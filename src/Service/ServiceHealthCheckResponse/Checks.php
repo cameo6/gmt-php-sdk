@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Service\ServiceHealthCheckResponse;
+namespace GmtPhpSDK\Service\ServiceHealthCheckResponse;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Contracts\BaseModel;
 
 /**
  * Detailed information about dependencies state.

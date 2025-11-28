@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Purchases\PurchaseListResponse;
+namespace GmtPhpSDK\Purchases\PurchaseListResponse;
 
 /**
  * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.

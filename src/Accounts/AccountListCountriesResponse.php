@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Accounts;
+namespace GmtPhpSDK\Accounts;
 
-use Gmt\Accounts\AccountListCountriesResponse\DisplayName;
-use Gmt\Accounts\AccountListCountriesResponse\Price;
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
-use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
+use GmtPhpSDK\Accounts\AccountListCountriesResponse\DisplayName;
+use GmtPhpSDK\Accounts\AccountListCountriesResponse\Price;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Concerns\SdkResponse;
+use GmtPhpSDK\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccountListCountriesResponseShape = array{

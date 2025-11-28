@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Gmt\ServiceContracts;
+namespace GmtPhpSDK\ServiceContracts;
 
-use Gmt\Accounts\AccountGetResponse;
-use Gmt\Accounts\AccountListCountriesParams;
-use Gmt\Accounts\AccountListCountriesResponse;
-use Gmt\Accounts\AccountListParams;
-use Gmt\Accounts\AccountListResponse;
-use Gmt\Core\Exceptions\APIException;
-use Gmt\PageNumber;
-use Gmt\RequestOptions;
+use GmtPhpSDK\Accounts\AccountGetResponse;
+use GmtPhpSDK\Accounts\AccountListCountriesParams;
+use GmtPhpSDK\Accounts\AccountListCountriesResponse;
+use GmtPhpSDK\Accounts\AccountListParams;
+use GmtPhpSDK\Accounts\AccountListResponse;
+use GmtPhpSDK\Core\Exceptions\APIException;
+use GmtPhpSDK\PageNumber;
+use GmtPhpSDK\RequestOptions;
 
 interface AccountsContract
 {

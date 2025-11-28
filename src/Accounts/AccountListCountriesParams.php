@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Accounts;
+namespace GmtPhpSDK\Accounts;
 
-use Gmt\Accounts\AccountListCountriesParams\Sort;
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkParams;
-use Gmt\Core\Contracts\BaseModel;
+use GmtPhpSDK\Accounts\AccountListCountriesParams\Sort;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Concerns\SdkParams;
+use GmtPhpSDK\Core\Contracts\BaseModel;
 
 /**
  * Returns a list of all available countries from providers with prices and availability. No authentication required.
  *
- * @see Gmt\Services\AccountsService::listCountries()
+ * @see GmtPhpSDK\Services\AccountsService::listCountries()
  *
  * @phpstan-type AccountListCountriesParamsShape = array{
  *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_code?: string

@@ -2,9 +2,9 @@
 
 namespace Tests\Services;
 
-use Gmt\Accounts\AccountGetResponse;
-use Gmt\Client;
-use Gmt\PageNumber;
+use GmtPhpSDK\Accounts\AccountGetResponse;
+use GmtPhpSDK\Client;
+use GmtPhpSDK\PageNumber;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

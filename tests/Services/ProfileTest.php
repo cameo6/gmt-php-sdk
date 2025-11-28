@@ -2,8 +2,8 @@
 
 namespace Tests\Services;
 
-use Gmt\Client;
-use Gmt\Profile\ProfileGetResponse;
+use GmtPhpSDK\Client;
+use GmtPhpSDK\Profile\ProfileGetResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

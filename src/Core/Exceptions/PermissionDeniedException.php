@@ -1,9 +1,9 @@
 <?php
 
-namespace Gmt\Core\Exceptions;
+namespace GmtPhpSDK\Core\Exceptions;
 
 class PermissionDeniedException extends APIStatusException
 {
     /** @var string */
-    protected const DESC = 'Gmt Permission Denied Exception';
+    protected const DESC = 'GmtPhpSDK Permission Denied Exception';
 }

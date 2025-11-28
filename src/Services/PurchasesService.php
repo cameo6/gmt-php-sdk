@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Services;
+namespace GmtPhpSDK\Services;
 
-use Gmt\Client;
-use Gmt\Core\Exceptions\APIException;
-use Gmt\PageNumber;
-use Gmt\Purchases\PurchaseCreateParams;
-use Gmt\Purchases\PurchaseGetResponse;
-use Gmt\Purchases\PurchaseListParams;
-use Gmt\Purchases\PurchaseListResponse;
-use Gmt\Purchases\PurchaseNewResponse;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
-use Gmt\RequestOptions;
-use Gmt\ServiceContracts\PurchasesContract;
+use GmtPhpSDK\Client;
+use GmtPhpSDK\Core\Exceptions\APIException;
+use GmtPhpSDK\PageNumber;
+use GmtPhpSDK\Purchases\PurchaseCreateParams;
+use GmtPhpSDK\Purchases\PurchaseGetResponse;
+use GmtPhpSDK\Purchases\PurchaseListParams;
+use GmtPhpSDK\Purchases\PurchaseListResponse;
+use GmtPhpSDK\Purchases\PurchaseNewResponse;
+use GmtPhpSDK\Purchases\PurchaseRequestVerificationCodeResponse;
+use GmtPhpSDK\RequestOptions;
+use GmtPhpSDK\ServiceContracts\PurchasesContract;
 
 final class PurchasesService implements PurchasesContract
 {

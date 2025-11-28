@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Conversion\Contracts;
+namespace GmtPhpSDK\Core\Conversion\Contracts;
 
 /**
  * @internal

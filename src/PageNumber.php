@@ -1,18 +1,18 @@
 <?php
 
-namespace Gmt;
+namespace GmtPhpSDK;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkPage;
-use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Contracts\BasePage;
-use Gmt\Core\Conversion;
-use Gmt\Core\Conversion\Contracts\Converter;
-use Gmt\Core\Conversion\Contracts\ConverterSource;
-use Gmt\Core\Conversion\ListOf;
-use Gmt\Core\Util;
-use Gmt\PageNumber\Pagination;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Concerns\SdkPage;
+use GmtPhpSDK\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Contracts\BasePage;
+use GmtPhpSDK\Core\Conversion;
+use GmtPhpSDK\Core\Conversion\Contracts\Converter;
+use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
+use GmtPhpSDK\Core\Conversion\ListOf;
+use GmtPhpSDK\Core\Util;
+use GmtPhpSDK\PageNumber\Pagination;
 use Psr\Http\Message\ResponseInterface;
 
 /**

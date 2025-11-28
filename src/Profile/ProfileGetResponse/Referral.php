@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Profile\ProfileGetResponse;
+namespace GmtPhpSDK\Profile\ProfileGetResponse;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Contracts\BaseModel;
-use Gmt\Profile\ProfileGetResponse\Referral\Balance;
-use Gmt\Profile\ProfileGetResponse\Referral\Level;
-use Gmt\Profile\ProfileGetResponse\Referral\Profit;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Contracts\BaseModel;
+use GmtPhpSDK\Profile\ProfileGetResponse\Referral\Balance;
+use GmtPhpSDK\Profile\ProfileGetResponse\Referral\Level;
+use GmtPhpSDK\Profile\ProfileGetResponse\Referral\Profit;
 
 /**
  * @phpstan-type ReferralShape = array{

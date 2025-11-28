@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Services;
+namespace GmtPhpSDK\Services;
 
-use Gmt\Client;
-use Gmt\Core\Exceptions\APIException;
-use Gmt\RequestOptions;
-use Gmt\Service\ServiceGetServerTimeResponse;
-use Gmt\Service\ServiceHealthCheckResponse;
-use Gmt\ServiceContracts\ServiceContract;
+use GmtPhpSDK\Client;
+use GmtPhpSDK\Core\Exceptions\APIException;
+use GmtPhpSDK\RequestOptions;
+use GmtPhpSDK\Service\ServiceGetServerTimeResponse;
+use GmtPhpSDK\Service\ServiceHealthCheckResponse;
+use GmtPhpSDK\ServiceContracts\ServiceContract;
 
 final class ServiceService implements ServiceContract
 {

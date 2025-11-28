@@ -1,15 +1,15 @@
 <?php
 
-namespace Gmt\Core\Exceptions;
+namespace GmtPhpSDK\Core\Exceptions;
 
-use Gmt\Core\Util;
+use GmtPhpSDK\Core\Util;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class APIStatusException extends APIException
 {
     /** @var string */
-    protected const DESC = 'Gmt API Status Error';
+    protected const DESC = 'GmtPhpSDK API Status Error';
 
     public ?int $status;
 

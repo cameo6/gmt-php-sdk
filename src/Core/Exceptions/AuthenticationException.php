@@ -1,9 +1,9 @@
 <?php
 
-namespace Gmt\Core\Exceptions;
+namespace GmtPhpSDK\Core\Exceptions;
 
 class AuthenticationException extends APIStatusException
 {
     /** @var string */
-    protected const DESC = 'Gmt Authentication Exception';
+    protected const DESC = 'GmtPhpSDK Authentication Exception';
 }
