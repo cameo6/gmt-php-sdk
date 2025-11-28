@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Gmt\Accounts;
 
-use Gmt\Accounts\AccountListParams\CountryCode;
 use Gmt\Accounts\AccountListParams\Sort;
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
@@ -17,10 +16,7 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\AccountsService::list()
  *
  * @phpstan-type AccountListParamsShape = array{
- *   page: int,
- *   page_size: int,
- *   sort: Sort|value-of<Sort>,
- *   country_code?: string|list<string>,
+ *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_code?: string
  * }
  */
 final class AccountListParams implements BaseModel
@@ -51,11 +47,9 @@ final class AccountListParams implements BaseModel
 
     /**
      * Filter by country codes (comma-separated, e.g., 'US,RU,GB').
-     *
-     * @var string|list<string>|null $country_code
      */
-    #[Api(union: CountryCode::class, optional: true)]
-    public string|array|null $country_code;
+    #[Api(optional: true)]
+    public ?string $country_code;
 
     /**
      * `new AccountListParams()` is missing required properties by the API.
@@ -82,13 +76,12 @@ final class AccountListParams implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Sort|value-of<Sort> $sort
-     * @param string|list<string> $country_code
      */
     public static function with(
         int $page = 1,
         int $page_size = 50,
         Sort|string $sort = 'name_asc',
-        string|array|null $country_code = null,
+        ?string $country_code = null,
     ): self {
         $obj = new self;
 
@@ -138,10 +131,8 @@ final class AccountListParams implements BaseModel
 
     /**
      * Filter by country codes (comma-separated, e.g., 'US,RU,GB').
-     *
-     * @param string|list<string> $countryCode
      */
-    public function withCountryCode(string|array $countryCode): self
+    public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
         $obj->country_code = $countryCode;
