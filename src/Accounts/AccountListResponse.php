@@ -1,0 +1,128 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Gmt\Accounts;
+
+use Gmt\Accounts\AccountListResponse\DisplayName;
+use Gmt\Accounts\AccountListResponse\Price;
+use Gmt\Core\Attributes\Api;
+use Gmt\Core\Concerns\SdkModel;
+use Gmt\Core\Concerns\SdkResponse;
+use Gmt\Core\Contracts\BaseModel;
+use Gmt\Core\Conversion\Contracts\ResponseConverter;
+
+/**
+ * @phpstan-type AccountListResponseShape = array{
+ *   available: bool, country_code: string, display_name: DisplayName, price: Price
+ * }
+ */
+final class AccountListResponse implements BaseModel, ResponseConverter
+{
+    /** @use SdkModel<AccountListResponseShape> */
+    use SdkModel;
+
+    use SdkResponse;
+
+    /**
+     * Indicates if account is available for purchase.
+     */
+    #[Api]
+    public bool $available;
+
+    /**
+     * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
+     */
+    #[Api]
+    public string $country_code;
+
+    #[Api]
+    public DisplayName $display_name;
+
+    #[Api]
+    public Price $price;
+
+    /**
+     * `new AccountListResponse()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * AccountListResponse::with(
+     *   available: ..., country_code: ..., display_name: ..., price: ...
+     * )
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new AccountListResponse)
+     *   ->withAvailable(...)
+     *   ->withCountryCode(...)
+     *   ->withDisplayName(...)
+     *   ->withPrice(...)
+     * ```
+     */
+    public function __construct()
+    {
+        $this->initialize();
+    }
+
+    /**
+     * Construct an instance from the required parameters.
+     *
+     * You must use named parameters to construct any parameters with a default value.
+     */
+    public static function with(
+        bool $available,
+        string $country_code,
+        DisplayName $display_name,
+        Price $price,
+    ): self {
+        $obj = new self;
+
+        $obj->available = $available;
+        $obj->country_code = $country_code;
+        $obj->display_name = $display_name;
+        $obj->price = $price;
+
+        return $obj;
+    }
+
+    /**
+     * Indicates if account is available for purchase.
+     */
+    public function withAvailable(bool $available): self
+    {
+        $obj = clone $this;
+        $obj->available = $available;
+
+        return $obj;
+    }
+
+    /**
+     * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
+     */
+    public function withCountryCode(string $countryCode): self
+    {
+        $obj = clone $this;
+        $obj->country_code = $countryCode;
+
+        return $obj;
+    }
+
+    public function withDisplayName(DisplayName $displayName): self
+    {
+        $obj = clone $this;
+        $obj->display_name = $displayName;
+
+        return $obj;
+    }
+
+    public function withPrice(Price $price): self
+    {
+        $obj = clone $this;
+        $obj->price = $price;
+
+        return $obj;
+    }
+}
