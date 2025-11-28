@@ -28,7 +28,7 @@
     "sort-packages": true
   },
   "description": "Gmt PHP SDK",
-  "name": "org-placeholder/gmt",
+  "name": "getmytg/gmt-php-sdk",
   "require": {
     "php": "^8.1",
     "php-http/discovery": "^1",
