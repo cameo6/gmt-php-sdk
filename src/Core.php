@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core;
+namespace Gmt\Core;
 
-use GmtPhpSDK\Core\Implementation\Omit;
+use Gmt\Core\Implementation\Omit;
 
 const OMIT = Omit::omit;

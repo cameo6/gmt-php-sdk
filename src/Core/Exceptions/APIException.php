@@ -1,11 +1,11 @@
 <?php
 
-namespace GmtPhpSDK\Core\Exceptions;
+namespace Gmt\Core\Exceptions;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class APIException extends GmtPhpSDKException
+class APIException extends GmtException
 {
     public ?int $status = null;
 

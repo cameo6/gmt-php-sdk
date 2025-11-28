@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Profile\ProfileGetResponse\Discount;
+namespace Gmt\Profile\ProfileGetResponse\Discount;
 
 /**
  * Current discount level: none, bronze, silver, gold, platinum, premium.

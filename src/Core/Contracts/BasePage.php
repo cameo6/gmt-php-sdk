@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core\Contracts;
+namespace Gmt\Core\Contracts;
 
-use GmtPhpSDK\Client;
-use GmtPhpSDK\Core\Conversion\Contracts\Converter;
-use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
-use GmtPhpSDK\RequestOptions;
+use Gmt\Client;
+use Gmt\Core\Conversion\Contracts\Converter;
+use Gmt\Core\Conversion\Contracts\ConverterSource;
+use Gmt\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * @internal
  *
- * @phpstan-import-type normalized_request from \GmtPhpSDK\Core\BaseClient
+ * @phpstan-import-type normalized_request from \Gmt\Core\BaseClient
  *
  * @template Item
  *

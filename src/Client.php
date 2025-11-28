@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK;
+namespace Gmt;
 
-use GmtPhpSDK\Core\BaseClient;
-use GmtPhpSDK\Services\AccountsService;
-use GmtPhpSDK\Services\ProfileService;
-use GmtPhpSDK\Services\PurchasesService;
-use GmtPhpSDK\Services\ServiceService;
+use Gmt\Core\BaseClient;
+use Gmt\Services\AccountsService;
+use Gmt\Services\ProfileService;
+use Gmt\Services\PurchasesService;
+use Gmt\Services\ServiceService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Purchases;
+namespace Gmt\Purchases;
 
-use GmtPhpSDK\Core\Attributes\Api;
-use GmtPhpSDK\Core\Concerns\SdkModel;
-use GmtPhpSDK\Core\Concerns\SdkParams;
-use GmtPhpSDK\Core\Contracts\BaseModel;
-use GmtPhpSDK\Purchases\PurchaseListParams\Status;
+use Gmt\Core\Attributes\Api;
+use Gmt\Core\Concerns\SdkModel;
+use Gmt\Core\Concerns\SdkParams;
+use Gmt\Core\Contracts\BaseModel;
+use Gmt\Purchases\PurchaseListParams\Status;
 
 /**
  * Returns paginated list of user's purchases with optional status filtering.
@@ -22,7 +22,7 @@ use GmtPhpSDK\Purchases\PurchaseListParams\Status;
  *
  * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
  *
- * @see GmtPhpSDK\Services\PurchasesService::list()
+ * @see Gmt\Services\PurchasesService::list()
  *
  * @phpstan-type PurchaseListParamsShape = array{
  *   page: int, page_size: int, status?: Status|value-of<Status>

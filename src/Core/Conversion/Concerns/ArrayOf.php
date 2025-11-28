@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core\Conversion\Concerns;
+namespace Gmt\Core\Conversion\Concerns;
 
-use GmtPhpSDK\Core\Conversion;
-use GmtPhpSDK\Core\Conversion\CoerceState;
-use GmtPhpSDK\Core\Conversion\Contracts\Converter;
-use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
-use GmtPhpSDK\Core\Conversion\DumpState;
+use Gmt\Core\Conversion;
+use Gmt\Core\Conversion\CoerceState;
+use Gmt\Core\Conversion\Contracts\Converter;
+use Gmt\Core\Conversion\Contracts\ConverterSource;
+use Gmt\Core\Conversion\DumpState;
 
 /**
  * @internal
