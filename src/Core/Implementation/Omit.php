@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Implementation;
+namespace GmtPhpSDK\Core\Implementation;
 
 /**
  * @internal

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Conversion\Contracts;
+namespace GmtPhpSDK\Core\Conversion\Contracts;
 
-use Gmt\Core\Conversion\CoerceState;
-use Gmt\Core\Conversion\DumpState;
+use GmtPhpSDK\Core\Conversion\CoerceState;
+use GmtPhpSDK\Core\Conversion\DumpState;
 
 /**
  * @internal

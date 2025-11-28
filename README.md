@@ -45,7 +45,7 @@ Parameters with a default value must be set by name.
 ```php
 <?php
 
-use Gmt\Client;
+use GmtPhpSDK\Client;
 
 $client = new Client(apiKey: getenv('x-api-key') ?: 'My API Key');
 
@@ -70,7 +70,7 @@ This library provides auto-paginating iterators with each list response, so you 
 ```php
 <?php
 
-use Gmt\Client;
+use GmtPhpSDK\Client;
 
 $client = new Client(apiKey: getenv('x-api-key') ?: 'My API Key');
 
@@ -90,12 +90,12 @@ foreach ($page->pagingEachItem() as $item) {
 
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Gmt\Core\Exceptions\APIException` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `GmtPhpSDK\Core\Exceptions\APIException` will be thrown:
 
 ```php
 <?php
 
-use Gmt\Core\Exceptions\APIConnectionException;
+use GmtPhpSDK\Core\Exceptions\APIConnectionException;
 
 try {
   $response = $client->service->healthCheck();
@@ -137,8 +137,8 @@ You can use the `maxRetries` option to configure or disable this:
 ```php
 <?php
 
-use Gmt\Client;
-use Gmt\RequestOptions;
+use GmtPhpSDK\Client;
+use GmtPhpSDK\RequestOptions;
 
 // Configure the default for all requests:
 $client = new Client(maxRetries: 0);
@@ -160,7 +160,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 ```php
 <?php
 
-use Gmt\RequestOptions;
+use GmtPhpSDK\RequestOptions;
 
 $response = $client->service->healthCheck(
   RequestOptions::with(

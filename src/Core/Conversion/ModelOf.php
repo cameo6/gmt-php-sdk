@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Conversion;
+namespace GmtPhpSDK\Core\Conversion;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion;
-use Gmt\Core\Conversion\Contracts\Converter;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Conversion;
+use GmtPhpSDK\Core\Conversion\Contracts\Converter;
 
 /**
  * @internal

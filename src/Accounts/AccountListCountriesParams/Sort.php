@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Accounts\AccountListCountriesParams;
+namespace GmtPhpSDK\Accounts\AccountListCountriesParams;
 
 /**
  * Sort order for accounts.

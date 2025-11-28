@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Gmt\ServiceContracts;
+namespace GmtPhpSDK\ServiceContracts;
 
-use Gmt\Core\Exceptions\APIException;
-use Gmt\RequestOptions;
-use Gmt\Service\ServiceGetServerTimeResponse;
-use Gmt\Service\ServiceHealthCheckResponse;
+use GmtPhpSDK\Core\Exceptions\APIException;
+use GmtPhpSDK\RequestOptions;
+use GmtPhpSDK\Service\ServiceGetServerTimeResponse;
+use GmtPhpSDK\Service\ServiceHealthCheckResponse;
 
 interface ServiceContract
 {

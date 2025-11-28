@@ -7,7 +7,7 @@
       "src/Client.php"
     ],
     "psr-4": {
-      "Gmt\\": "src/"
+      "GmtPhpSDK\\": "src/"
     }
   },
   "autoload-dev": {
