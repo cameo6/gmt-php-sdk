@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Profile\ProfileGetResponse\Referral;
+namespace Gmt\Profile\ProfileGetResponse\Referral;
 
-use GmtPhpSDK\Core\Attributes\Api;
-use GmtPhpSDK\Core\Concerns\SdkModel;
-use GmtPhpSDK\Core\Contracts\BaseModel;
+use Gmt\Core\Attributes\Api;
+use Gmt\Core\Concerns\SdkModel;
+use Gmt\Core\Contracts\BaseModel;
 
 /**
  * Current referral balance available for withdrawal.

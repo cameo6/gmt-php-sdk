@@ -1,9 +1,9 @@
 <?php
 
-namespace GmtPhpSDK\Core\Exceptions;
+namespace Gmt\Core\Exceptions;
 
 class RateLimitException extends APIStatusException
 {
     /** @var string */
-    protected const DESC = 'GmtPhpSDK Rate Limit Exception';
+    protected const DESC = 'Gmt Rate Limit Exception';
 }

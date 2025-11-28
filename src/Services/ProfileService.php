@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Services;
+namespace Gmt\Services;
 
-use GmtPhpSDK\Client;
-use GmtPhpSDK\Core\Exceptions\APIException;
-use GmtPhpSDK\Profile\ProfileGetResponse;
-use GmtPhpSDK\RequestOptions;
-use GmtPhpSDK\ServiceContracts\ProfileContract;
+use Gmt\Client;
+use Gmt\Core\Exceptions\APIException;
+use Gmt\Profile\ProfileGetResponse;
+use Gmt\RequestOptions;
+use Gmt\ServiceContracts\ProfileContract;
 
 final class ProfileService implements ProfileContract
 {

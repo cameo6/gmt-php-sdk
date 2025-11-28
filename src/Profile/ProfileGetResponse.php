@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Profile;
+namespace Gmt\Profile;
 
-use GmtPhpSDK\Core\Attributes\Api;
-use GmtPhpSDK\Core\Concerns\SdkModel;
-use GmtPhpSDK\Core\Concerns\SdkResponse;
-use GmtPhpSDK\Core\Contracts\BaseModel;
-use GmtPhpSDK\Core\Conversion\Contracts\ResponseConverter;
-use GmtPhpSDK\Profile\ProfileGetResponse\Balance;
-use GmtPhpSDK\Profile\ProfileGetResponse\Discount;
-use GmtPhpSDK\Profile\ProfileGetResponse\Referral;
-use GmtPhpSDK\Profile\ProfileGetResponse\Statistics;
+use Gmt\Core\Attributes\Api;
+use Gmt\Core\Concerns\SdkModel;
+use Gmt\Core\Concerns\SdkResponse;
+use Gmt\Core\Contracts\BaseModel;
+use Gmt\Core\Conversion\Contracts\ResponseConverter;
+use Gmt\Profile\ProfileGetResponse\Balance;
+use Gmt\Profile\ProfileGetResponse\Discount;
+use Gmt\Profile\ProfileGetResponse\Referral;
+use Gmt\Profile\ProfileGetResponse\Statistics;
 
 /**
  * Successful response.

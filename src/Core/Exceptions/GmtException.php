@@ -1,11 +1,11 @@
 <?php
 
-namespace GmtPhpSDK\Core\Exceptions;
+namespace Gmt\Core\Exceptions;
 
-class GmtPhpSDKException extends \Exception
+class GmtException extends \Exception
 {
     /** @var string */
-    protected const DESC = 'GmtPhpSDK Error';
+    protected const DESC = 'Gmt Error';
 
     public function __construct(string $message, int $code = 0, ?\Throwable $previous = null)
     {

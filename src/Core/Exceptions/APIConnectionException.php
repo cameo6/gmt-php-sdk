@@ -1,9 +1,9 @@
 <?php
 
-namespace GmtPhpSDK\Core\Exceptions;
+namespace Gmt\Core\Exceptions;
 
 class APIConnectionException extends APIException
 {
     /** @var string */
-    protected const DESC = 'GmtPhpSDK API Connection Error';
+    protected const DESC = 'Gmt API Connection Error';
 }

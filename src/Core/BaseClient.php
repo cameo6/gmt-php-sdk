@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core;
+namespace Gmt\Core;
 
-use GmtPhpSDK\Core\Contracts\BasePage;
-use GmtPhpSDK\Core\Contracts\BaseStream;
-use GmtPhpSDK\Core\Conversion\Contracts\Converter;
-use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
-use GmtPhpSDK\Core\Exceptions\APIConnectionException;
-use GmtPhpSDK\Core\Exceptions\APIStatusException;
-use GmtPhpSDK\RequestOptions;
+use Gmt\Core\Contracts\BasePage;
+use Gmt\Core\Contracts\BaseStream;
+use Gmt\Core\Conversion\Contracts\Converter;
+use Gmt\Core\Conversion\Contracts\ConverterSource;
+use Gmt\Core\Exceptions\APIConnectionException;
+use Gmt\Core\Exceptions\APIStatusException;
+use Gmt\RequestOptions;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
