@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Services;
+namespace Gmt\Services;
 
-use GmtPhpSDK\Accounts\AccountGetResponse;
-use GmtPhpSDK\Accounts\AccountListCountriesParams;
-use GmtPhpSDK\Accounts\AccountListCountriesResponse;
-use GmtPhpSDK\Accounts\AccountListParams;
-use GmtPhpSDK\Accounts\AccountListResponse;
-use GmtPhpSDK\Client;
-use GmtPhpSDK\Core\Exceptions\APIException;
-use GmtPhpSDK\PageNumber;
-use GmtPhpSDK\RequestOptions;
-use GmtPhpSDK\ServiceContracts\AccountsContract;
+use Gmt\Accounts\AccountGetResponse;
+use Gmt\Accounts\AccountListCountriesParams;
+use Gmt\Accounts\AccountListCountriesResponse;
+use Gmt\Accounts\AccountListParams;
+use Gmt\Accounts\AccountListResponse;
+use Gmt\Client;
+use Gmt\Core\Exceptions\APIException;
+use Gmt\PageNumber;
+use Gmt\RequestOptions;
+use Gmt\ServiceContracts\AccountsContract;
 
 final class AccountsService implements AccountsContract
 {

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Accounts;
+namespace Gmt\Accounts;
 
-use GmtPhpSDK\Accounts\AccountListParams\Sort;
-use GmtPhpSDK\Core\Attributes\Api;
-use GmtPhpSDK\Core\Concerns\SdkModel;
-use GmtPhpSDK\Core\Concerns\SdkParams;
-use GmtPhpSDK\Core\Contracts\BaseModel;
+use Gmt\Accounts\AccountListParams\Sort;
+use Gmt\Core\Attributes\Api;
+use Gmt\Core\Concerns\SdkModel;
+use Gmt\Core\Concerns\SdkParams;
+use Gmt\Core\Contracts\BaseModel;
 
 /**
  * Returns paginated list of accounts with filtering and sorting options.
  *
- * @see GmtPhpSDK\Services\AccountsService::list()
+ * @see Gmt\Services\AccountsService::list()
  *
  * @phpstan-type AccountListParamsShape = array{
  *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_code?: string

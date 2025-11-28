@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core\Concerns;
+namespace Gmt\Core\Concerns;
 
-use GmtPhpSDK\Core\Conversion\Contracts\Converter;
-use GmtPhpSDK\Core\Conversion\EnumOf;
+use Gmt\Core\Conversion\Contracts\Converter;
+use Gmt\Core\Conversion\EnumOf;
 
 /**
  * @internal

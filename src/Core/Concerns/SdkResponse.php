@@ -1,8 +1,8 @@
 <?php
 
-namespace GmtPhpSDK\Core\Concerns;
+namespace Gmt\Core\Concerns;
 
-use GmtPhpSDK\Core\Util;
+use Gmt\Core\Util;
 use Psr\Http\Message\ResponseInterface;
 
 /**

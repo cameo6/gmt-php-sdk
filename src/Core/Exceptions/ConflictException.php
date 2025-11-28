@@ -1,9 +1,9 @@
 <?php
 
-namespace GmtPhpSDK\Core\Exceptions;
+namespace Gmt\Core\Exceptions;
 
 class ConflictException extends APIStatusException
 {
     /** @var string */
-    protected const DESC = 'GmtPhpSDK Conflict Exception';
+    protected const DESC = 'Gmt Conflict Exception';
 }

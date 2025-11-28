@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Purchases;
+namespace Gmt\Purchases;
 
-use GmtPhpSDK\Core\Attributes\Api;
-use GmtPhpSDK\Core\Concerns\SdkModel;
-use GmtPhpSDK\Core\Concerns\SdkParams;
-use GmtPhpSDK\Core\Contracts\BaseModel;
+use Gmt\Core\Attributes\Api;
+use Gmt\Core\Concerns\SdkModel;
+use Gmt\Core\Concerns\SdkParams;
+use Gmt\Core\Contracts\BaseModel;
 
 /**
  * Creates a new purchase for specified country. Deducts balance immediately and returns purchase with `PENDING` status.
@@ -22,7 +22,7 @@ use GmtPhpSDK\Core\Contracts\BaseModel;
  *
  * **Country availability.** Accounts may become unavailable between checking `/accounts` and creating purchase. Always handle availability errors gracefully.
  *
- * @see GmtPhpSDK\Services\PurchasesService::create()
+ * @see Gmt\Services\PurchasesService::create()
  *
  * @phpstan-type PurchaseCreateParamsShape = array{country_code: string}
  */

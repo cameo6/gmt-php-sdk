@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core\Concerns;
+namespace Gmt\Core\Concerns;
 
-use GmtPhpSDK\Core\Contracts\BaseModel;
-use GmtPhpSDK\Core\Conversion;
-use GmtPhpSDK\Core\Conversion\CoerceState;
-use GmtPhpSDK\Core\Conversion\Contracts\Converter;
-use GmtPhpSDK\Core\Conversion\ModelOf;
-use GmtPhpSDK\Core\Util;
+use Gmt\Core\Contracts\BaseModel;
+use Gmt\Core\Conversion;
+use Gmt\Core\Conversion\CoerceState;
+use Gmt\Core\Conversion\Contracts\Converter;
+use Gmt\Core\Conversion\ModelOf;
+use Gmt\Core\Util;
 
 /**
  * @internal

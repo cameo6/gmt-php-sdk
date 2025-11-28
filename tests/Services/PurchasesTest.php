@@ -2,11 +2,11 @@
 
 namespace Tests\Services;
 
-use GmtPhpSDK\Client;
-use GmtPhpSDK\PageNumber;
-use GmtPhpSDK\Purchases\PurchaseGetResponse;
-use GmtPhpSDK\Purchases\PurchaseNewResponse;
-use GmtPhpSDK\Purchases\PurchaseRequestVerificationCodeResponse;
+use Gmt\Client;
+use Gmt\PageNumber;
+use Gmt\Purchases\PurchaseGetResponse;
+use Gmt\Purchases\PurchaseNewResponse;
+use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

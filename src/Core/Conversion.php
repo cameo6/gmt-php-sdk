@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core;
+namespace Gmt\Core;
 
-use GmtPhpSDK\Core\Conversion\CoerceState;
-use GmtPhpSDK\Core\Conversion\Contracts\Converter;
-use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
-use GmtPhpSDK\Core\Conversion\Contracts\ResponseConverter;
-use GmtPhpSDK\Core\Conversion\DumpState;
+use Gmt\Core\Conversion\CoerceState;
+use Gmt\Core\Conversion\Contracts\Converter;
+use Gmt\Core\Conversion\Contracts\ConverterSource;
+use Gmt\Core\Conversion\Contracts\ResponseConverter;
+use Gmt\Core\Conversion\DumpState;
 use Psr\Http\Message\ResponseInterface;
 
 /**

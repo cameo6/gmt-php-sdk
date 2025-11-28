@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Profile\ProfileGetResponse\Referral;
+namespace Gmt\Profile\ProfileGetResponse\Referral;
 
 /**
  * Current referral program level: bronze, silver, gold, platinum.

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace GmtPhpSDK\Core\Concerns;
+namespace Gmt\Core\Concerns;
 
-use GmtPhpSDK\Core\Conversion;
-use GmtPhpSDK\Core\Conversion\DumpState;
-use GmtPhpSDK\Core\Util;
-use GmtPhpSDK\RequestOptions;
+use Gmt\Core\Conversion;
+use Gmt\Core\Conversion\DumpState;
+use Gmt\Core\Util;
+use Gmt\RequestOptions;
 
 /**
  * @internal
