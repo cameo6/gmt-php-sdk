@@ -1,9 +1,9 @@
 <?php
 
-namespace Gmt\Core\Exceptions;
+namespace GmtPhpSDK\Core\Exceptions;
 
 class BadRequestException extends APIStatusException
 {
     /** @var string */
-    protected const DESC = 'Gmt Bad Request Exception';
+    protected const DESC = 'GmtPhpSDK Bad Request Exception';
 }

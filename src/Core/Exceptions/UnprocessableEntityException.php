@@ -1,9 +1,9 @@
 <?php
 
-namespace Gmt\Core\Exceptions;
+namespace GmtPhpSDK\Core\Exceptions;
 
 class UnprocessableEntityException extends APIStatusException
 {
     /** @var string */
-    protected const DESC = 'Gmt Unprocessable Entity Exception';
+    protected const DESC = 'GmtPhpSDK Unprocessable Entity Exception';
 }

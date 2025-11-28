@@ -2,9 +2,9 @@
 
 namespace Tests\Core;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Contracts\BaseModel;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

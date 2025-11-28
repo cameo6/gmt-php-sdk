@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Attributes;
+namespace GmtPhpSDK\Core\Attributes;
 
-use Gmt\Core\Conversion\Contracts\Converter;
-use Gmt\Core\Conversion\Contracts\ConverterSource;
-use Gmt\Core\Conversion\EnumOf;
-use Gmt\Core\Conversion\ListOf;
-use Gmt\Core\Conversion\MapOf;
+use GmtPhpSDK\Core\Conversion\Contracts\Converter;
+use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
+use GmtPhpSDK\Core\Conversion\EnumOf;
+use GmtPhpSDK\Core\Conversion\ListOf;
+use GmtPhpSDK\Core\Conversion\MapOf;
 
 /**
  * @internal

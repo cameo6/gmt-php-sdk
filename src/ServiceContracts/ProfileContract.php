@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Gmt\ServiceContracts;
+namespace GmtPhpSDK\ServiceContracts;
 
-use Gmt\Core\Exceptions\APIException;
-use Gmt\Profile\ProfileGetResponse;
-use Gmt\RequestOptions;
+use GmtPhpSDK\Core\Exceptions\APIException;
+use GmtPhpSDK\Profile\ProfileGetResponse;
+use GmtPhpSDK\RequestOptions;
 
 interface ProfileContract
 {

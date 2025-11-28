@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Purchases;
+namespace GmtPhpSDK\Purchases;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
-use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\DisplayName;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Price;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Status;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Verification;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Concerns\SdkResponse;
+use GmtPhpSDK\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Conversion\Contracts\ResponseConverter;
+use GmtPhpSDK\Purchases\PurchaseRequestVerificationCodeResponse\DisplayName;
+use GmtPhpSDK\Purchases\PurchaseRequestVerificationCodeResponse\Price;
+use GmtPhpSDK\Purchases\PurchaseRequestVerificationCodeResponse\Status;
+use GmtPhpSDK\Purchases\PurchaseRequestVerificationCodeResponse\Verification;
 
 /**
  * @phpstan-type PurchaseRequestVerificationCodeResponseShape = array{

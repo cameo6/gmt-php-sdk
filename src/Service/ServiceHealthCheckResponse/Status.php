@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Service\ServiceHealthCheckResponse;
+namespace GmtPhpSDK\Service\ServiceHealthCheckResponse;
 
 /**
  * Service status.

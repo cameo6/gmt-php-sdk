@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Concerns;
+namespace GmtPhpSDK\Core\Concerns;
 
-use Gmt\Client;
-use Gmt\Core\Conversion\Contracts\Converter;
-use Gmt\Core\Conversion\Contracts\ConverterSource;
-use Gmt\Core\Exceptions\APIStatusException;
-use Gmt\RequestOptions;
+use GmtPhpSDK\Client;
+use GmtPhpSDK\Core\Conversion\Contracts\Converter;
+use GmtPhpSDK\Core\Conversion\Contracts\ConverterSource;
+use GmtPhpSDK\Core\Exceptions\APIStatusException;
+use GmtPhpSDK\RequestOptions;
 
 /**
  * @internal
  *
  * @template Item
  *
- * @phpstan-import-type normalized_request from \Gmt\Core\BaseClient
+ * @phpstan-import-type normalized_request from \GmtPhpSDK\Core\BaseClient
  */
 trait SdkPage
 {

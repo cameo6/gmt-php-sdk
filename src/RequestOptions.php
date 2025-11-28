@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Gmt;
+namespace GmtPhpSDK;
 
-use Gmt\Core\Attributes\Api as Property;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Implementation\Omit;
+use GmtPhpSDK\Core\Attributes\Api as Property;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Implementation\Omit;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
-use const Gmt\Core\OMIT as omit;
+use const GmtPhpSDK\Core\OMIT as omit;
 
 /**
  * @phpstan-type request_options = array{

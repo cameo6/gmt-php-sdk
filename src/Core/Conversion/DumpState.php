@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Core\Conversion;
+namespace GmtPhpSDK\Core\Conversion;
 
 /**
  * @internal

@@ -1,13 +1,13 @@
 <?php
 
-namespace Gmt\Core\Exceptions;
+namespace GmtPhpSDK\Core\Exceptions;
 
 use Psr\Http\Message\RequestInterface;
 
 class APITimeoutException extends APIConnectionException
 {
     /** @var string */
-    protected const DESC = 'Gmt API Timeout Exception';
+    protected const DESC = 'GmtPhpSDK API Timeout Exception';
 
     public function __construct(
         RequestInterface $request,

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Purchases\PurchaseListResponse;
+namespace GmtPhpSDK\Purchases\PurchaseListResponse;
 
-use Gmt\Core\Attributes\Api;
-use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Contracts\BaseModel;
+use GmtPhpSDK\Core\Attributes\Api;
+use GmtPhpSDK\Core\Concerns\SdkModel;
+use GmtPhpSDK\Core\Contracts\BaseModel;
 
 /**
  * **Final Price After Discount.** The actual amount deducted from your balance, with your personal discount already applied.
