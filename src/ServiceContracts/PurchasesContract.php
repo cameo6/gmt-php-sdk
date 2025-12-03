@@ -25,7 +25,7 @@ interface PurchasesContract
      */
     public function create(
         array|PurchaseCreateParams $params,
-        ?RequestOptions $requestOptions = null,
+        ?RequestOptions $requestOptions = null
     ): PurchaseNewResponse;
 
     /**
