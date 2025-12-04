@@ -13,7 +13,7 @@ use Gmt\Profile\ProfileGetResponse\Referral\Profit;
 
 /**
  * @phpstan-type ReferralShape = array{
- *   balance: Balance,
+ *   balance: \Gmt\Profile\ProfileGetResponse\Referral\Balance,
  *   level: value-of<Level>,
  *   percent: float,
  *   profit: Profit,
@@ -111,8 +111,9 @@ final class Referral implements BaseModel
     /**
      * Current referral balance available for withdrawal.
      */
-    public function withBalance(Balance $balance): self
-    {
+    public function withBalance(
+        Balance $balance
+    ): self {
         $obj = clone $this;
         $obj->balance = $balance;
 
