@@ -33,7 +33,7 @@ final class AccountsService implements AccountsContract
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): AccountGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['v1/accounts/%1$s', $countryCode],
@@ -67,7 +67,7 @@ final class AccountsService implements AccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v1/accounts/',
@@ -103,7 +103,7 @@ final class AccountsService implements AccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v1/accounts/countries',

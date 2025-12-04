@@ -51,7 +51,7 @@ final class PurchasesService implements PurchasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: 'v1/purchases/',
@@ -74,7 +74,7 @@ final class PurchasesService implements PurchasesContract
         int $purchaseID,
         ?RequestOptions $requestOptions = null
     ): PurchaseGetResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['v1/purchases/%1$s', $purchaseID],
@@ -114,7 +114,7 @@ final class PurchasesService implements PurchasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v1/purchases/',
@@ -144,7 +144,7 @@ final class PurchasesService implements PurchasesContract
         int $purchaseID,
         ?RequestOptions $requestOptions = null
     ): PurchaseRequestVerificationCodeResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['v1/purchases/%1$s/request-code', $purchaseID],
