@@ -28,7 +28,7 @@ final class ServiceService implements ServiceContract
     public function getServerTime(
         ?RequestOptions $requestOptions = null
     ): ServiceGetServerTimeResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v1/service/time',
@@ -47,7 +47,7 @@ final class ServiceService implements ServiceContract
     public function healthCheck(
         ?RequestOptions $requestOptions = null
     ): ServiceHealthCheckResponse {
-        // @phpstan-ignore-next-line;
+        // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: 'v1/service/health',
