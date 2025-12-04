@@ -98,7 +98,7 @@ final class PurchasesService implements PurchasesContract
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
      * @param array{
-     *   page: int, page_size: int, status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'
+     *   page?: int, page_size?: int, status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'
      * }|PurchaseListParams $params
      *
      * @return PageNumber<PurchaseListResponse>
