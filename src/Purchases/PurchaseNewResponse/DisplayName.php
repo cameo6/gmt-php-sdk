@@ -56,8 +56,8 @@ final class DisplayName implements BaseModel
     {
         $obj = new self;
 
-        $obj->en = $en;
-        $obj->ru = $ru;
+        $obj['en'] = $en;
+        $obj['ru'] = $ru;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class DisplayName implements BaseModel
     public function withEn(string $en): self
     {
         $obj = clone $this;
-        $obj->en = $en;
+        $obj['en'] = $en;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class DisplayName implements BaseModel
     public function withRu(string $ru): self
     {
         $obj = clone $this;
-        $obj->ru = $ru;
+        $obj['ru'] = $ru;
 
         return $obj;
     }

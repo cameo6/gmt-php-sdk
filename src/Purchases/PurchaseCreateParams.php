@@ -66,7 +66,7 @@ final class PurchaseCreateParams implements BaseModel
     {
         $obj = new self;
 
-        $obj->country_code = $country_code;
+        $obj['country_code'] = $country_code;
 
         return $obj;
     }
@@ -77,7 +77,7 @@ final class PurchaseCreateParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }

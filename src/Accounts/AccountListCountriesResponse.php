@@ -86,21 +86,24 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param DisplayName|array{en: string, ru: string} $display_name
+     * @param Price|array{amount: string, currency_code: string} $price
      */
     public static function with(
         bool $available,
         string $country_code,
-        DisplayName $display_name,
-        Price $price,
+        DisplayName|array $display_name,
+        Price|array $price,
         string $provider,
     ): self {
         $obj = new self;
 
-        $obj->available = $available;
-        $obj->country_code = $country_code;
-        $obj->display_name = $display_name;
-        $obj->price = $price;
-        $obj->provider = $provider;
+        $obj['available'] = $available;
+        $obj['country_code'] = $country_code;
+        $obj['display_name'] = $display_name;
+        $obj['price'] = $price;
+        $obj['provider'] = $provider;
 
         return $obj;
     }
@@ -111,7 +114,7 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
     public function withAvailable(bool $available): self
     {
         $obj = clone $this;
-        $obj->available = $available;
+        $obj['available'] = $available;
 
         return $obj;
     }
@@ -122,23 +125,29 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
 
-    public function withDisplayName(DisplayName $displayName): self
+    /**
+     * @param DisplayName|array{en: string, ru: string} $displayName
+     */
+    public function withDisplayName(DisplayName|array $displayName): self
     {
         $obj = clone $this;
-        $obj->display_name = $displayName;
+        $obj['display_name'] = $displayName;
 
         return $obj;
     }
 
-    public function withPrice(Price $price): self
+    /**
+     * @param Price|array{amount: string, currency_code: string} $price
+     */
+    public function withPrice(Price|array $price): self
     {
         $obj = clone $this;
-        $obj->price = $price;
+        $obj['price'] = $price;
 
         return $obj;
     }
@@ -149,7 +158,7 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
     public function withProvider(string $provider): self
     {
         $obj = clone $this;
-        $obj->provider = $provider;
+        $obj['provider'] = $provider;
 
         return $obj;
     }

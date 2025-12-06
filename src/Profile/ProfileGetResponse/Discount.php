@@ -62,7 +62,7 @@ final class Discount implements BaseModel
         $obj = new self;
 
         $obj['level'] = $level;
-        $obj->percent = $percent;
+        $obj['percent'] = $percent;
 
         return $obj;
     }
@@ -86,7 +86,7 @@ final class Discount implements BaseModel
     public function withPercent(float $percent): self
     {
         $obj = clone $this;
-        $obj->percent = $percent;
+        $obj['percent'] = $percent;
 
         return $obj;
     }
