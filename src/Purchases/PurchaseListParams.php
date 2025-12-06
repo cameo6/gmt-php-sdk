@@ -95,8 +95,8 @@ final class PurchaseListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->page = $page;
-        $obj->page_size = $page_size;
+        $obj['page'] = $page;
+        $obj['page_size'] = $page_size;
 
         null !== $status && $obj['status'] = $status;
 
@@ -109,7 +109,7 @@ final class PurchaseListParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class PurchaseListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }

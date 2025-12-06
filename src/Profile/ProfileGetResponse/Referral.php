@@ -88,34 +88,42 @@ final class Referral implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Balance|array{
+     *   amount: string, currency_code: string
+     * } $balance
      * @param Level|value-of<Level> $level
+     * @param Profit|array{amount: string, currency_code: string} $profit
      */
     public static function with(
-        Balance $balance,
+        Balance|array $balance,
         Level|string $level,
         float $percent,
-        Profit $profit,
+        Profit|array $profit,
         int $referrals_count,
     ): self {
         $obj = new self;
 
-        $obj->balance = $balance;
+        $obj['balance'] = $balance;
         $obj['level'] = $level;
-        $obj->percent = $percent;
-        $obj->profit = $profit;
-        $obj->referrals_count = $referrals_count;
+        $obj['percent'] = $percent;
+        $obj['profit'] = $profit;
+        $obj['referrals_count'] = $referrals_count;
 
         return $obj;
     }
 
     /**
      * Current referral balance available for withdrawal.
+     *
+     * @param Balance|array{
+     *   amount: string, currency_code: string
+     * } $balance
      */
     public function withBalance(
-        Balance $balance
+        Balance|array $balance
     ): self {
         $obj = clone $this;
-        $obj->balance = $balance;
+        $obj['balance'] = $balance;
 
         return $obj;
     }
@@ -139,18 +147,20 @@ final class Referral implements BaseModel
     public function withPercent(float $percent): self
     {
         $obj = clone $this;
-        $obj->percent = $percent;
+        $obj['percent'] = $percent;
 
         return $obj;
     }
 
     /**
      * Total lifetime earnings from referral commissions.
+     *
+     * @param Profit|array{amount: string, currency_code: string} $profit
      */
-    public function withProfit(Profit $profit): self
+    public function withProfit(Profit|array $profit): self
     {
         $obj = clone $this;
-        $obj->profit = $profit;
+        $obj['profit'] = $profit;
 
         return $obj;
     }
@@ -161,7 +171,7 @@ final class Referral implements BaseModel
     public function withReferralsCount(int $referralsCount): self
     {
         $obj = clone $this;
-        $obj->referrals_count = $referralsCount;
+        $obj['referrals_count'] = $referralsCount;
 
         return $obj;
     }

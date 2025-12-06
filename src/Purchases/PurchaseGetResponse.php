@@ -139,28 +139,33 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param DisplayName|array{en: string, ru: string} $display_name
+     * @param Price|array{amount: string, currency_code: string} $price
      * @param Status|value-of<Status> $status
+     * @param Verification|array{
+     *   code: string, password: string, received_at: string
+     * }|null $verification
      */
     public static function with(
         int $id,
         string $country_code,
         string $created_at,
-        DisplayName $display_name,
+        DisplayName|array $display_name,
         string $phone_number,
-        Price $price,
+        Price|array $price,
         Status|string $status,
-        ?Verification $verification,
+        Verification|array|null $verification,
     ): self {
         $obj = new self;
 
-        $obj->id = $id;
-        $obj->country_code = $country_code;
-        $obj->created_at = $created_at;
-        $obj->display_name = $display_name;
-        $obj->phone_number = $phone_number;
-        $obj->price = $price;
+        $obj['id'] = $id;
+        $obj['country_code'] = $country_code;
+        $obj['created_at'] = $created_at;
+        $obj['display_name'] = $display_name;
+        $obj['phone_number'] = $phone_number;
+        $obj['price'] = $price;
         $obj['status'] = $status;
-        $obj->verification = $verification;
+        $obj['verification'] = $verification;
 
         return $obj;
     }
@@ -171,7 +176,7 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
     public function withID(int $id): self
     {
         $obj = clone $this;
-        $obj->id = $id;
+        $obj['id'] = $id;
 
         return $obj;
     }
@@ -182,7 +187,7 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }
@@ -193,15 +198,18 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
-    public function withDisplayName(DisplayName $displayName): self
+    /**
+     * @param DisplayName|array{en: string, ru: string} $displayName
+     */
+    public function withDisplayName(DisplayName|array $displayName): self
     {
         $obj = clone $this;
-        $obj->display_name = $displayName;
+        $obj['display_name'] = $displayName;
 
         return $obj;
     }
@@ -214,7 +222,7 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj->phone_number = $phoneNumber;
+        $obj['phone_number'] = $phoneNumber;
 
         return $obj;
     }
@@ -225,11 +233,13 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      * **To see pricing breakdown before purchase.** Check `GET /accounts/:country_code` which shows both discounted price and original `base_price`.
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
+     *
+     * @param Price|array{amount: string, currency_code: string} $price
      */
-    public function withPrice(Price $price): self
+    public function withPrice(Price|array $price): self
     {
         $obj = clone $this;
-        $obj->price = $price;
+        $obj['price'] = $price;
 
         return $obj;
     }
@@ -261,11 +271,16 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      * **Availability.** Populated after calling `POST /purchases/:id/request-code`. Once received, credentials are permanent and cannot be re-requested.
      *
      * **Security.** Verification data is only visible to the purchase owner.
+     *
+     * @param Verification|array{
+     *   code: string, password: string, received_at: string
+     * }|null $verification
      */
-    public function withVerification(?Verification $verification): self
-    {
+    public function withVerification(
+        Verification|array|null $verification
+    ): self {
         $obj = clone $this;
-        $obj->verification = $verification;
+        $obj['verification'] = $verification;
 
         return $obj;
     }

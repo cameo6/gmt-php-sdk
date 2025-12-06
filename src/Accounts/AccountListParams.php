@@ -85,11 +85,11 @@ final class AccountListParams implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->page = $page;
-        $obj->page_size = $page_size;
+        $obj['page'] = $page;
+        $obj['page_size'] = $page_size;
         $obj['sort'] = $sort;
 
-        null !== $country_code && $obj->country_code = $country_code;
+        null !== $country_code && $obj['country_code'] = $country_code;
 
         return $obj;
     }
@@ -100,7 +100,7 @@ final class AccountListParams implements BaseModel
     public function withPage(int $page): self
     {
         $obj = clone $this;
-        $obj->page = $page;
+        $obj['page'] = $page;
 
         return $obj;
     }
@@ -111,7 +111,7 @@ final class AccountListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj->page_size = $pageSize;
+        $obj['page_size'] = $pageSize;
 
         return $obj;
     }
@@ -135,7 +135,7 @@ final class AccountListParams implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj->country_code = $countryCode;
+        $obj['country_code'] = $countryCode;
 
         return $obj;
     }

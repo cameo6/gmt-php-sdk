@@ -11,7 +11,9 @@ use Gmt\Core\Contracts\BaseModel;
 use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Profile\ProfileGetResponse\Balance;
 use Gmt\Profile\ProfileGetResponse\Discount;
+use Gmt\Profile\ProfileGetResponse\Discount\Level;
 use Gmt\Profile\ProfileGetResponse\Referral;
+use Gmt\Profile\ProfileGetResponse\Referral\Profit;
 use Gmt\Profile\ProfileGetResponse\Statistics;
 
 /**
@@ -102,33 +104,47 @@ final class ProfileGetResponse implements BaseModel, ResponseConverter
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Balance|array{amount: string, currency_code: string} $balance
+     * @param Discount|array{level: value-of<Level>, percent: float} $discount
+     * @param Referral|array{
+     *   balance: Referral\Balance,
+     *   level: value-of<Referral\Level>,
+     *   percent: float,
+     *   profit: Profit,
+     *   referrals_count: int,
+     * } $referral
+     * @param Statistics|array{total_purchases: int} $statistics
      */
     public static function with(
-        Balance $balance,
+        Balance|array $balance,
         string $created_at,
-        Discount $discount,
-        Referral $referral,
-        Statistics $statistics,
+        Discount|array $discount,
+        Referral|array $referral,
+        Statistics|array $statistics,
         string $telegram_id,
         ?string $telegram_username,
     ): self {
         $obj = new self;
 
-        $obj->balance = $balance;
-        $obj->created_at = $created_at;
-        $obj->discount = $discount;
-        $obj->referral = $referral;
-        $obj->statistics = $statistics;
-        $obj->telegram_id = $telegram_id;
-        $obj->telegram_username = $telegram_username;
+        $obj['balance'] = $balance;
+        $obj['created_at'] = $created_at;
+        $obj['discount'] = $discount;
+        $obj['referral'] = $referral;
+        $obj['statistics'] = $statistics;
+        $obj['telegram_id'] = $telegram_id;
+        $obj['telegram_username'] = $telegram_username;
 
         return $obj;
     }
 
-    public function withBalance(Balance $balance): self
+    /**
+     * @param Balance|array{amount: string, currency_code: string} $balance
+     */
+    public function withBalance(Balance|array $balance): self
     {
         $obj = clone $this;
-        $obj->balance = $balance;
+        $obj['balance'] = $balance;
 
         return $obj;
     }
@@ -139,31 +155,46 @@ final class ProfileGetResponse implements BaseModel, ResponseConverter
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj->created_at = $createdAt;
+        $obj['created_at'] = $createdAt;
 
         return $obj;
     }
 
-    public function withDiscount(Discount $discount): self
+    /**
+     * @param Discount|array{level: value-of<Level>, percent: float} $discount
+     */
+    public function withDiscount(Discount|array $discount): self
     {
         $obj = clone $this;
-        $obj->discount = $discount;
+        $obj['discount'] = $discount;
 
         return $obj;
     }
 
-    public function withReferral(Referral $referral): self
+    /**
+     * @param Referral|array{
+     *   balance: Referral\Balance,
+     *   level: value-of<Referral\Level>,
+     *   percent: float,
+     *   profit: Profit,
+     *   referrals_count: int,
+     * } $referral
+     */
+    public function withReferral(Referral|array $referral): self
     {
         $obj = clone $this;
-        $obj->referral = $referral;
+        $obj['referral'] = $referral;
 
         return $obj;
     }
 
-    public function withStatistics(Statistics $statistics): self
+    /**
+     * @param Statistics|array{total_purchases: int} $statistics
+     */
+    public function withStatistics(Statistics|array $statistics): self
     {
         $obj = clone $this;
-        $obj->statistics = $statistics;
+        $obj['statistics'] = $statistics;
 
         return $obj;
     }
@@ -174,7 +205,7 @@ final class ProfileGetResponse implements BaseModel, ResponseConverter
     public function withTelegramID(string $telegramID): self
     {
         $obj = clone $this;
-        $obj->telegram_id = $telegramID;
+        $obj['telegram_id'] = $telegramID;
 
         return $obj;
     }
@@ -185,7 +216,7 @@ final class ProfileGetResponse implements BaseModel, ResponseConverter
     public function withTelegramUsername(?string $telegramUsername): self
     {
         $obj = clone $this;
-        $obj->telegram_username = $telegramUsername;
+        $obj['telegram_username'] = $telegramUsername;
 
         return $obj;
     }
