@@ -83,20 +83,21 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
+     * @param Checks|array{database: bool, redis: bool} $checks
      */
     public static function with(
         string $now,
         Status|string $status,
         int $uptimeSeconds,
-        ?Checks $checks = null,
+        Checks|array|null $checks = null,
     ): self {
         $obj = new self;
 
-        $obj->now = $now;
+        $obj['now'] = $now;
         $obj['status'] = $status;
-        $obj->uptimeSeconds = $uptimeSeconds;
+        $obj['uptimeSeconds'] = $uptimeSeconds;
 
-        null !== $checks && $obj->checks = $checks;
+        null !== $checks && $obj['checks'] = $checks;
 
         return $obj;
     }
@@ -107,7 +108,7 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
     public function withNow(string $now): self
     {
         $obj = clone $this;
-        $obj->now = $now;
+        $obj['now'] = $now;
 
         return $obj;
     }
@@ -131,18 +132,20 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
     public function withUptimeSeconds(int $uptimeSeconds): self
     {
         $obj = clone $this;
-        $obj->uptimeSeconds = $uptimeSeconds;
+        $obj['uptimeSeconds'] = $uptimeSeconds;
 
         return $obj;
     }
 
     /**
      * Detailed information about dependencies state.
+     *
+     * @param Checks|array{database: bool, redis: bool} $checks
      */
-    public function withChecks(Checks $checks): self
+    public function withChecks(Checks|array $checks): self
     {
         $obj = clone $this;
-        $obj->checks = $checks;
+        $obj['checks'] = $checks;
 
         return $obj;
     }

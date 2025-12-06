@@ -79,9 +79,9 @@ final class Verification implements BaseModel
     ): self {
         $obj = new self;
 
-        $obj->code = $code;
-        $obj->password = $password;
-        $obj->received_at = $received_at;
+        $obj['code'] = $code;
+        $obj['password'] = $password;
+        $obj['received_at'] = $received_at;
 
         return $obj;
     }
@@ -92,7 +92,7 @@ final class Verification implements BaseModel
     public function withCode(string $code): self
     {
         $obj = clone $this;
-        $obj->code = $code;
+        $obj['code'] = $code;
 
         return $obj;
     }
@@ -103,7 +103,7 @@ final class Verification implements BaseModel
     public function withPassword(string $password): self
     {
         $obj = clone $this;
-        $obj->password = $password;
+        $obj['password'] = $password;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Verification implements BaseModel
     public function withReceivedAt(string $receivedAt): self
     {
         $obj = clone $this;
-        $obj->received_at = $receivedAt;
+        $obj['received_at'] = $receivedAt;
 
         return $obj;
     }

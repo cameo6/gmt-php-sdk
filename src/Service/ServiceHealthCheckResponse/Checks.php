@@ -58,8 +58,8 @@ final class Checks implements BaseModel
     {
         $obj = new self;
 
-        $obj->database = $database;
-        $obj->redis = $redis;
+        $obj['database'] = $database;
+        $obj['redis'] = $redis;
 
         return $obj;
     }
@@ -70,7 +70,7 @@ final class Checks implements BaseModel
     public function withDatabase(bool $database): self
     {
         $obj = clone $this;
-        $obj->database = $database;
+        $obj['database'] = $database;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Checks implements BaseModel
     public function withRedis(bool $redis): self
     {
         $obj = clone $this;
-        $obj->redis = $redis;
+        $obj['redis'] = $redis;
 
         return $obj;
     }

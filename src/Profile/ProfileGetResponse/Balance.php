@@ -56,8 +56,8 @@ final class Balance implements BaseModel
     {
         $obj = new self;
 
-        $obj->amount = $amount;
-        $obj->currency_code = $currency_code;
+        $obj['amount'] = $amount;
+        $obj['currency_code'] = $currency_code;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Balance implements BaseModel
     public function withAmount(string $amount): self
     {
         $obj = clone $this;
-        $obj->amount = $amount;
+        $obj['amount'] = $amount;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Balance implements BaseModel
     public function withCurrencyCode(string $currencyCode): self
     {
         $obj = clone $this;
-        $obj->currency_code = $currencyCode;
+        $obj['currency_code'] = $currencyCode;
 
         return $obj;
     }
