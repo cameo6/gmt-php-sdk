@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.0 (2025-12-08)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* allow both model class instances and arrays in setters ([32b27c5](https://github.com/cameo6/gmt-php-sdk/commit/32b27c5abbef8ab4a4cb8a6bca546d5bad245bd8))
+* **api:** api update ([68bbe0d](https://github.com/cameo6/gmt-php-sdk/commit/68bbe0da806e0bf9669a055149bcf14af5142483))
+
+
+### Chores
+
+* be more targeted in suppressing superfluous linter warnings ([5f4fccd](https://github.com/cameo6/gmt-php-sdk/commit/5f4fccd8d5d0cd49d7c5d6aee211ab6789c98826))
+* better support for phpstan ([4d21db5](https://github.com/cameo6/gmt-php-sdk/commit/4d21db5d93ea4667e3e44106c499aa057b886562))
+* formatting ([5f0b339](https://github.com/cameo6/gmt-php-sdk/commit/5f0b339310dc7f3ee4b129a7abb3d5ed4813ff0f))
+
 ## 0.2.0 (2025-11-28)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.1.0...v0.2.0)
