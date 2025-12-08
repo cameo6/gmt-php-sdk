@@ -60,9 +60,9 @@ class Client extends BaseClient
             headers: [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'User-Agent' => sprintf('gmt/PHP %s', '0.6.0'),
+                'User-Agent' => sprintf('gmt/PHP %s', '0.7.0'),
                 'X-Stainless-Lang' => 'php',
-                'X-Stainless-Package-Version' => '0.6.0',
+                'X-Stainless-Package-Version' => '0.7.0',
                 'X-Stainless-OS' => $this->getNormalizedOS(),
                 'X-Stainless-Arch' => $this->getNormalizedArchitecture(),
                 'X-Stainless-Runtime' => 'php',
