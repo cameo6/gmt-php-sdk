@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2025-12-08)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([8974229](https://github.com/cameo6/gmt-php-sdk/commit/897422915ed9fa274dc491b7896839acce889105))
+
 ## 0.4.0 (2025-12-08)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.3.0...v0.4.0)
