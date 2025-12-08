@@ -9,6 +9,7 @@ use Gmt\Services\AccountsService;
 use Gmt\Services\ProfileService;
 use Gmt\Services\PurchasesService;
 use Gmt\Services\ServiceService;
+use Gmt\Services\WebhooksService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
 
@@ -35,6 +36,11 @@ class Client extends BaseClient
      * @api
      */
     public PurchasesService $purchases;
+
+    /**
+     * @api
+     */
+    public WebhooksService $webhooks;
 
     public function __construct(?string $apiKey = null, ?string $baseUrl = null)
     {
@@ -71,6 +77,7 @@ class Client extends BaseClient
         $this->accounts = new AccountsService($this);
         $this->profile = new ProfileService($this);
         $this->purchases = new PurchasesService($this);
+        $this->webhooks = new WebhooksService($this);
     }
 
     /** @return array<string,string> */
