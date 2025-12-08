@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 (2025-12-08)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** add webhooks endpoint ([86b6b79](https://github.com/cameo6/gmt-php-sdk/commit/86b6b79cac5dd3eb55dfcf3b74a3b27a919e3ac7))
+
 ## 0.3.0 (2025-12-08)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.2.0...v0.3.0)
