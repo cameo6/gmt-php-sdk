@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
+namespace Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;

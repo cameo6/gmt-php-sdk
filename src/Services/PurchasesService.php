@@ -12,6 +12,7 @@ use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
+use Gmt\Purchases\PurchaseRequestVerificationCodeParams;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\PurchasesContract;
@@ -138,17 +139,30 @@ final class PurchasesService implements PurchasesContract
      *
      * **Provider timeout.** Code retrieval may take 5-30 seconds depending on provider availability.
      *
+     * **Webhook notification.** Optionally provide `callback_url` to receive a POST webhook when code is retrieved. See [Webhooks](#tag/webhooks) section for payload structure and **Models** section for `WebhookSuccessPayload` / `WebhookFailedPayload` schemas.
+     *
+     * @param array{
+     *   callback_url?: string
+     * }|PurchaseRequestVerificationCodeParams $params
+     *
      * @throws APIException
      */
     public function requestVerificationCode(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        array|PurchaseRequestVerificationCodeParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PurchaseRequestVerificationCodeResponse {
+        [$parsed, $options] = PurchaseRequestVerificationCodeParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'post',
             path: ['v1/purchases/%1$s/request-code', $purchaseID],
-            options: $requestOptions,
+            body: (object) $parsed,
+            options: $options,
             convert: PurchaseRequestVerificationCodeResponse::class,
         );
     }
