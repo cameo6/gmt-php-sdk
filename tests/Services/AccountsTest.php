@@ -67,7 +67,7 @@ final class AccountsTest extends TestCase
             'page' => 1,
             'page_size' => 50,
             'sort' => 'price_asc',
-            'country_code' => 'US,RU',
+            'country_codes' => 'US,RU,GB',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -100,7 +100,7 @@ final class AccountsTest extends TestCase
             'page' => 1,
             'page_size' => 50,
             'sort' => 'price_asc',
-            'country_code' => 'US,RU',
+            'country_codes' => 'US,RU,GB',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -11,6 +11,7 @@ use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
+use Gmt\Purchases\PurchaseRequestVerificationCodeParams;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
 
@@ -55,10 +56,13 @@ interface PurchasesContract
     /**
      * @api
      *
+     * @param array<mixed>|PurchaseRequestVerificationCodeParams $params
+     *
      * @throws APIException
      */
     public function requestVerificationCode(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        array|PurchaseRequestVerificationCodeParams $params,
+        ?RequestOptions $requestOptions = null,
     ): PurchaseRequestVerificationCodeResponse;
 }

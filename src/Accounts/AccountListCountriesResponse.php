@@ -14,11 +14,7 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccountListCountriesResponseShape = array{
- *   available: bool,
- *   country_code: string,
- *   display_name: DisplayName,
- *   price: Price,
- *   provider: string,
+ *   available: bool, country_code: string, display_name: DisplayName, price: Price
  * }
  */
 final class AccountListCountriesResponse implements BaseModel, ResponseConverter
@@ -47,22 +43,12 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
     public Price $price;
 
     /**
-     * Name of the account provider for this country.
-     */
-    #[Api]
-    public string $provider;
-
-    /**
      * `new AccountListCountriesResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
      * AccountListCountriesResponse::with(
-     *   available: ...,
-     *   country_code: ...,
-     *   display_name: ...,
-     *   price: ...,
-     *   provider: ...,
+     *   available: ..., country_code: ..., display_name: ..., price: ...
      * )
      * ```
      *
@@ -74,7 +60,6 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
      *   ->withCountryCode(...)
      *   ->withDisplayName(...)
      *   ->withPrice(...)
-     *   ->withProvider(...)
      * ```
      */
     public function __construct()
@@ -95,7 +80,6 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
         string $country_code,
         DisplayName|array $display_name,
         Price|array $price,
-        string $provider,
     ): self {
         $obj = new self;
 
@@ -103,7 +87,6 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
         $obj['country_code'] = $country_code;
         $obj['display_name'] = $display_name;
         $obj['price'] = $price;
-        $obj['provider'] = $provider;
 
         return $obj;
     }
@@ -148,17 +131,6 @@ final class AccountListCountriesResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj['price'] = $price;
-
-        return $obj;
-    }
-
-    /**
-     * Name of the account provider for this country.
-     */
-    public function withProvider(string $provider): self
-    {
-        $obj = clone $this;
-        $obj['provider'] = $provider;
 
         return $obj;
     }
