@@ -7,6 +7,7 @@ namespace Gmt\Accounts;
 use Gmt\Accounts\AccountGetResponse\Discount;
 use Gmt\Accounts\AccountGetResponse\DisplayName;
 use Gmt\Accounts\AccountGetResponse\Price;
+use Gmt\Accounts\AccountGetResponse\Tag;
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkResponse;
@@ -20,6 +21,7 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
  *   discount: Discount,
  *   display_name: DisplayName,
  *   price: Price,
+ *   tags: list<value-of<Tag>>,
  * }
  */
 final class AccountGetResponse implements BaseModel, ResponseConverter
@@ -51,6 +53,14 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
     public Price $price;
 
     /**
+     * Account tags (e.g., HIGH_QUALITY for premium accounts).
+     *
+     * @var list<value-of<Tag>> $tags
+     */
+    #[Api(list: Tag::class)]
+    public array $tags;
+
+    /**
      * `new AccountGetResponse()` is missing required properties by the API.
      *
      * To enforce required parameters use
@@ -61,6 +71,7 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      *   discount: ...,
      *   display_name: ...,
      *   price: ...,
+     *   tags: ...,
      * )
      * ```
      *
@@ -73,6 +84,7 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      *   ->withDiscount(...)
      *   ->withDisplayName(...)
      *   ->withPrice(...)
+     *   ->withTags(...)
      * ```
      */
     public function __construct()
@@ -88,6 +100,7 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      * @param Discount|array{base_price: string, percent: float} $discount
      * @param DisplayName|array{en: string, ru: string} $display_name
      * @param Price|array{amount: string, currency_code: string} $price
+     * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
         bool $available,
@@ -95,6 +108,7 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
         Discount|array $discount,
         DisplayName|array $display_name,
         Price|array $price,
+        array $tags,
     ): self {
         $obj = new self;
 
@@ -103,6 +117,7 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
         $obj['discount'] = $discount;
         $obj['display_name'] = $display_name;
         $obj['price'] = $price;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
@@ -158,6 +173,19 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
     {
         $obj = clone $this;
         $obj['price'] = $price;
+
+        return $obj;
+    }
+
+    /**
+     * Account tags (e.g., HIGH_QUALITY for premium accounts).
+     *
+     * @param list<Tag|value-of<Tag>> $tags
+     */
+    public function withTags(array $tags): self
+    {
+        $obj = clone $this;
+        $obj['tags'] = $tags;
 
         return $obj;
     }
