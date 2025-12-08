@@ -11,6 +11,7 @@ use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
+use Gmt\Purchases\PurchaseRefundResponse;
 use Gmt\Purchases\PurchaseRequestVerificationCodeParams;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
@@ -52,6 +53,16 @@ interface PurchasesContract
         array|PurchaseListParams $params,
         ?RequestOptions $requestOptions = null
     ): PageNumber;
+
+    /**
+     * @api
+     *
+     * @throws APIException
+     */
+    public function refund(
+        int $purchaseID,
+        ?RequestOptions $requestOptions = null
+    ): PurchaseRefundResponse;
 
     /**
      * @api

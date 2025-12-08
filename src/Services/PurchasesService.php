@@ -12,6 +12,7 @@ use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
+use Gmt\Purchases\PurchaseRefundResponse;
 use Gmt\Purchases\PurchaseRequestVerificationCodeParams;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
@@ -123,6 +124,30 @@ final class PurchasesService implements PurchasesContract
             options: $options,
             convert: PurchaseListResponse::class,
             page: PageNumber::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Refunds a purchase if verification code was not received within 20 minutes.
+     *
+     * **Requirements:**
+     * - Status `PENDING`, code not received
+     * - At least 20 minutes since purchase creation
+     *
+     * @throws APIException
+     */
+    public function refund(
+        int $purchaseID,
+        ?RequestOptions $requestOptions = null
+    ): PurchaseRefundResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['v1/purchases/%1$s/refund', $purchaseID],
+            options: $requestOptions,
+            convert: PurchaseRefundResponse::class,
         );
     }
 
