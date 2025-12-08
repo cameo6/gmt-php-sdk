@@ -35,13 +35,13 @@ final class PurchaseListParams implements BaseModel
     use SdkParams;
 
     /**
-     * Page number (starts from 1).
+     * Page number.
      */
     #[Api]
     public int $page;
 
     /**
-     * Number of items per page (max 50).
+     * Number of items per page.
      */
     #[Api]
     public int $page_size;
@@ -104,7 +104,7 @@ final class PurchaseListParams implements BaseModel
     }
 
     /**
-     * Page number (starts from 1).
+     * Page number.
      */
     public function withPage(int $page): self
     {
@@ -115,7 +115,7 @@ final class PurchaseListParams implements BaseModel
     }
 
     /**
-     * Number of items per page (max 50).
+     * Number of items per page.
      */
     public function withPageSize(int $pageSize): self
     {
