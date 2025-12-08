@@ -51,7 +51,7 @@ final class AccountsService implements AccountsContract
      *   page?: int,
      *   page_size?: int,
      *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc',
-     *   country_code?: string,
+     *   country_codes?: string,
      * }|AccountListParams $params
      *
      * @return PageNumber<AccountListResponse>
@@ -87,7 +87,7 @@ final class AccountsService implements AccountsContract
      *   page?: int,
      *   page_size?: int,
      *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc',
-     *   country_code?: string,
+     *   country_codes?: string,
      * }|AccountListCountriesParams $params
      *
      * @return PageNumber<AccountListCountriesResponse>

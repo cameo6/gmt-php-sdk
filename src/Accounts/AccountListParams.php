@@ -16,7 +16,7 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\AccountsService::list()
  *
  * @phpstan-type AccountListParamsShape = array{
- *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_code?: string
+ *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_codes?: string
  * }
  */
 final class AccountListParams implements BaseModel
@@ -46,10 +46,10 @@ final class AccountListParams implements BaseModel
     public string $sort;
 
     /**
-     * Filter by country codes (comma-separated, e.g., 'US,RU,GB').
+     * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      */
     #[Api(optional: true)]
-    public ?string $country_code;
+    public ?string $country_codes;
 
     /**
      * `new AccountListParams()` is missing required properties by the API.
@@ -81,7 +81,7 @@ final class AccountListParams implements BaseModel
         int $page = 1,
         int $page_size = 50,
         Sort|string $sort = 'name_asc',
-        ?string $country_code = null,
+        ?string $country_codes = null,
     ): self {
         $obj = new self;
 
@@ -89,7 +89,7 @@ final class AccountListParams implements BaseModel
         $obj['page_size'] = $page_size;
         $obj['sort'] = $sort;
 
-        null !== $country_code && $obj['country_code'] = $country_code;
+        null !== $country_codes && $obj['country_codes'] = $country_codes;
 
         return $obj;
     }
@@ -130,12 +130,12 @@ final class AccountListParams implements BaseModel
     }
 
     /**
-     * Filter by country codes (comma-separated, e.g., 'US,RU,GB').
+     * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      */
-    public function withCountryCode(string $countryCode): self
+    public function withCountryCodes(string $countryCodes): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['country_codes'] = $countryCodes;
 
         return $obj;
     }

@@ -104,7 +104,7 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->purchases->requestVerificationCode(12345);
+        $result = $this->client->purchases->requestVerificationCode(12345, []);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(
