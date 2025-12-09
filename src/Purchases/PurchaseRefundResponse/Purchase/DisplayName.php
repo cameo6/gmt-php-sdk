@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseRefundResponse\Purchase;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class DisplayName implements BaseModel
     /**
      * Name in English.
      */
-    #[Api]
+    #[Required]
     public string $en;
 
     /**
      * Name in Russian.
      */
-    #[Api]
+    #[Required]
     public string $ru;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseListResponse\DisplayName;
@@ -32,22 +32,22 @@ final class PurchaseListResponse implements BaseModel
     /**
      * Unique purchase identifier.
      */
-    #[Api]
+    #[Required]
     public int $id;
 
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api]
+    #[Required]
     public string $country_code;
 
     /**
      * Purchase creation time in ISO 8601 format (UTC).
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
-    #[Api]
+    #[Required]
     public DisplayName $display_name;
 
     /**
@@ -55,7 +55,7 @@ final class PurchaseListResponse implements BaseModel
      *
      * **Usage.** This is your Telegram account login. Use it with `verification.code` and `verification.password` to access the account.
      */
-    #[Api]
+    #[Required]
     public string $phone_number;
 
     /**
@@ -65,7 +65,7 @@ final class PurchaseListResponse implements BaseModel
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
      */
-    #[Api]
+    #[Required]
     public Price $price;
 
     /**
@@ -81,7 +81,7 @@ final class PurchaseListResponse implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
@@ -91,7 +91,7 @@ final class PurchaseListResponse implements BaseModel
      *
      * **Security.** Verification data is only visible to the purchase owner.
      */
-    #[Api]
+    #[Required]
     public ?Verification $verification;
 
     /**

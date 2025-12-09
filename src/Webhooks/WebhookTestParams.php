@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Webhooks;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -42,13 +42,13 @@ final class WebhookTestParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * Webhook endpoint URL. Must be a valid URL.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**

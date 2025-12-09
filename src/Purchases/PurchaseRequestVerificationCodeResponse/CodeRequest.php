@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
@@ -26,25 +26,25 @@ final class CodeRequest implements BaseModel
     /**
      * Current attempt number.
      */
-    #[Api]
+    #[Required]
     public int $attempt;
 
     /**
      * Maximum number of attempts.
      */
-    #[Api]
+    #[Required]
     public int $max_attempts;
 
     /**
      * ISO timestamp of next attempt (null if not scheduled).
      */
-    #[Api]
+    #[Required]
     public ?string $next_attempt_at;
 
     /**
      * Seconds until next attempt (null if not scheduled).
      */
-    #[Api]
+    #[Required]
     public ?int $retry_after;
 
     /**
@@ -52,7 +52,7 @@ final class CodeRequest implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**

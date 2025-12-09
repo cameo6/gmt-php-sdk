@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Profile\ProfileGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -19,7 +19,7 @@ final class Statistics implements BaseModel
     /**
      * Total number of successful purchases.
      */
-    #[Api]
+    #[Required]
     public int $total_purchases;
 
     /**

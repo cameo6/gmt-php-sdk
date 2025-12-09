@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Profile\ProfileGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Referral\Balance;
@@ -28,7 +28,7 @@ final class Referral implements BaseModel
     /**
      * Current referral balance available for withdrawal.
      */
-    #[Api]
+    #[Required]
     public Balance $balance;
 
     /**
@@ -36,25 +36,25 @@ final class Referral implements BaseModel
      *
      * @var value-of<Level> $level
      */
-    #[Api(enum: Level::class)]
+    #[Required(enum: Level::class)]
     public string $level;
 
     /**
      * Referral commission percentage.
      */
-    #[Api]
+    #[Required]
     public float $percent;
 
     /**
      * Total lifetime earnings from referral commissions.
      */
-    #[Api]
+    #[Required]
     public Profit $profit;
 
     /**
      * Total number of users invited through referral link.
      */
-    #[Api]
+    #[Required]
     public int $referrals_count;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Service\ServiceHealthCheckResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Checks implements BaseModel
     /**
      * Database connection status.
      */
-    #[Api]
+    #[Required]
     public bool $database;
 
     /**
      * Redis connection status.
      */
-    #[Api]
+    #[Required]
     public bool $redis;
 
     /**

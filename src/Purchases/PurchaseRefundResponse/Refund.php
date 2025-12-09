@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseRefundResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
@@ -22,19 +22,19 @@ final class Refund implements BaseModel
     /**
      * Refunded amount (full purchase price).
      */
-    #[Api]
+    #[Required]
     public Amount $amount;
 
     /**
      * Refund reason.
      */
-    #[Api]
+    #[Required]
     public string $reason;
 
     /**
      * Refund timestamp in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $refunded_at;
 
     /**

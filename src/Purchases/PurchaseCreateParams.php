@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -35,7 +35,7 @@ final class PurchaseCreateParams implements BaseModel
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api]
+    #[Required]
     public string $country_code;
 
     /**

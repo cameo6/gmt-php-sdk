@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Profile\ProfileGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Discount\Level;
@@ -22,13 +22,13 @@ final class Discount implements BaseModel
      *
      * @var value-of<Level> $level
      */
-    #[Api(enum: Level::class)]
+    #[Required(enum: Level::class)]
     public string $level;
 
     /**
      * Discount percentage.
      */
-    #[Api]
+    #[Required]
     public float $percent;
 
     /**

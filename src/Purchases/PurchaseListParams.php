@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -37,13 +38,13 @@ final class PurchaseListParams implements BaseModel
     /**
      * Page number.
      */
-    #[Api]
+    #[Required]
     public int $page;
 
     /**
      * Number of items per page.
      */
-    #[Api]
+    #[Required]
     public int $page_size;
 
     /**
@@ -59,7 +60,7 @@ final class PurchaseListParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**

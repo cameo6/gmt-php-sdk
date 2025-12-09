@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Gmt\Accounts;
 
 use Gmt\Accounts\AccountListCountriesParams\Sort;
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -28,13 +29,13 @@ final class AccountListCountriesParams implements BaseModel
     /**
      * Page number.
      */
-    #[Api]
+    #[Required]
     public int $page;
 
     /**
      * Number of items per page.
      */
-    #[Api]
+    #[Required]
     public int $page_size;
 
     /**
@@ -42,13 +43,13 @@ final class AccountListCountriesParams implements BaseModel
      *
      * @var value-of<Sort> $sort
      */
-    #[Api(enum: Sort::class)]
+    #[Required(enum: Sort::class)]
     public string $sort;
 
     /**
      * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $country_codes;
 
     /**

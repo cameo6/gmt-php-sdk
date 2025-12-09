@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Accounts\AccountGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class Discount implements BaseModel
     /**
      * Original price without discount.
      */
-    #[Api]
+    #[Required]
     public string $base_price;
 
     /**
      * Discount percentage applied to this user.
      */
-    #[Api]
+    #[Required]
     public float $percent;
 
     /**

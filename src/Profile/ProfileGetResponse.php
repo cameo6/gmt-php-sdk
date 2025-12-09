@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Profile;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Balance;
@@ -32,34 +32,34 @@ final class ProfileGetResponse implements BaseModel
     /** @use SdkModel<ProfileGetResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public Balance $balance;
 
     /**
      * Account creation time in ISO 8601 format (UTC).
      */
-    #[Api]
+    #[Required]
     public string $created_at;
 
-    #[Api]
+    #[Required]
     public Discount $discount;
 
-    #[Api]
+    #[Required]
     public Referral $referral;
 
-    #[Api]
+    #[Required]
     public Statistics $statistics;
 
     /**
      * User's Telegram ID.
      */
-    #[Api]
+    #[Required]
     public string $telegram_id;
 
     /**
      * User's Telegram username.
      */
-    #[Api]
+    #[Required]
     public ?string $telegram_username;
 
     /**

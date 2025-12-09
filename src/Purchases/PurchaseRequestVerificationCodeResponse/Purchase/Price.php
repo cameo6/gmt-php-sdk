@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -25,13 +25,13 @@ final class Price implements BaseModel
     /**
      * Monetary amount as a string with up to 2 decimal places.
      */
-    #[Api]
+    #[Required]
     public string $amount;
 
     /**
      * ISO 4217 currency code.
      */
-    #[Api]
+    #[Required]
     public string $currency_code;
 
     /**
