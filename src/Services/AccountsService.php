@@ -10,6 +10,7 @@ use Gmt\Accounts\AccountListCountriesResponse;
 use Gmt\Accounts\AccountListParams;
 use Gmt\Accounts\AccountListResponse;
 use Gmt\Client;
+use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\PageNumber;
 use Gmt\RequestOptions;
@@ -33,13 +34,15 @@ final class AccountsService implements AccountsContract
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): AccountGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<AccountGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['v1/accounts/%1$s', $countryCode],
             options: $requestOptions,
             convert: AccountGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -67,8 +70,8 @@ final class AccountsService implements AccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PageNumber<AccountListResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v1/accounts/',
             query: $parsed,
@@ -76,6 +79,8 @@ final class AccountsService implements AccountsContract
             convert: AccountListResponse::class,
             page: PageNumber::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -103,8 +108,8 @@ final class AccountsService implements AccountsContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PageNumber<AccountListCountriesResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v1/accounts/countries',
             query: $parsed,
@@ -112,5 +117,7 @@ final class AccountsService implements AccountsContract
             convert: AccountListCountriesResponse::class,
             page: PageNumber::class,
         );
+
+        return $response->parse();
     }
 }

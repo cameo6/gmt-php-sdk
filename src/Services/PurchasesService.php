@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Client;
+use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseCreateParams;
@@ -53,14 +54,16 @@ final class PurchasesService implements PurchasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PurchaseNewResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'v1/purchases/',
             body: (object) $parsed,
             options: $options,
             convert: PurchaseNewResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -76,13 +79,15 @@ final class PurchasesService implements PurchasesContract
         int $purchaseID,
         ?RequestOptions $requestOptions = null
     ): PurchaseGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PurchaseGetResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: ['v1/purchases/%1$s', $purchaseID],
             options: $requestOptions,
             convert: PurchaseGetResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -116,8 +121,8 @@ final class PurchasesService implements PurchasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PageNumber<PurchaseListResponse>> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v1/purchases/',
             query: $parsed,
@@ -125,6 +130,8 @@ final class PurchasesService implements PurchasesContract
             convert: PurchaseListResponse::class,
             page: PageNumber::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -142,13 +149,15 @@ final class PurchasesService implements PurchasesContract
         int $purchaseID,
         ?RequestOptions $requestOptions = null
     ): PurchaseRefundResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PurchaseRefundResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['v1/purchases/%1$s/refund', $purchaseID],
             options: $requestOptions,
             convert: PurchaseRefundResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -182,13 +191,15 @@ final class PurchasesService implements PurchasesContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<PurchaseRequestVerificationCodeResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: ['v1/purchases/%1$s/request-code', $purchaseID],
             body: (object) $parsed,
             options: $options,
             convert: PurchaseRequestVerificationCodeResponse::class,
         );
+
+        return $response->parse();
     }
 }

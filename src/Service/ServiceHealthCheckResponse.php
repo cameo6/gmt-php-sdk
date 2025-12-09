@@ -6,9 +6,7 @@ namespace Gmt\Service;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Service\ServiceHealthCheckResponse\Checks;
 use Gmt\Service\ServiceHealthCheckResponse\Status;
 
@@ -22,12 +20,10 @@ use Gmt\Service\ServiceHealthCheckResponse\Status;
  *   checks?: Checks|null,
  * }
  */
-final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
+final class ServiceHealthCheckResponse implements BaseModel
 {
     /** @use SdkModel<ServiceHealthCheckResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Current server time in ISO 8601 format.

@@ -6,9 +6,7 @@ namespace Gmt\Service;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Successful response.
@@ -17,12 +15,10 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
  *   epochMs: int, iso: string, timezone: string
  * }
  */
-final class ServiceGetServerTimeResponse implements BaseModel, ResponseConverter
+final class ServiceGetServerTimeResponse implements BaseModel
 {
     /** @use SdkModel<ServiceGetServerTimeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Current server time in milliseconds since Unix epoch.

@@ -6,9 +6,7 @@ namespace Gmt\Purchases;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\DisplayName;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\Price;
@@ -22,12 +20,10 @@ use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
  *   purchase: Purchase, refund: Refund
  * }
  */
-final class PurchaseRefundResponse implements BaseModel, ResponseConverter
+final class PurchaseRefundResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseRefundResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Purchase $purchase;

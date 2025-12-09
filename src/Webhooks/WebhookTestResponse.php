@@ -6,9 +6,7 @@ namespace Gmt\Webhooks;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Result of webhook test request.
@@ -21,12 +19,10 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
  *   response_time_ms?: int|null,
  * }
  */
-final class WebhookTestResponse implements BaseModel, ResponseConverter
+final class WebhookTestResponse implements BaseModel
 {
     /** @use SdkModel<WebhookTestResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Whether the webhook was delivered successfully (HTTP 200).

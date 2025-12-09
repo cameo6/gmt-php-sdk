@@ -6,9 +6,7 @@ namespace Gmt\Purchases;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase;
@@ -21,12 +19,10 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase\Verification;
  *   code_request: CodeRequest, purchase: Purchase
  * }
  */
-final class PurchaseRequestVerificationCodeResponse implements BaseModel, ResponseConverter
+final class PurchaseRequestVerificationCodeResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseRequestVerificationCodeResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public CodeRequest $code_request;

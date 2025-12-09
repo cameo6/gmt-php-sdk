@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Client;
+use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\RequestOptions;
 use Gmt\Service\ServiceGetServerTimeResponse;
@@ -28,13 +29,15 @@ final class ServiceService implements ServiceContract
     public function getServerTime(
         ?RequestOptions $requestOptions = null
     ): ServiceGetServerTimeResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ServiceGetServerTimeResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v1/service/time',
             options: $requestOptions,
             convert: ServiceGetServerTimeResponse::class,
         );
+
+        return $response->parse();
     }
 
     /**
@@ -47,12 +50,14 @@ final class ServiceService implements ServiceContract
     public function healthCheck(
         ?RequestOptions $requestOptions = null
     ): ServiceHealthCheckResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<ServiceHealthCheckResponse> */
+        $response = $this->client->request(
             method: 'get',
             path: 'v1/service/health',
             options: $requestOptions,
             convert: ServiceHealthCheckResponse::class,
         );
+
+        return $response->parse();
     }
 }

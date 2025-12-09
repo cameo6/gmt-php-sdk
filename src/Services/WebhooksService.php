@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Client;
+use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\WebhooksContract;
@@ -48,13 +49,15 @@ final class WebhooksService implements WebhooksContract
             $requestOptions,
         );
 
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
+        /** @var BaseResponse<WebhookTestResponse> */
+        $response = $this->client->request(
             method: 'post',
             path: 'v1/webhooks/test',
             body: (object) $parsed,
             options: $options,
             convert: WebhookTestResponse::class,
         );
+
+        return $response->parse();
     }
 }
