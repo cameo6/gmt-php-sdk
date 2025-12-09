@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Gmt\Webhooks;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -27,31 +28,31 @@ final class WebhookTestResponse implements BaseModel
     /**
      * Whether the webhook was delivered successfully (HTTP 200).
      */
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
      * Error message if delivery failed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error;
 
     /**
      * HTTP status code returned by your endpoint.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $http_code;
 
     /**
      * Response body from your endpoint (truncated to 1000 characters).
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $response_body;
 
     /**
      * Response time in milliseconds.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?int $response_time_ms;
 
     /**

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseNewResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -27,13 +27,13 @@ final class Verification implements BaseModel
     /**
      * Verification code for account.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * Account password.
      */
-    #[Api]
+    #[Required]
     public string $password;
 
     /**
@@ -45,7 +45,7 @@ final class Verification implements BaseModel
      *
      * **Note.** These timestamps may be identical if code is requested immediately after purchase.
      */
-    #[Api]
+    #[Required]
     public string $received_at;
 
     /**

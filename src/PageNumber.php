@@ -2,7 +2,7 @@
 
 namespace Gmt;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkPage;
 use Gmt\Core\Contracts\BaseModel;
@@ -32,10 +32,10 @@ final class PageNumber implements BaseModel, BasePage
     use SdkPage;
 
     /** @var list<TItem>|null $items */
-    #[Api(list: 'mixed', optional: true)]
+    #[Optional(list: 'mixed')]
     public ?array $items;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Pagination $pagination;
 
     /**

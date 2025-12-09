@@ -7,7 +7,7 @@ namespace Gmt\Accounts;
 use Gmt\Accounts\AccountListResponse\DisplayName;
 use Gmt\Accounts\AccountListResponse\Price;
 use Gmt\Accounts\AccountListResponse\Tag;
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -28,19 +28,19 @@ final class AccountListResponse implements BaseModel
     /**
      * Indicates if account is available for purchase.
      */
-    #[Api]
+    #[Required]
     public bool $available;
 
     /**
      * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
      */
-    #[Api]
+    #[Required]
     public string $country_code;
 
-    #[Api]
+    #[Required]
     public DisplayName $display_name;
 
-    #[Api]
+    #[Required]
     public Price $price;
 
     /**
@@ -48,7 +48,7 @@ final class AccountListResponse implements BaseModel
      *
      * @var list<value-of<Tag>> $tags
      */
-    #[Api(list: Tag::class)]
+    #[Required(list: Tag::class)]
     public array $tags;
 
     /**

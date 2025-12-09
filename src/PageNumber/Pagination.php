@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\PageNumber;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -18,13 +18,13 @@ final class Pagination implements BaseModel
     /** @use SdkModel<PaginationShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public int $current_page;
 
-    #[Api]
+    #[Required]
     public bool $has_next;
 
-    #[Api]
+    #[Required]
     public int $total_pages;
 
     /**

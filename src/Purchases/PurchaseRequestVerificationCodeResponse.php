@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest;
@@ -24,10 +24,10 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
     /** @use SdkModel<PurchaseRequestVerificationCodeResponseShape> */
     use SdkModel;
 
-    #[Api]
+    #[Required]
     public CodeRequest $code_request;
 
-    #[Api]
+    #[Required]
     public Purchase $purchase;
 
     /**

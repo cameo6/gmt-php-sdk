@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -39,7 +39,7 @@ final class PurchaseRequestVerificationCodeParams implements BaseModel
      *
      * **Retry policy.** If your endpoint does not return HTTP 200, webhook will be retried up to 3 times with delays: immediately, after 10 seconds, after 30 seconds. Any non-200 response triggers retry.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $callback_url;
 
     public function __construct()

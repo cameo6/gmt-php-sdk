@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Service;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -23,19 +23,19 @@ final class ServiceGetServerTimeResponse implements BaseModel
     /**
      * Current server time in milliseconds since Unix epoch.
      */
-    #[Api]
+    #[Required]
     public int $epochMs;
 
     /**
      * Current server time in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $iso;
 
     /**
      * Server timezone.
      */
-    #[Api]
+    #[Required]
     public string $timezone;
 
     /**

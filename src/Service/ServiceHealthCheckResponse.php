@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Gmt\Service;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Service\ServiceHealthCheckResponse\Checks;
@@ -28,7 +29,7 @@ final class ServiceHealthCheckResponse implements BaseModel
     /**
      * Current server time in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $now;
 
     /**
@@ -36,19 +37,19 @@ final class ServiceHealthCheckResponse implements BaseModel
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * API uptime in seconds.
      */
-    #[Api]
+    #[Required]
     public int $uptimeSeconds;
 
     /**
      * Detailed information about dependencies state.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Checks $checks;
 
     /**
