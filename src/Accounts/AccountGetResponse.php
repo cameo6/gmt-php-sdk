@@ -10,9 +10,7 @@ use Gmt\Accounts\AccountGetResponse\Price;
 use Gmt\Accounts\AccountGetResponse\Tag;
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccountGetResponseShape = array{
@@ -24,12 +22,10 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
  *   tags: list<value-of<Tag>>,
  * }
  */
-final class AccountGetResponse implements BaseModel, ResponseConverter
+final class AccountGetResponse implements BaseModel
 {
     /** @use SdkModel<AccountGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Indicates if account is available for purchase.

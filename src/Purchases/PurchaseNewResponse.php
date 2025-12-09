@@ -6,9 +6,7 @@ namespace Gmt\Purchases;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Purchases\PurchaseNewResponse\DisplayName;
 use Gmt\Purchases\PurchaseNewResponse\Price;
 use Gmt\Purchases\PurchaseNewResponse\Status;
@@ -26,12 +24,10 @@ use Gmt\Purchases\PurchaseNewResponse\Verification;
  *   verification: Verification|null,
  * }
  */
-final class PurchaseNewResponse implements BaseModel, ResponseConverter
+final class PurchaseNewResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseNewResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     /**
      * Unique purchase identifier.

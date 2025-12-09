@@ -6,9 +6,7 @@ namespace Gmt\Profile;
 
 use Gmt\Core\Attributes\Api;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Profile\ProfileGetResponse\Balance;
 use Gmt\Profile\ProfileGetResponse\Discount;
 use Gmt\Profile\ProfileGetResponse\Discount\Level;
@@ -29,12 +27,10 @@ use Gmt\Profile\ProfileGetResponse\Statistics;
  *   telegram_username: string|null,
  * }
  */
-final class ProfileGetResponse implements BaseModel, ResponseConverter
+final class ProfileGetResponse implements BaseModel
 {
     /** @use SdkModel<ProfileGetResponseShape> */
     use SdkModel;
-
-    use SdkResponse;
 
     #[Api]
     public Balance $balance;
