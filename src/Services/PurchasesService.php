@@ -11,6 +11,7 @@ use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseCreateParams;
 use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams;
+use Gmt\Purchases\PurchaseListParams\Status;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
 use Gmt\Purchases\PurchaseRefundResponse;
@@ -105,7 +106,9 @@ final class PurchasesService implements PurchasesContract
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
      * @param array{
-     *   page?: int, page_size?: int, status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'
+     *   page: int,
+     *   page_size: int,
+     *   status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status,
      * }|PurchaseListParams $params
      *
      * @return PageNumber<PurchaseListResponse>

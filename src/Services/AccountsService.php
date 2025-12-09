@@ -8,6 +8,7 @@ use Gmt\Accounts\AccountGetResponse;
 use Gmt\Accounts\AccountListCountriesParams;
 use Gmt\Accounts\AccountListCountriesResponse;
 use Gmt\Accounts\AccountListParams;
+use Gmt\Accounts\AccountListParams\Sort;
 use Gmt\Accounts\AccountListResponse;
 use Gmt\Client;
 use Gmt\Core\Contracts\BaseResponse;
@@ -51,9 +52,9 @@ final class AccountsService implements AccountsContract
      * Returns paginated list of accounts with filtering and sorting options.
      *
      * @param array{
-     *   page?: int,
-     *   page_size?: int,
-     *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc',
+     *   page: int,
+     *   page_size: int,
+     *   sort: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort,
      *   country_codes?: string,
      * }|AccountListParams $params
      *
@@ -89,9 +90,9 @@ final class AccountsService implements AccountsContract
      * Returns a list of all available countries from providers with prices and availability. No authentication required.
      *
      * @param array{
-     *   page?: int,
-     *   page_size?: int,
-     *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc',
+     *   page: int,
+     *   page_size: int,
+     *   sort: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|AccountListCountriesParams\Sort,
      *   country_codes?: string,
      * }|AccountListCountriesParams $params
      *

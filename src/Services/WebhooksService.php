@@ -10,6 +10,7 @@ use Gmt\Core\Exceptions\APIException;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\WebhooksContract;
 use Gmt\Webhooks\WebhookTestParams;
+use Gmt\Webhooks\WebhookTestParams\Type;
 use Gmt\Webhooks\WebhookTestResponse;
 
 final class WebhooksService implements WebhooksContract
@@ -36,7 +37,9 @@ final class WebhooksService implements WebhooksContract
      *
      * **No persistence.** Test webhooks are not stored in delivery history.
      *
-     * @param array{type?: 'success'|'failed', url: string}|WebhookTestParams $params
+     * @param array{
+     *   type: 'success'|'failed'|Type, url: string
+     * }|WebhookTestParams $params
      *
      * @throws APIException
      */
