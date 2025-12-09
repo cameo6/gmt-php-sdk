@@ -11,7 +11,7 @@ use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
 
 /**
  * @phpstan-type RefundShape = array{
- *   amount: Amount, reason: string, refunded_at: string
+ *   amount: Amount, reason: string, refundedAt: string
  * }
  */
 final class Refund implements BaseModel
@@ -34,15 +34,15 @@ final class Refund implements BaseModel
     /**
      * Refund timestamp in ISO 8601 format.
      */
-    #[Required]
-    public string $refunded_at;
+    #[Required('refunded_at')]
+    public string $refundedAt;
 
     /**
      * `new Refund()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Refund::with(amount: ..., reason: ..., refunded_at: ...)
+     * Refund::with(amount: ..., reason: ..., refundedAt: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,18 +61,18 @@ final class Refund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Amount|array{amount: string, currency_code: string} $amount
+     * @param Amount|array{amount: string, currencyCode: string} $amount
      */
     public static function with(
         Amount|array $amount,
         string $reason,
-        string $refunded_at
+        string $refundedAt
     ): self {
         $obj = new self;
 
         $obj['amount'] = $amount;
         $obj['reason'] = $reason;
-        $obj['refunded_at'] = $refunded_at;
+        $obj['refundedAt'] = $refundedAt;
 
         return $obj;
     }
@@ -80,7 +80,7 @@ final class Refund implements BaseModel
     /**
      * Refunded amount (full purchase price).
      *
-     * @param Amount|array{amount: string, currency_code: string} $amount
+     * @param Amount|array{amount: string, currencyCode: string} $amount
      */
     public function withAmount(Amount|array $amount): self
     {
@@ -107,7 +107,7 @@ final class Refund implements BaseModel
     public function withRefundedAt(string $refundedAt): self
     {
         $obj = clone $this;
-        $obj['refunded_at'] = $refundedAt;
+        $obj['refundedAt'] = $refundedAt;
 
         return $obj;
     }

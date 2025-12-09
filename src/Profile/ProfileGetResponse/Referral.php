@@ -17,7 +17,7 @@ use Gmt\Profile\ProfileGetResponse\Referral\Profit;
  *   level: value-of<Level>,
  *   percent: float,
  *   profit: Profit,
- *   referrals_count: int,
+ *   referralsCount: int,
  * }
  */
 final class Referral implements BaseModel
@@ -54,8 +54,8 @@ final class Referral implements BaseModel
     /**
      * Total number of users invited through referral link.
      */
-    #[Required]
-    public int $referrals_count;
+    #[Required('referrals_count')]
+    public int $referralsCount;
 
     /**
      * `new Referral()` is missing required properties by the API.
@@ -63,7 +63,7 @@ final class Referral implements BaseModel
      * To enforce required parameters use
      * ```
      * Referral::with(
-     *   balance: ..., level: ..., percent: ..., profit: ..., referrals_count: ...
+     *   balance: ..., level: ..., percent: ..., profit: ..., referralsCount: ...
      * )
      * ```
      *
@@ -89,17 +89,17 @@ final class Referral implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Balance|array{
-     *   amount: string, currency_code: string
+     *   amount: string, currencyCode: string
      * } $balance
      * @param Level|value-of<Level> $level
-     * @param Profit|array{amount: string, currency_code: string} $profit
+     * @param Profit|array{amount: string, currencyCode: string} $profit
      */
     public static function with(
         Balance|array $balance,
         Level|string $level,
         float $percent,
         Profit|array $profit,
-        int $referrals_count,
+        int $referralsCount,
     ): self {
         $obj = new self;
 
@@ -107,7 +107,7 @@ final class Referral implements BaseModel
         $obj['level'] = $level;
         $obj['percent'] = $percent;
         $obj['profit'] = $profit;
-        $obj['referrals_count'] = $referrals_count;
+        $obj['referralsCount'] = $referralsCount;
 
         return $obj;
     }
@@ -116,7 +116,7 @@ final class Referral implements BaseModel
      * Current referral balance available for withdrawal.
      *
      * @param Balance|array{
-     *   amount: string, currency_code: string
+     *   amount: string, currencyCode: string
      * } $balance
      */
     public function withBalance(
@@ -155,7 +155,7 @@ final class Referral implements BaseModel
     /**
      * Total lifetime earnings from referral commissions.
      *
-     * @param Profit|array{amount: string, currency_code: string} $profit
+     * @param Profit|array{amount: string, currencyCode: string} $profit
      */
     public function withProfit(Profit|array $profit): self
     {
@@ -171,7 +171,7 @@ final class Referral implements BaseModel
     public function withReferralsCount(int $referralsCount): self
     {
         $obj = clone $this;
-        $obj['referrals_count'] = $referralsCount;
+        $obj['referralsCount'] = $referralsCount;
 
         return $obj;
     }

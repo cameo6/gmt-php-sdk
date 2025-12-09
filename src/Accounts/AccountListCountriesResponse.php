@@ -14,8 +14,8 @@ use Gmt\Core\Contracts\BaseModel;
 /**
  * @phpstan-type AccountListCountriesResponseShape = array{
  *   available: bool,
- *   country_code: string,
- *   display_name: DisplayName,
+ *   countryCode: string,
+ *   displayName: DisplayName,
  *   price: Price,
  *   tags: list<value-of<Tag>>,
  * }
@@ -34,11 +34,11 @@ final class AccountListCountriesResponse implements BaseModel
     /**
      * Country code (ISO 3166-1 alpha-2).
      */
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
-    #[Required]
-    public DisplayName $display_name;
+    #[Required('display_name')]
+    public DisplayName $displayName;
 
     #[Required]
     public Price $price;
@@ -57,7 +57,7 @@ final class AccountListCountriesResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * AccountListCountriesResponse::with(
-     *   available: ..., country_code: ..., display_name: ..., price: ..., tags: ...
+     *   available: ..., countryCode: ..., displayName: ..., price: ..., tags: ...
      * )
      * ```
      *
@@ -82,22 +82,22 @@ final class AccountListCountriesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayName|array{en: string, ru: string} $display_name
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param Price|array{amount: string, currencyCode: string} $price
      * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
         bool $available,
-        string $country_code,
-        DisplayName|array $display_name,
+        string $countryCode,
+        DisplayName|array $displayName,
         Price|array $price,
         array $tags,
     ): self {
         $obj = new self;
 
         $obj['available'] = $available;
-        $obj['country_code'] = $country_code;
-        $obj['display_name'] = $display_name;
+        $obj['countryCode'] = $countryCode;
+        $obj['displayName'] = $displayName;
         $obj['price'] = $price;
         $obj['tags'] = $tags;
 
@@ -121,7 +121,7 @@ final class AccountListCountriesResponse implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -132,13 +132,13 @@ final class AccountListCountriesResponse implements BaseModel
     public function withDisplayName(DisplayName|array $displayName): self
     {
         $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
 
     /**
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param Price|array{amount: string, currencyCode: string} $price
      */
     public function withPrice(Price|array $price): self
     {

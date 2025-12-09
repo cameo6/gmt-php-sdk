@@ -49,7 +49,7 @@ final class AccountsTest extends TestCase
         }
 
         $result = $this->client->accounts->list([
-            'page' => 1, 'page_size' => 50, 'sort' => 'price_asc',
+            'page' => 1, 'pageSize' => 50, 'sort' => 'price_asc',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -65,9 +65,9 @@ final class AccountsTest extends TestCase
 
         $result = $this->client->accounts->list([
             'page' => 1,
-            'page_size' => 50,
+            'pageSize' => 50,
             'sort' => 'price_asc',
-            'country_codes' => 'US,RU,GB',
+            'countryCodes' => 'US,RU,GB',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -82,7 +82,7 @@ final class AccountsTest extends TestCase
         }
 
         $result = $this->client->accounts->listCountries([
-            'page' => 1, 'page_size' => 50, 'sort' => 'price_asc',
+            'page' => 1, 'pageSize' => 50, 'sort' => 'price_asc',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
@@ -98,9 +98,9 @@ final class AccountsTest extends TestCase
 
         $result = $this->client->accounts->listCountries([
             'page' => 1,
-            'page_size' => 50,
+            'pageSize' => 50,
             'sort' => 'price_asc',
-            'country_codes' => 'US,RU,GB',
+            'countryCodes' => 'US,RU,GB',
         ]);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType

@@ -17,7 +17,7 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\AccountsService::listCountries()
  *
  * @phpstan-type AccountListCountriesParamsShape = array{
- *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_codes?: string
+ *   page: int, pageSize: int, sort: Sort|value-of<Sort>, countryCodes?: string
  * }
  */
 final class AccountListCountriesParams implements BaseModel
@@ -36,7 +36,7 @@ final class AccountListCountriesParams implements BaseModel
      * Number of items per page.
      */
     #[Required]
-    public int $page_size;
+    public int $pageSize;
 
     /**
      * Sort order for accounts.
@@ -50,14 +50,14 @@ final class AccountListCountriesParams implements BaseModel
      * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      */
     #[Optional]
-    public ?string $country_codes;
+    public ?string $countryCodes;
 
     /**
      * `new AccountListCountriesParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AccountListCountriesParams::with(page: ..., page_size: ..., sort: ...)
+     * AccountListCountriesParams::with(page: ..., pageSize: ..., sort: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -83,17 +83,17 @@ final class AccountListCountriesParams implements BaseModel
      */
     public static function with(
         int $page = 1,
-        int $page_size = 50,
+        int $pageSize = 50,
         Sort|string $sort = 'name_asc',
-        ?string $country_codes = null,
+        ?string $countryCodes = null,
     ): self {
         $obj = new self;
 
         $obj['page'] = $page;
-        $obj['page_size'] = $page_size;
+        $obj['pageSize'] = $pageSize;
         $obj['sort'] = $sort;
 
-        null !== $country_codes && $obj['country_codes'] = $country_codes;
+        null !== $countryCodes && $obj['countryCodes'] = $countryCodes;
 
         return $obj;
     }
@@ -115,7 +115,7 @@ final class AccountListCountriesParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
@@ -139,7 +139,7 @@ final class AccountListCountriesParams implements BaseModel
     public function withCountryCodes(string $countryCodes): self
     {
         $obj = clone $this;
-        $obj['country_codes'] = $countryCodes;
+        $obj['countryCodes'] = $countryCodes;
 
         return $obj;
     }

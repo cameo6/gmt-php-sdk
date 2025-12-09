@@ -12,9 +12,9 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
 /**
  * @phpstan-type CodeRequestShape = array{
  *   attempt: int,
- *   max_attempts: int,
- *   next_attempt_at: string|null,
- *   retry_after: int|null,
+ *   maxAttempts: int,
+ *   nextAttemptAt: string|null,
+ *   retryAfter: int|null,
  *   status: value-of<Status>,
  * }
  */
@@ -32,20 +32,20 @@ final class CodeRequest implements BaseModel
     /**
      * Maximum number of attempts.
      */
-    #[Required]
-    public int $max_attempts;
+    #[Required('max_attempts')]
+    public int $maxAttempts;
 
     /**
      * ISO timestamp of next attempt (null if not scheduled).
      */
-    #[Required]
-    public ?string $next_attempt_at;
+    #[Required('next_attempt_at')]
+    public ?string $nextAttemptAt;
 
     /**
      * Seconds until next attempt (null if not scheduled).
      */
-    #[Required]
-    public ?int $retry_after;
+    #[Required('retry_after')]
+    public ?int $retryAfter;
 
     /**
      * Current status of the code request.
@@ -62,9 +62,9 @@ final class CodeRequest implements BaseModel
      * ```
      * CodeRequest::with(
      *   attempt: ...,
-     *   max_attempts: ...,
-     *   next_attempt_at: ...,
-     *   retry_after: ...,
+     *   maxAttempts: ...,
+     *   nextAttemptAt: ...,
+     *   retryAfter: ...,
      *   status: ...,
      * )
      * ```
@@ -94,17 +94,17 @@ final class CodeRequest implements BaseModel
      */
     public static function with(
         int $attempt,
-        int $max_attempts,
-        ?string $next_attempt_at,
-        ?int $retry_after,
+        int $maxAttempts,
+        ?string $nextAttemptAt,
+        ?int $retryAfter,
         Status|string $status,
     ): self {
         $obj = new self;
 
         $obj['attempt'] = $attempt;
-        $obj['max_attempts'] = $max_attempts;
-        $obj['next_attempt_at'] = $next_attempt_at;
-        $obj['retry_after'] = $retry_after;
+        $obj['maxAttempts'] = $maxAttempts;
+        $obj['nextAttemptAt'] = $nextAttemptAt;
+        $obj['retryAfter'] = $retryAfter;
         $obj['status'] = $status;
 
         return $obj;
@@ -127,7 +127,7 @@ final class CodeRequest implements BaseModel
     public function withMaxAttempts(int $maxAttempts): self
     {
         $obj = clone $this;
-        $obj['max_attempts'] = $maxAttempts;
+        $obj['maxAttempts'] = $maxAttempts;
 
         return $obj;
     }
@@ -138,7 +138,7 @@ final class CodeRequest implements BaseModel
     public function withNextAttemptAt(?string $nextAttemptAt): self
     {
         $obj = clone $this;
-        $obj['next_attempt_at'] = $nextAttemptAt;
+        $obj['nextAttemptAt'] = $nextAttemptAt;
 
         return $obj;
     }
@@ -149,7 +149,7 @@ final class CodeRequest implements BaseModel
     public function withRetryAfter(?int $retryAfter): self
     {
         $obj = clone $this;
-        $obj['retry_after'] = $retryAfter;
+        $obj['retryAfter'] = $retryAfter;
 
         return $obj;
     }

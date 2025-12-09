@@ -19,12 +19,12 @@ use Gmt\Profile\ProfileGetResponse\Statistics;
  *
  * @phpstan-type ProfileGetResponseShape = array{
  *   balance: Balance,
- *   created_at: string,
+ *   createdAt: string,
  *   discount: Discount,
  *   referral: Referral,
  *   statistics: Statistics,
- *   telegram_id: string,
- *   telegram_username: string|null,
+ *   telegramID: string,
+ *   telegramUsername: string|null,
  * }
  */
 final class ProfileGetResponse implements BaseModel
@@ -38,8 +38,8 @@ final class ProfileGetResponse implements BaseModel
     /**
      * Account creation time in ISO 8601 format (UTC).
      */
-    #[Required]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
     #[Required]
     public Discount $discount;
@@ -53,14 +53,14 @@ final class ProfileGetResponse implements BaseModel
     /**
      * User's Telegram ID.
      */
-    #[Required]
-    public string $telegram_id;
+    #[Required('telegram_id')]
+    public string $telegramID;
 
     /**
      * User's Telegram username.
      */
-    #[Required]
-    public ?string $telegram_username;
+    #[Required('telegram_username')]
+    public ?string $telegramUsername;
 
     /**
      * `new ProfileGetResponse()` is missing required properties by the API.
@@ -69,12 +69,12 @@ final class ProfileGetResponse implements BaseModel
      * ```
      * ProfileGetResponse::with(
      *   balance: ...,
-     *   created_at: ...,
+     *   createdAt: ...,
      *   discount: ...,
      *   referral: ...,
      *   statistics: ...,
-     *   telegram_id: ...,
-     *   telegram_username: ...,
+     *   telegramID: ...,
+     *   telegramUsername: ...,
      * )
      * ```
      *
@@ -101,41 +101,41 @@ final class ProfileGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Balance|array{amount: string, currency_code: string} $balance
+     * @param Balance|array{amount: string, currencyCode: string} $balance
      * @param Discount|array{level: value-of<Level>, percent: float} $discount
      * @param Referral|array{
      *   balance: Referral\Balance,
      *   level: value-of<Referral\Level>,
      *   percent: float,
      *   profit: Profit,
-     *   referrals_count: int,
+     *   referralsCount: int,
      * } $referral
-     * @param Statistics|array{total_purchases: int} $statistics
+     * @param Statistics|array{totalPurchases: int} $statistics
      */
     public static function with(
         Balance|array $balance,
-        string $created_at,
+        string $createdAt,
         Discount|array $discount,
         Referral|array $referral,
         Statistics|array $statistics,
-        string $telegram_id,
-        ?string $telegram_username,
+        string $telegramID,
+        ?string $telegramUsername,
     ): self {
         $obj = new self;
 
         $obj['balance'] = $balance;
-        $obj['created_at'] = $created_at;
+        $obj['createdAt'] = $createdAt;
         $obj['discount'] = $discount;
         $obj['referral'] = $referral;
         $obj['statistics'] = $statistics;
-        $obj['telegram_id'] = $telegram_id;
-        $obj['telegram_username'] = $telegram_username;
+        $obj['telegramID'] = $telegramID;
+        $obj['telegramUsername'] = $telegramUsername;
 
         return $obj;
     }
 
     /**
-     * @param Balance|array{amount: string, currency_code: string} $balance
+     * @param Balance|array{amount: string, currencyCode: string} $balance
      */
     public function withBalance(Balance|array $balance): self
     {
@@ -151,7 +151,7 @@ final class ProfileGetResponse implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -173,7 +173,7 @@ final class ProfileGetResponse implements BaseModel
      *   level: value-of<Referral\Level>,
      *   percent: float,
      *   profit: Profit,
-     *   referrals_count: int,
+     *   referralsCount: int,
      * } $referral
      */
     public function withReferral(Referral|array $referral): self
@@ -185,7 +185,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param Statistics|array{total_purchases: int} $statistics
+     * @param Statistics|array{totalPurchases: int} $statistics
      */
     public function withStatistics(Statistics|array $statistics): self
     {
@@ -201,7 +201,7 @@ final class ProfileGetResponse implements BaseModel
     public function withTelegramID(string $telegramID): self
     {
         $obj = clone $this;
-        $obj['telegram_id'] = $telegramID;
+        $obj['telegramID'] = $telegramID;
 
         return $obj;
     }
@@ -212,7 +212,7 @@ final class ProfileGetResponse implements BaseModel
     public function withTelegramUsername(?string $telegramUsername): self
     {
         $obj = clone $this;
-        $obj['telegram_username'] = $telegramUsername;
+        $obj['telegramUsername'] = $telegramUsername;
 
         return $obj;
     }

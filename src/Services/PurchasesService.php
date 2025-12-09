@@ -7,6 +7,7 @@ namespace Gmt\Services;
 use Gmt\Client;
 use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Core\Util;
 use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseCreateParams;
 use Gmt\Purchases\PurchaseGetResponse;
@@ -42,7 +43,7 @@ final class PurchasesService implements PurchasesContract
      *
      * **Country availability.** Accounts may become unavailable between checking `/accounts` and creating purchase. Always handle availability errors gracefully.
      *
-     * @param array{country_code: string}|PurchaseCreateParams $params
+     * @param array{countryCode: string}|PurchaseCreateParams $params
      *
      * @throws APIException
      */
@@ -106,9 +107,7 @@ final class PurchasesService implements PurchasesContract
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
      * @param array{
-     *   page: int,
-     *   page_size: int,
-     *   status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status,
+     *   page: int, pageSize: int, status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status
      * }|PurchaseListParams $params
      *
      * @return PageNumber<PurchaseListResponse>
@@ -128,7 +127,7 @@ final class PurchasesService implements PurchasesContract
         $response = $this->client->request(
             method: 'get',
             path: 'v1/purchases/',
-            query: $parsed,
+            query: Util::array_transform_keys($parsed, ['pageSize' => 'page_size']),
             options: $options,
             convert: PurchaseListResponse::class,
             page: PageNumber::class,
@@ -178,9 +177,7 @@ final class PurchasesService implements PurchasesContract
      *
      * **Webhook notification.** Optionally provide `callback_url` to receive a POST webhook when code is retrieved. See [Webhooks](#tag/webhooks) section for payload structure and **Models** section for `WebhookSuccessPayload` / `WebhookFailedPayload` schemas.
      *
-     * @param array{
-     *   callback_url?: string
-     * }|PurchaseRequestVerificationCodeParams $params
+     * @param array{callbackURL?: string}|PurchaseRequestVerificationCodeParams $params
      *
      * @throws APIException
      */

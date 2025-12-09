@@ -15,9 +15,9 @@ use Gmt\Core\Contracts\BaseModel;
  * @phpstan-type WebhookTestResponseShape = array{
  *   success: bool,
  *   error?: string|null,
- *   http_code?: int|null,
- *   response_body?: string|null,
- *   response_time_ms?: int|null,
+ *   httpCode?: int|null,
+ *   responseBody?: string|null,
+ *   responseTimeMs?: int|null,
  * }
  */
 final class WebhookTestResponse implements BaseModel
@@ -40,20 +40,20 @@ final class WebhookTestResponse implements BaseModel
     /**
      * HTTP status code returned by your endpoint.
      */
-    #[Optional]
-    public ?int $http_code;
+    #[Optional('http_code')]
+    public ?int $httpCode;
 
     /**
      * Response body from your endpoint (truncated to 1000 characters).
      */
-    #[Optional]
-    public ?string $response_body;
+    #[Optional('response_body')]
+    public ?string $responseBody;
 
     /**
      * Response time in milliseconds.
      */
-    #[Optional]
-    public ?int $response_time_ms;
+    #[Optional('response_time_ms')]
+    public ?int $responseTimeMs;
 
     /**
      * `new WebhookTestResponse()` is missing required properties by the API.
@@ -82,18 +82,18 @@ final class WebhookTestResponse implements BaseModel
     public static function with(
         bool $success,
         ?string $error = null,
-        ?int $http_code = null,
-        ?string $response_body = null,
-        ?int $response_time_ms = null,
+        ?int $httpCode = null,
+        ?string $responseBody = null,
+        ?int $responseTimeMs = null,
     ): self {
         $obj = new self;
 
         $obj['success'] = $success;
 
         null !== $error && $obj['error'] = $error;
-        null !== $http_code && $obj['http_code'] = $http_code;
-        null !== $response_body && $obj['response_body'] = $response_body;
-        null !== $response_time_ms && $obj['response_time_ms'] = $response_time_ms;
+        null !== $httpCode && $obj['httpCode'] = $httpCode;
+        null !== $responseBody && $obj['responseBody'] = $responseBody;
+        null !== $responseTimeMs && $obj['responseTimeMs'] = $responseTimeMs;
 
         return $obj;
     }
@@ -126,7 +126,7 @@ final class WebhookTestResponse implements BaseModel
     public function withHTTPCode(int $httpCode): self
     {
         $obj = clone $this;
-        $obj['http_code'] = $httpCode;
+        $obj['httpCode'] = $httpCode;
 
         return $obj;
     }
@@ -137,7 +137,7 @@ final class WebhookTestResponse implements BaseModel
     public function withResponseBody(string $responseBody): self
     {
         $obj = clone $this;
-        $obj['response_body'] = $responseBody;
+        $obj['responseBody'] = $responseBody;
 
         return $obj;
     }
@@ -148,7 +148,7 @@ final class WebhookTestResponse implements BaseModel
     public function withResponseTimeMs(int $responseTimeMs): self
     {
         $obj = clone $this;
-        $obj['response_time_ms'] = $responseTimeMs;
+        $obj['responseTimeMs'] = $responseTimeMs;
 
         return $obj;
     }

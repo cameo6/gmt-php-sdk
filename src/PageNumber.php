@@ -100,10 +100,10 @@ final class PageNumber implements BaseModel, BasePage
     public function nextRequest(): ?array
     {
         /** @var int */
-        $curr = $this->pagination->current_page ?? null;
+        $curr = $this->pagination->currentPage ?? null;
         if (!($this
-            ->pagination->has_next ?? null) || !count($this->getItems()) || ($curr >= ($this
-            ->pagination->total_pages ?? null))) {
+            ->pagination->hasNext ?? null) || !count($this->getItems()) || ($curr >= ($this
+            ->pagination->totalPages ?? null))) {
             return null;
         }
 
