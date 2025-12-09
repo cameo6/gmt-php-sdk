@@ -10,7 +10,7 @@ use Gmt\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PaginationShape = array{
- *   current_page: int, has_next: bool, total_pages: int
+ *   currentPage: int, hasNext: bool, totalPages: int
  * }
  */
 final class Pagination implements BaseModel
@@ -18,21 +18,21 @@ final class Pagination implements BaseModel
     /** @use SdkModel<PaginationShape> */
     use SdkModel;
 
-    #[Required]
-    public int $current_page;
+    #[Required('current_page')]
+    public int $currentPage;
 
-    #[Required]
-    public bool $has_next;
+    #[Required('has_next')]
+    public bool $hasNext;
 
-    #[Required]
-    public int $total_pages;
+    #[Required('total_pages')]
+    public int $totalPages;
 
     /**
      * `new Pagination()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Pagination::with(current_page: ..., has_next: ..., total_pages: ...)
+     * Pagination::with(currentPage: ..., hasNext: ..., totalPages: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,15 +52,15 @@ final class Pagination implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        int $current_page,
-        bool $has_next,
-        int $total_pages
+        int $currentPage,
+        bool $hasNext,
+        int $totalPages
     ): self {
         $obj = new self;
 
-        $obj['current_page'] = $current_page;
-        $obj['has_next'] = $has_next;
-        $obj['total_pages'] = $total_pages;
+        $obj['currentPage'] = $currentPage;
+        $obj['hasNext'] = $hasNext;
+        $obj['totalPages'] = $totalPages;
 
         return $obj;
     }
@@ -68,7 +68,7 @@ final class Pagination implements BaseModel
     public function withCurrentPage(int $currentPage): self
     {
         $obj = clone $this;
-        $obj['current_page'] = $currentPage;
+        $obj['currentPage'] = $currentPage;
 
         return $obj;
     }
@@ -76,7 +76,7 @@ final class Pagination implements BaseModel
     public function withHasNext(bool $hasNext): self
     {
         $obj = clone $this;
-        $obj['has_next'] = $hasNext;
+        $obj['hasNext'] = $hasNext;
 
         return $obj;
     }
@@ -84,7 +84,7 @@ final class Pagination implements BaseModel
     public function withTotalPages(int $totalPages): self
     {
         $obj = clone $this;
-        $obj['total_pages'] = $totalPages;
+        $obj['totalPages'] = $totalPages;
 
         return $obj;
     }

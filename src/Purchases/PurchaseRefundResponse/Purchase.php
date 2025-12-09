@@ -15,10 +15,10 @@ use Gmt\Purchases\PurchaseRefundResponse\Purchase\Verification;
 /**
  * @phpstan-type PurchaseShape = array{
  *   id: int,
- *   country_code: string,
- *   created_at: string,
- *   display_name: DisplayName,
- *   phone_number: string,
+ *   countryCode: string,
+ *   createdAt: string,
+ *   displayName: DisplayName,
+ *   phoneNumber: string,
  *   price: Price,
  *   status: value-of<Status>,
  *   verification: Verification|null,
@@ -38,25 +38,25 @@ final class Purchase implements BaseModel
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Required]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
     /**
      * Purchase creation time in ISO 8601 format (UTC).
      */
-    #[Required]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
-    #[Required]
-    public DisplayName $display_name;
+    #[Required('display_name')]
+    public DisplayName $displayName;
 
     /**
      * **E.164 International Format.** Phone number with country code prefix (e.g., `+12025550123` for US, `+79991234567` for Russia).
      *
      * **Usage.** This is your Telegram account login. Use it with `verification.code` and `verification.password` to access the account.
      */
-    #[Required]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * **Final Price After Discount.** The actual amount deducted from your balance, with your personal discount already applied.
@@ -101,10 +101,10 @@ final class Purchase implements BaseModel
      * ```
      * Purchase::with(
      *   id: ...,
-     *   country_code: ...,
-     *   created_at: ...,
-     *   display_name: ...,
-     *   phone_number: ...,
+     *   countryCode: ...,
+     *   createdAt: ...,
+     *   displayName: ...,
+     *   phoneNumber: ...,
      *   price: ...,
      *   status: ...,
      *   verification: ...,
@@ -135,19 +135,19 @@ final class Purchase implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayName|array{en: string, ru: string} $display_name
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param Price|array{amount: string, currencyCode: string} $price
      * @param Status|value-of<Status> $status
      * @param Verification|array{
-     *   code: string, password: string, received_at: string
+     *   code: string, password: string, receivedAt: string
      * }|null $verification
      */
     public static function with(
         int $id,
-        string $country_code,
-        string $created_at,
-        DisplayName|array $display_name,
-        string $phone_number,
+        string $countryCode,
+        string $createdAt,
+        DisplayName|array $displayName,
+        string $phoneNumber,
         Price|array $price,
         Status|string $status,
         Verification|array|null $verification,
@@ -155,10 +155,10 @@ final class Purchase implements BaseModel
         $obj = new self;
 
         $obj['id'] = $id;
-        $obj['country_code'] = $country_code;
-        $obj['created_at'] = $created_at;
-        $obj['display_name'] = $display_name;
-        $obj['phone_number'] = $phone_number;
+        $obj['countryCode'] = $countryCode;
+        $obj['createdAt'] = $createdAt;
+        $obj['displayName'] = $displayName;
+        $obj['phoneNumber'] = $phoneNumber;
         $obj['price'] = $price;
         $obj['status'] = $status;
         $obj['verification'] = $verification;
@@ -183,7 +183,7 @@ final class Purchase implements BaseModel
     public function withCountryCode(string $countryCode): self
     {
         $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $obj['countryCode'] = $countryCode;
 
         return $obj;
     }
@@ -194,7 +194,7 @@ final class Purchase implements BaseModel
     public function withCreatedAt(string $createdAt): self
     {
         $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $obj['createdAt'] = $createdAt;
 
         return $obj;
     }
@@ -205,7 +205,7 @@ final class Purchase implements BaseModel
     public function withDisplayName(DisplayName|array $displayName): self
     {
         $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $obj['displayName'] = $displayName;
 
         return $obj;
     }
@@ -218,7 +218,7 @@ final class Purchase implements BaseModel
     public function withPhoneNumber(string $phoneNumber): self
     {
         $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $obj['phoneNumber'] = $phoneNumber;
 
         return $obj;
     }
@@ -230,7 +230,7 @@ final class Purchase implements BaseModel
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
      *
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param Price|array{amount: string, currencyCode: string} $price
      */
     public function withPrice(Price|array $price): self
     {
@@ -269,7 +269,7 @@ final class Purchase implements BaseModel
      * **Security.** Verification data is only visible to the purchase owner.
      *
      * @param Verification|array{
-     *   code: string, password: string, received_at: string
+     *   code: string, password: string, receivedAt: string
      * }|null $verification
      */
     public function withVerification(

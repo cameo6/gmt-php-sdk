@@ -16,7 +16,7 @@ use Gmt\Core\Contracts\BaseModel;
  * **Security.** Verification data is only visible to the purchase owner.
  *
  * @phpstan-type VerificationShape = array{
- *   code: string, password: string, received_at: string
+ *   code: string, password: string, receivedAt: string
  * }
  */
 final class Verification implements BaseModel
@@ -45,15 +45,15 @@ final class Verification implements BaseModel
      *
      * **Note.** These timestamps may be identical if code is requested immediately after purchase.
      */
-    #[Required]
-    public string $received_at;
+    #[Required('received_at')]
+    public string $receivedAt;
 
     /**
      * `new Verification()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Verification::with(code: ..., password: ..., received_at: ...)
+     * Verification::with(code: ..., password: ..., receivedAt: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,13 +75,13 @@ final class Verification implements BaseModel
     public static function with(
         string $code,
         string $password,
-        string $received_at
+        string $receivedAt
     ): self {
         $obj = new self;
 
         $obj['code'] = $code;
         $obj['password'] = $password;
-        $obj['received_at'] = $received_at;
+        $obj['receivedAt'] = $receivedAt;
 
         return $obj;
     }
@@ -120,7 +120,7 @@ final class Verification implements BaseModel
     public function withReceivedAt(string $receivedAt): self
     {
         $obj = clone $this;
-        $obj['received_at'] = $receivedAt;
+        $obj['receivedAt'] = $receivedAt;
 
         return $obj;
     }

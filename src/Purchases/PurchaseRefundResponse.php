@@ -57,15 +57,15 @@ final class PurchaseRefundResponse implements BaseModel
      *
      * @param Purchase|array{
      *   id: int,
-     *   country_code: string,
-     *   created_at: string,
-     *   display_name: DisplayName,
-     *   phone_number: string,
+     *   countryCode: string,
+     *   createdAt: string,
+     *   displayName: DisplayName,
+     *   phoneNumber: string,
      *   price: Price,
      *   status: value-of<Status>,
      *   verification: Verification|null,
      * } $purchase
-     * @param Refund|array{amount: Amount, reason: string, refunded_at: string} $refund
+     * @param Refund|array{amount: Amount, reason: string, refundedAt: string} $refund
      */
     public static function with(
         Purchase|array $purchase,
@@ -82,10 +82,10 @@ final class PurchaseRefundResponse implements BaseModel
     /**
      * @param Purchase|array{
      *   id: int,
-     *   country_code: string,
-     *   created_at: string,
-     *   display_name: DisplayName,
-     *   phone_number: string,
+     *   countryCode: string,
+     *   createdAt: string,
+     *   displayName: DisplayName,
+     *   phoneNumber: string,
      *   price: Price,
      *   status: value-of<Status>,
      *   verification: Verification|null,
@@ -100,7 +100,7 @@ final class PurchaseRefundResponse implements BaseModel
     }
 
     /**
-     * @param Refund|array{amount: Amount, reason: string, refunded_at: string} $refund
+     * @param Refund|array{amount: Amount, reason: string, refundedAt: string} $refund
      */
     public function withRefund(Refund|array $refund): self
     {

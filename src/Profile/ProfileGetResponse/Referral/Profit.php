@@ -11,7 +11,7 @@ use Gmt\Core\Contracts\BaseModel;
 /**
  * Total lifetime earnings from referral commissions.
  *
- * @phpstan-type ProfitShape = array{amount: string, currency_code: string}
+ * @phpstan-type ProfitShape = array{amount: string, currencyCode: string}
  */
 final class Profit implements BaseModel
 {
@@ -27,15 +27,15 @@ final class Profit implements BaseModel
     /**
      * ISO 4217 currency code.
      */
-    #[Required]
-    public string $currency_code;
+    #[Required('currency_code')]
+    public string $currencyCode;
 
     /**
      * `new Profit()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Profit::with(amount: ..., currency_code: ...)
+     * Profit::with(amount: ..., currencyCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -54,12 +54,12 @@ final class Profit implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $amount, string $currency_code): self
+    public static function with(string $amount, string $currencyCode): self
     {
         $obj = new self;
 
         $obj['amount'] = $amount;
-        $obj['currency_code'] = $currency_code;
+        $obj['currencyCode'] = $currencyCode;
 
         return $obj;
     }
@@ -81,7 +81,7 @@ final class Profit implements BaseModel
     public function withCurrencyCode(string $currencyCode): self
     {
         $obj = clone $this;
-        $obj['currency_code'] = $currencyCode;
+        $obj['currencyCode'] = $currencyCode;
 
         return $obj;
     }

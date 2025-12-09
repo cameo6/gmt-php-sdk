@@ -9,7 +9,7 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type StatisticsShape = array{total_purchases: int}
+ * @phpstan-type StatisticsShape = array{totalPurchases: int}
  */
 final class Statistics implements BaseModel
 {
@@ -19,15 +19,15 @@ final class Statistics implements BaseModel
     /**
      * Total number of successful purchases.
      */
-    #[Required]
-    public int $total_purchases;
+    #[Required('total_purchases')]
+    public int $totalPurchases;
 
     /**
      * `new Statistics()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Statistics::with(total_purchases: ...)
+     * Statistics::with(totalPurchases: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -46,11 +46,11 @@ final class Statistics implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(int $total_purchases): self
+    public static function with(int $totalPurchases): self
     {
         $obj = new self;
 
-        $obj['total_purchases'] = $total_purchases;
+        $obj['totalPurchases'] = $totalPurchases;
 
         return $obj;
     }
@@ -61,7 +61,7 @@ final class Statistics implements BaseModel
     public function withTotalPurchases(int $totalPurchases): self
     {
         $obj = clone $this;
-        $obj['total_purchases'] = $totalPurchases;
+        $obj['totalPurchases'] = $totalPurchases;
 
         return $obj;
     }

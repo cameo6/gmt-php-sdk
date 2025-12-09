@@ -74,7 +74,7 @@ use Gmt\Client;
 
 $client = new Client(apiKey: getenv('x-api-key') ?: 'My API Key');
 
-$page = $client->purchases->list(['page' => 1, 'page_size' => 100]);
+$page = $client->purchases->list(['page' => 1, 'pageSize' => 100]);
 
 var_dump($page);
 

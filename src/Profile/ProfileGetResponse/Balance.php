@@ -9,7 +9,7 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type BalanceShape = array{amount: string, currency_code: string}
+ * @phpstan-type BalanceShape = array{amount: string, currencyCode: string}
  */
 final class Balance implements BaseModel
 {
@@ -25,15 +25,15 @@ final class Balance implements BaseModel
     /**
      * ISO 4217 currency code.
      */
-    #[Required]
-    public string $currency_code;
+    #[Required('currency_code')]
+    public string $currencyCode;
 
     /**
      * `new Balance()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Balance::with(amount: ..., currency_code: ...)
+     * Balance::with(amount: ..., currencyCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,12 +52,12 @@ final class Balance implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $amount, string $currency_code): self
+    public static function with(string $amount, string $currencyCode): self
     {
         $obj = new self;
 
         $obj['amount'] = $amount;
-        $obj['currency_code'] = $currency_code;
+        $obj['currencyCode'] = $currencyCode;
 
         return $obj;
     }
@@ -79,7 +79,7 @@ final class Balance implements BaseModel
     public function withCurrencyCode(string $currencyCode): self
     {
         $obj = clone $this;
-        $obj['currency_code'] = $currencyCode;
+        $obj['currencyCode'] = $currencyCode;
 
         return $obj;
     }

@@ -26,7 +26,7 @@ use Gmt\Purchases\PurchaseListParams\Status;
  * @see Gmt\Services\PurchasesService::list()
  *
  * @phpstan-type PurchaseListParamsShape = array{
- *   page: int, page_size: int, status?: Status|value-of<Status>
+ *   page: int, pageSize: int, status?: Status|value-of<Status>
  * }
  */
 final class PurchaseListParams implements BaseModel
@@ -45,7 +45,7 @@ final class PurchaseListParams implements BaseModel
      * Number of items per page.
      */
     #[Required]
-    public int $page_size;
+    public int $pageSize;
 
     /**
      * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
@@ -68,7 +68,7 @@ final class PurchaseListParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PurchaseListParams::with(page: ..., page_size: ...)
+     * PurchaseListParams::with(page: ..., pageSize: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -91,13 +91,13 @@ final class PurchaseListParams implements BaseModel
      */
     public static function with(
         int $page = 1,
-        int $page_size = 50,
+        int $pageSize = 50,
         Status|string|null $status = null
     ): self {
         $obj = new self;
 
         $obj['page'] = $page;
-        $obj['page_size'] = $page_size;
+        $obj['pageSize'] = $pageSize;
 
         null !== $status && $obj['status'] = $status;
 
@@ -121,7 +121,7 @@ final class PurchaseListParams implements BaseModel
     public function withPageSize(int $pageSize): self
     {
         $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $obj['pageSize'] = $pageSize;
 
         return $obj;
     }
