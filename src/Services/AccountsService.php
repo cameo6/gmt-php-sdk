@@ -5,15 +5,11 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Accounts\AccountGetResponse;
-use Gmt\Accounts\AccountListCountriesParams;
 use Gmt\Accounts\AccountListCountriesResponse;
-use Gmt\Accounts\AccountListParams;
 use Gmt\Accounts\AccountListParams\Sort;
 use Gmt\Accounts\AccountListResponse;
 use Gmt\Client;
-use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
-use Gmt\Core\Util;
 use Gmt\PageNumber;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\AccountsContract;
@@ -21,14 +17,24 @@ use Gmt\ServiceContracts\AccountsContract;
 final class AccountsService implements AccountsContract
 {
     /**
+     * @api
+     */
+    public AccountsRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new AccountsRawService($client);
+    }
 
     /**
      * @api
      *
      * Returns detailed information about account for specific country including pricing and discount information.
+     *
+     * @param string $countryCode ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
      *
      * @throws APIException
      */
@@ -36,13 +42,8 @@ final class AccountsService implements AccountsContract
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): AccountGetResponse {
-        /** @var BaseResponse<AccountGetResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: ['v1/accounts/%1$s', $countryCode],
-            options: $requestOptions,
-            convert: AccountGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($countryCode, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -52,38 +53,33 @@ final class AccountsService implements AccountsContract
      *
      * Returns paginated list of accounts with filtering and sorting options.
      *
-     * @param array{
-     *   page: int,
-     *   pageSize: int,
-     *   sort: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort,
-     *   countryCodes?: string,
-     * }|AccountListParams $params
+     * @param int $page page number
+     * @param int $pageSize number of items per page
+     * @param 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort $sort sort order for accounts
+     * @param string $countryCodes Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      *
      * @return PageNumber<AccountListResponse>
      *
      * @throws APIException
      */
     public function list(
-        array|AccountListParams $params,
-        ?RequestOptions $requestOptions = null
+        int $page = 1,
+        int $pageSize = 50,
+        string|Sort $sort = 'name_asc',
+        ?string $countryCodes = null,
+        ?RequestOptions $requestOptions = null,
     ): PageNumber {
-        [$parsed, $options] = AccountListParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'sort' => $sort,
+            'countryCodes' => $countryCodes,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PageNumber<AccountListResponse>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'v1/accounts/',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageSize' => 'page_size', 'countryCodes' => 'country_codes']
-            ),
-            options: $options,
-            convert: AccountListResponse::class,
-            page: PageNumber::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -93,38 +89,33 @@ final class AccountsService implements AccountsContract
      *
      * Returns a list of all available countries from providers with prices and availability. No authentication required.
      *
-     * @param array{
-     *   page: int,
-     *   pageSize: int,
-     *   sort: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|AccountListCountriesParams\Sort,
-     *   countryCodes?: string,
-     * }|AccountListCountriesParams $params
+     * @param int $page page number
+     * @param int $pageSize number of items per page
+     * @param 'price_asc'|'price_desc'|'name_asc'|'name_desc'|\Gmt\Accounts\AccountListCountriesParams\Sort $sort sort order for accounts
+     * @param string $countryCodes Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      *
      * @return PageNumber<AccountListCountriesResponse>
      *
      * @throws APIException
      */
     public function listCountries(
-        array|AccountListCountriesParams $params,
+        int $page = 1,
+        int $pageSize = 50,
+        string|\Gmt\Accounts\AccountListCountriesParams\Sort $sort = 'name_asc',
+        ?string $countryCodes = null,
         ?RequestOptions $requestOptions = null,
     ): PageNumber {
-        [$parsed, $options] = AccountListCountriesParams::parseRequest(
-            $params,
-            $requestOptions,
-        );
+        $params = [
+            'page' => $page,
+            'pageSize' => $pageSize,
+            'sort' => $sort,
+            'countryCodes' => $countryCodes,
+        ];
+        // @phpstan-ignore-next-line function.impossibleType
+        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
 
-        /** @var BaseResponse<PageNumber<AccountListCountriesResponse>> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'v1/accounts/countries',
-            query: Util::array_transform_keys(
-                $parsed,
-                ['pageSize' => 'page_size', 'countryCodes' => 'country_codes']
-            ),
-            options: $options,
-            convert: AccountListCountriesResponse::class,
-            page: PageNumber::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->listCountries(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }

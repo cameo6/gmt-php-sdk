@@ -34,9 +34,10 @@ final class WebhooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->webhooks->test([
-            'type' => 'success', 'url' => 'https://example.com/webhooks/handler',
-        ]);
+        $result = $this->client->webhooks->test(
+            type: 'success',
+            url: 'https://example.com/webhooks/handler'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WebhookTestResponse::class, $result);
@@ -49,9 +50,10 @@ final class WebhooksTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->webhooks->test([
-            'type' => 'success', 'url' => 'https://example.com/webhooks/handler',
-        ]);
+        $result = $this->client->webhooks->test(
+            type: 'success',
+            url: 'https://example.com/webhooks/handler'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(WebhookTestResponse::class, $result);

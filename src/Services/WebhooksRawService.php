@@ -5,26 +5,21 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Client;
+use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\RequestOptions;
-use Gmt\ServiceContracts\WebhooksContract;
+use Gmt\ServiceContracts\WebhooksRawContract;
+use Gmt\Webhooks\WebhookTestParams;
 use Gmt\Webhooks\WebhookTestParams\Type;
 use Gmt\Webhooks\WebhookTestResponse;
 
-final class WebhooksService implements WebhooksContract
+final class WebhooksRawService implements WebhooksRawContract
 {
-    /**
-     * @api
-     */
-    public WebhooksRawService $raw;
-
+    // @phpstan-ignore-next-line
     /**
      * @internal
      */
-    public function __construct(private Client $client)
-    {
-        $this->raw = new WebhooksRawService($client);
-    }
+    public function __construct(private Client $client) {}
 
     /**
      * @api
@@ -43,23 +38,30 @@ final class WebhooksService implements WebhooksContract
      *
      * **No persistence.** Test webhooks are not stored in delivery history.
      *
-     * @param string $url Webhook endpoint URL. Must be a valid URL.
-     * @param 'success'|'failed'|Type $type webhook payload type to send: `success` or `failed`
+     * @param array{
+     *   type: 'success'|'failed'|Type, url: string
+     * }|WebhookTestParams $params
+     *
+     * @return BaseResponse<WebhookTestResponse>
      *
      * @throws APIException
      */
     public function test(
-        string $url,
-        string|Type $type = 'success',
-        ?RequestOptions $requestOptions = null,
-    ): WebhookTestResponse {
-        $params = ['type' => $type, 'url' => $url];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        array|WebhookTestParams $params,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        [$parsed, $options] = WebhookTestParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
 
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->test(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'v1/webhooks/test',
+            body: (object) $parsed,
+            options: $options,
+            convert: WebhookTestResponse::class,
+        );
     }
 }
