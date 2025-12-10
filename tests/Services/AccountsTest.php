@@ -3,6 +3,8 @@
 namespace Tests\Services;
 
 use Gmt\Accounts\AccountGetResponse;
+use Gmt\Accounts\AccountListCountriesResponse;
+use Gmt\Accounts\AccountListResponse;
 use Gmt\Client;
 use Gmt\PageNumber;
 use PHPUnit\Framework\Attributes\CoversNothing;
@@ -48,14 +50,19 @@ final class AccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accounts->list(
+        $page = $this->client->accounts->list(
             page: 1,
             pageSize: 50,
             sort: 'price_asc'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $result);
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccountListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -65,7 +72,7 @@ final class AccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accounts->list(
+        $page = $this->client->accounts->list(
             page: 1,
             pageSize: 50,
             sort: 'price_asc',
@@ -73,7 +80,12 @@ final class AccountsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $result);
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccountListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -83,14 +95,19 @@ final class AccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accounts->listCountries(
+        $page = $this->client->accounts->listCountries(
             page: 1,
             pageSize: 50,
             sort: 'price_asc'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $result);
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccountListCountriesResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -100,7 +117,7 @@ final class AccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->accounts->listCountries(
+        $page = $this->client->accounts->listCountries(
             page: 1,
             pageSize: 50,
             sort: 'price_asc',
@@ -108,6 +125,11 @@ final class AccountsTest extends TestCase
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $result);
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(AccountListCountriesResponse::class, $item);
+        }
     }
 }
