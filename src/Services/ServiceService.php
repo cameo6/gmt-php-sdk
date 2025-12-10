@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Client;
-use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\RequestOptions;
 use Gmt\Service\ServiceGetServerTimeResponse;
@@ -15,9 +14,17 @@ use Gmt\ServiceContracts\ServiceContract;
 final class ServiceService implements ServiceContract
 {
     /**
+     * @api
+     */
+    public ServiceRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ServiceRawService($client);
+    }
 
     /**
      * @api
@@ -29,13 +36,8 @@ final class ServiceService implements ServiceContract
     public function getServerTime(
         ?RequestOptions $requestOptions = null
     ): ServiceGetServerTimeResponse {
-        /** @var BaseResponse<ServiceGetServerTimeResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'v1/service/time',
-            options: $requestOptions,
-            convert: ServiceGetServerTimeResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->getServerTime(requestOptions: $requestOptions);
 
         return $response->parse();
     }
@@ -50,13 +52,8 @@ final class ServiceService implements ServiceContract
     public function healthCheck(
         ?RequestOptions $requestOptions = null
     ): ServiceHealthCheckResponse {
-        /** @var BaseResponse<ServiceHealthCheckResponse> */
-        $response = $this->client->request(
-            method: 'get',
-            path: 'v1/service/health',
-            options: $requestOptions,
-            convert: ServiceHealthCheckResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->healthCheck(requestOptions: $requestOptions);
 
         return $response->parse();
     }

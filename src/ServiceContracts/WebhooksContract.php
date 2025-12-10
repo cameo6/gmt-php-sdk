@@ -6,7 +6,7 @@ namespace Gmt\ServiceContracts;
 
 use Gmt\Core\Exceptions\APIException;
 use Gmt\RequestOptions;
-use Gmt\Webhooks\WebhookTestParams;
+use Gmt\Webhooks\WebhookTestParams\Type;
 use Gmt\Webhooks\WebhookTestResponse;
 
 interface WebhooksContract
@@ -14,12 +14,14 @@ interface WebhooksContract
     /**
      * @api
      *
-     * @param array<mixed>|WebhookTestParams $params
+     * @param string $url Webhook endpoint URL. Must be a valid URL.
+     * @param 'success'|'failed'|Type $type webhook payload type to send: `success` or `failed`
      *
      * @throws APIException
      */
     public function test(
-        array|WebhookTestParams $params,
-        ?RequestOptions $requestOptions = null
+        string $url,
+        string|Type $type = 'success',
+        ?RequestOptions $requestOptions = null,
     ): WebhookTestResponse;
 }

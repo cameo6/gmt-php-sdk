@@ -5,31 +5,29 @@ declare(strict_types=1);
 namespace Gmt\Services;
 
 use Gmt\Client;
+use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Core\Util;
 use Gmt\PageNumber;
+use Gmt\Purchases\PurchaseCreateParams;
 use Gmt\Purchases\PurchaseGetResponse;
+use Gmt\Purchases\PurchaseListParams;
 use Gmt\Purchases\PurchaseListParams\Status;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
 use Gmt\Purchases\PurchaseRefundResponse;
+use Gmt\Purchases\PurchaseRequestVerificationCodeParams;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
-use Gmt\ServiceContracts\PurchasesContract;
+use Gmt\ServiceContracts\PurchasesRawContract;
 
-final class PurchasesService implements PurchasesContract
+final class PurchasesRawService implements PurchasesRawContract
 {
-    /**
-     * @api
-     */
-    public PurchasesRawService $raw;
-
+    // @phpstan-ignore-next-line
     /**
      * @internal
      */
-    public function __construct(private Client $client)
-    {
-        $this->raw = new PurchasesRawService($client);
-    }
+    public function __construct(private Client $client) {}
 
     /**
      * @api
@@ -46,20 +44,29 @@ final class PurchasesService implements PurchasesContract
      *
      * **Country availability.** Accounts may become unavailable between checking `/accounts` and creating purchase. Always handle availability errors gracefully.
      *
-     * @param string $countryCode ISO 3166-1 alpha-2 country code
+     * @param array{countryCode: string}|PurchaseCreateParams $params
+     *
+     * @return BaseResponse<PurchaseNewResponse>
      *
      * @throws APIException
      */
     public function create(
-        string $countryCode,
+        array|PurchaseCreateParams $params,
         ?RequestOptions $requestOptions = null
-    ): PurchaseNewResponse {
-        $params = ['countryCode' => $countryCode];
+    ): BaseResponse {
+        [$parsed, $options] = PurchaseCreateParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
 
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: 'v1/purchases/',
+            body: (object) $parsed,
+            options: $options,
+            convert: PurchaseNewResponse::class,
+        );
     }
 
     /**
@@ -71,16 +78,21 @@ final class PurchasesService implements PurchasesContract
      *
      * @param int $purchaseID unique purchase identifier
      *
+     * @return BaseResponse<PurchaseGetResponse>
+     *
      * @throws APIException
      */
     public function retrieve(
         int $purchaseID,
         ?RequestOptions $requestOptions = null
-    ): PurchaseGetResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->retrieve($purchaseID, requestOptions: $requestOptions);
-
-        return $response->parse();
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: ['v1/purchases/%1$s', $purchaseID],
+            options: $requestOptions,
+            convert: PurchaseGetResponse::class,
+        );
     }
 
     /**
@@ -97,36 +109,32 @@ final class PurchasesService implements PurchasesContract
      *
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
-     * @param int $page page number
-     * @param int $pageSize number of items per page
-     * @param 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status $status **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
+     * @param array{
+     *   page: int, pageSize: int, status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status
+     * }|PurchaseListParams $params
      *
-     * **Important.** Status is immutable once set to `SUCCESS`, `ERROR`, or `REFUND`.
-     *
-     * **Filter options**
-     * - `PENDING` - code not requested.
-     * - `SUCCESS` - code ready.
-     * - `ERROR` - provider failed.
-     * - `REFUND` - money returned.
-     *
-     * @return PageNumber<PurchaseListResponse>
+     * @return BaseResponse<PageNumber<PurchaseListResponse>>
      *
      * @throws APIException
      */
     public function list(
-        int $page = 1,
-        int $pageSize = 50,
-        string|Status|null $status = null,
-        ?RequestOptions $requestOptions = null,
-    ): PageNumber {
-        $params = ['page' => $page, 'pageSize' => $pageSize, 'status' => $status];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        array|PurchaseListParams $params,
+        ?RequestOptions $requestOptions = null
+    ): BaseResponse {
+        [$parsed, $options] = PurchaseListParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
 
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'get',
+            path: 'v1/purchases/',
+            query: Util::array_transform_keys($parsed, ['pageSize' => 'page_size']),
+            options: $options,
+            convert: PurchaseListResponse::class,
+            page: PageNumber::class,
+        );
     }
 
     /**
@@ -140,16 +148,21 @@ final class PurchasesService implements PurchasesContract
      *
      * @param int $purchaseID unique purchase identifier
      *
+     * @return BaseResponse<PurchaseRefundResponse>
+     *
      * @throws APIException
      */
     public function refund(
         int $purchaseID,
         ?RequestOptions $requestOptions = null
-    ): PurchaseRefundResponse {
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->refund($purchaseID, requestOptions: $requestOptions);
-
-        return $response->parse();
+    ): BaseResponse {
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['v1/purchases/%1$s/refund', $purchaseID],
+            options: $requestOptions,
+            convert: PurchaseRefundResponse::class,
+        );
     }
 
     /**
@@ -168,24 +181,29 @@ final class PurchasesService implements PurchasesContract
      * **Webhook notification.** Optionally provide `callback_url` to receive a POST webhook when code is retrieved. See [Webhooks](#tag/webhooks) section for payload structure and **Models** section for `WebhookSuccessPayload` / `WebhookFailedPayload` schemas.
      *
      * @param int $purchaseID unique purchase identifier
-     * @param string $callbackURL URL to receive webhook notification when code is received. POST request will be sent with either `WebhookSuccessPayload` or `WebhookFailedPayload`.
+     * @param array{callbackURL?: string}|PurchaseRequestVerificationCodeParams $params
      *
-     * **Retry policy.** If your endpoint does not return HTTP 200, webhook will be retried up to 3 times with delays: immediately, after 10 seconds, after 30 seconds. Any non-200 response triggers retry.
+     * @return BaseResponse<PurchaseRequestVerificationCodeResponse>
      *
      * @throws APIException
      */
     public function requestVerificationCode(
         int $purchaseID,
-        ?string $callbackURL = null,
+        array|PurchaseRequestVerificationCodeParams $params,
         ?RequestOptions $requestOptions = null,
-    ): PurchaseRequestVerificationCodeResponse {
-        $params = ['callbackURL' => $callbackURL];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+    ): BaseResponse {
+        [$parsed, $options] = PurchaseRequestVerificationCodeParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
 
-        // @phpstan-ignore-next-line argument.type
-        $response = $this->raw->requestVerificationCode($purchaseID, params: $params, requestOptions: $requestOptions);
-
-        return $response->parse();
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'post',
+            path: ['v1/purchases/%1$s/request-code', $purchaseID],
+            body: (object) $parsed,
+            options: $options,
+            convert: PurchaseRequestVerificationCodeResponse::class,
+        );
     }
 }
