@@ -13,9 +13,17 @@ use Gmt\ServiceContracts\ProfileContract;
 final class ProfileService implements ProfileContract
 {
     /**
+     * @api
+     */
+    public ProfileRawService $raw;
+
+    /**
      * @internal
      */
-    public function __construct(private Client $client) {}
+    public function __construct(private Client $client)
+    {
+        $this->raw = new ProfileRawService($client);
+    }
 
     /**
      * @api
@@ -27,12 +35,9 @@ final class ProfileService implements ProfileContract
     public function retrieve(
         ?RequestOptions $requestOptions = null
     ): ProfileGetResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: 'v1/profile/',
-            options: $requestOptions,
-            convert: ProfileGetResponse::class,
-        );
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve(requestOptions: $requestOptions);
+
+        return $response->parse();
     }
 }

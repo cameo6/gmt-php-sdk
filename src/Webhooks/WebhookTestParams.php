@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Webhooks;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -42,13 +42,13 @@ final class WebhookTestParams implements BaseModel
      *
      * @var value-of<Type> $type
      */
-    #[Api(enum: Type::class)]
+    #[Required(enum: Type::class)]
     public string $type;
 
     /**
      * Webhook endpoint URL. Must be a valid URL.
      */
-    #[Api]
+    #[Required]
     public string $url;
 
     /**
@@ -81,12 +81,12 @@ final class WebhookTestParams implements BaseModel
         string $url,
         Type|string $type = 'success'
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
-        $obj['url'] = $url;
+        $self['type'] = $type;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class WebhookTestParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class WebhookTestParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

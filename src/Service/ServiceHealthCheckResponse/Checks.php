@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Service\ServiceHealthCheckResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -21,13 +21,13 @@ final class Checks implements BaseModel
     /**
      * Database connection status.
      */
-    #[Api]
+    #[Required]
     public bool $database;
 
     /**
      * Redis connection status.
      */
-    #[Api]
+    #[Required]
     public bool $redis;
 
     /**
@@ -56,12 +56,12 @@ final class Checks implements BaseModel
      */
     public static function with(bool $database, bool $redis): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['database'] = $database;
-        $obj['redis'] = $redis;
+        $self['database'] = $database;
+        $self['redis'] = $redis;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -69,10 +69,10 @@ final class Checks implements BaseModel
      */
     public function withDatabase(bool $database): self
     {
-        $obj = clone $this;
-        $obj['database'] = $database;
+        $self = clone $this;
+        $self['database'] = $database;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -80,9 +80,9 @@ final class Checks implements BaseModel
      */
     public function withRedis(bool $redis): self
     {
-        $obj = clone $this;
-        $obj['redis'] = $redis;
+        $self = clone $this;
+        $self['redis'] = $redis;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Gmt\Webhooks;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Result of webhook test request.
@@ -16,47 +15,45 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
  * @phpstan-type WebhookTestResponseShape = array{
  *   success: bool,
  *   error?: string|null,
- *   http_code?: int|null,
- *   response_body?: string|null,
- *   response_time_ms?: int|null,
+ *   httpCode?: int|null,
+ *   responseBody?: string|null,
+ *   responseTimeMs?: int|null,
  * }
  */
-final class WebhookTestResponse implements BaseModel, ResponseConverter
+final class WebhookTestResponse implements BaseModel
 {
     /** @use SdkModel<WebhookTestResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Whether the webhook was delivered successfully (HTTP 200).
      */
-    #[Api]
+    #[Required]
     public bool $success;
 
     /**
      * Error message if delivery failed.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?string $error;
 
     /**
      * HTTP status code returned by your endpoint.
      */
-    #[Api(optional: true)]
-    public ?int $http_code;
+    #[Optional('http_code')]
+    public ?int $httpCode;
 
     /**
      * Response body from your endpoint (truncated to 1000 characters).
      */
-    #[Api(optional: true)]
-    public ?string $response_body;
+    #[Optional('response_body')]
+    public ?string $responseBody;
 
     /**
      * Response time in milliseconds.
      */
-    #[Api(optional: true)]
-    public ?int $response_time_ms;
+    #[Optional('response_time_ms')]
+    public ?int $responseTimeMs;
 
     /**
      * `new WebhookTestResponse()` is missing required properties by the API.
@@ -85,20 +82,20 @@ final class WebhookTestResponse implements BaseModel, ResponseConverter
     public static function with(
         bool $success,
         ?string $error = null,
-        ?int $http_code = null,
-        ?string $response_body = null,
-        ?int $response_time_ms = null,
+        ?int $httpCode = null,
+        ?string $responseBody = null,
+        ?int $responseTimeMs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['success'] = $success;
+        $self['success'] = $success;
 
-        null !== $error && $obj['error'] = $error;
-        null !== $http_code && $obj['http_code'] = $http_code;
-        null !== $response_body && $obj['response_body'] = $response_body;
-        null !== $response_time_ms && $obj['response_time_ms'] = $response_time_ms;
+        null !== $error && $self['error'] = $error;
+        null !== $httpCode && $self['httpCode'] = $httpCode;
+        null !== $responseBody && $self['responseBody'] = $responseBody;
+        null !== $responseTimeMs && $self['responseTimeMs'] = $responseTimeMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,10 +103,10 @@ final class WebhookTestResponse implements BaseModel, ResponseConverter
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +114,10 @@ final class WebhookTestResponse implements BaseModel, ResponseConverter
      */
     public function withError(string $error): self
     {
-        $obj = clone $this;
-        $obj['error'] = $error;
+        $self = clone $this;
+        $self['error'] = $error;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +125,10 @@ final class WebhookTestResponse implements BaseModel, ResponseConverter
      */
     public function withHTTPCode(int $httpCode): self
     {
-        $obj = clone $this;
-        $obj['http_code'] = $httpCode;
+        $self = clone $this;
+        $self['httpCode'] = $httpCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +136,10 @@ final class WebhookTestResponse implements BaseModel, ResponseConverter
      */
     public function withResponseBody(string $responseBody): self
     {
-        $obj = clone $this;
-        $obj['response_body'] = $responseBody;
+        $self = clone $this;
+        $self['responseBody'] = $responseBody;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,9 +147,9 @@ final class WebhookTestResponse implements BaseModel, ResponseConverter
      */
     public function withResponseTimeMs(int $responseTimeMs): self
     {
-        $obj = clone $this;
-        $obj['response_time_ms'] = $responseTimeMs;
+        $self = clone $this;
+        $self['responseTimeMs'] = $responseTimeMs;
 
-        return $obj;
+        return $self;
     }
 }

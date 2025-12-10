@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Profile\ProfileGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Referral\Balance;
@@ -17,7 +17,7 @@ use Gmt\Profile\ProfileGetResponse\Referral\Profit;
  *   level: value-of<Level>,
  *   percent: float,
  *   profit: Profit,
- *   referrals_count: int,
+ *   referralsCount: int,
  * }
  */
 final class Referral implements BaseModel
@@ -28,7 +28,7 @@ final class Referral implements BaseModel
     /**
      * Current referral balance available for withdrawal.
      */
-    #[Api]
+    #[Required]
     public Balance $balance;
 
     /**
@@ -36,26 +36,26 @@ final class Referral implements BaseModel
      *
      * @var value-of<Level> $level
      */
-    #[Api(enum: Level::class)]
+    #[Required(enum: Level::class)]
     public string $level;
 
     /**
      * Referral commission percentage.
      */
-    #[Api]
+    #[Required]
     public float $percent;
 
     /**
      * Total lifetime earnings from referral commissions.
      */
-    #[Api]
+    #[Required]
     public Profit $profit;
 
     /**
      * Total number of users invited through referral link.
      */
-    #[Api]
-    public int $referrals_count;
+    #[Required('referrals_count')]
+    public int $referralsCount;
 
     /**
      * `new Referral()` is missing required properties by the API.
@@ -63,7 +63,7 @@ final class Referral implements BaseModel
      * To enforce required parameters use
      * ```
      * Referral::with(
-     *   balance: ..., level: ..., percent: ..., profit: ..., referrals_count: ...
+     *   balance: ..., level: ..., percent: ..., profit: ..., referralsCount: ...
      * )
      * ```
      *
@@ -89,43 +89,43 @@ final class Referral implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Balance|array{
-     *   amount: string, currency_code: string
+     *   amount: string, currencyCode: string
      * } $balance
      * @param Level|value-of<Level> $level
-     * @param Profit|array{amount: string, currency_code: string} $profit
+     * @param Profit|array{amount: string, currencyCode: string} $profit
      */
     public static function with(
         Balance|array $balance,
         Level|string $level,
         float $percent,
         Profit|array $profit,
-        int $referrals_count,
+        int $referralsCount,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['balance'] = $balance;
-        $obj['level'] = $level;
-        $obj['percent'] = $percent;
-        $obj['profit'] = $profit;
-        $obj['referrals_count'] = $referrals_count;
+        $self['balance'] = $balance;
+        $self['level'] = $level;
+        $self['percent'] = $percent;
+        $self['profit'] = $profit;
+        $self['referralsCount'] = $referralsCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Current referral balance available for withdrawal.
      *
      * @param Balance|array{
-     *   amount: string, currency_code: string
+     *   amount: string, currencyCode: string
      * } $balance
      */
     public function withBalance(
         Balance|array $balance
     ): self {
-        $obj = clone $this;
-        $obj['balance'] = $balance;
+        $self = clone $this;
+        $self['balance'] = $balance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class Referral implements BaseModel
      */
     public function withLevel(Level|string $level): self
     {
-        $obj = clone $this;
-        $obj['level'] = $level;
+        $self = clone $this;
+        $self['level'] = $level;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,23 +146,23 @@ final class Referral implements BaseModel
      */
     public function withPercent(float $percent): self
     {
-        $obj = clone $this;
-        $obj['percent'] = $percent;
+        $self = clone $this;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Total lifetime earnings from referral commissions.
      *
-     * @param Profit|array{amount: string, currency_code: string} $profit
+     * @param Profit|array{amount: string, currencyCode: string} $profit
      */
     public function withProfit(Profit|array $profit): self
     {
-        $obj = clone $this;
-        $obj['profit'] = $profit;
+        $self = clone $this;
+        $self['profit'] = $profit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,9 +170,9 @@ final class Referral implements BaseModel
      */
     public function withReferralsCount(int $referralsCount): self
     {
-        $obj = clone $this;
-        $obj['referrals_count'] = $referralsCount;
+        $self = clone $this;
+        $self['referralsCount'] = $referralsCount;
 
-        return $obj;
+        return $self;
     }
 }

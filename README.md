@@ -74,7 +74,7 @@ use Gmt\Client;
 
 $client = new Client(apiKey: getenv('x-api-key') ?: 'My API Key');
 
-$page = $client->purchases->list(['page' => 1, 'page_size' => 100]);
+$page = $client->purchases->list(page: 1, pageSize: 100);
 
 var_dump($page);
 
@@ -102,7 +102,7 @@ try {
 } catch (APIConnectionException $e) {
   echo "The server could not be reached", PHP_EOL;
   var_dump($e->getPrevious());
-} catch (RateLimitError $_) {
+} catch (RateLimitError $e) {
   echo "A 429 status code was received; we should back off a bit.", PHP_EOL;
 } catch (APIStatusError $e) {
   echo "Another non-200-range status code was received", PHP_EOL;
@@ -144,7 +144,9 @@ use Gmt\RequestOptions;
 $client = new Client(maxRetries: 0);
 
 // Or, configure per-request:
-$result = $client->service->healthCheck(RequestOptions::with(maxRetries: 5));
+$result = $client->service->healthCheck(
+  requestOptions: RequestOptions::with(maxRetries: 5)
+);
 ```
 
 ## Advanced concepts
@@ -163,7 +165,7 @@ Note: the `extra*` parameters of the same name overrides the documented paramete
 use Gmt\RequestOptions;
 
 $response = $client->service->healthCheck(
-  RequestOptions::with(
+  requestOptions: RequestOptions::with(
     extraQueryParams: ['my_query_parameter' => 'value'],
     extraBodyParams: ['my_body_parameter' => 'value'],
     extraHeaders: ['my-header' => 'value'],

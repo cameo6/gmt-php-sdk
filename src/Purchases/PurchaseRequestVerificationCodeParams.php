@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -25,7 +25,7 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\PurchasesService::requestVerificationCode()
  *
  * @phpstan-type PurchaseRequestVerificationCodeParamsShape = array{
- *   callback_url?: string
+ *   callbackURL?: string
  * }
  */
 final class PurchaseRequestVerificationCodeParams implements BaseModel
@@ -39,8 +39,8 @@ final class PurchaseRequestVerificationCodeParams implements BaseModel
      *
      * **Retry policy.** If your endpoint does not return HTTP 200, webhook will be retried up to 3 times with delays: immediately, after 10 seconds, after 30 seconds. Any non-200 response triggers retry.
      */
-    #[Api(optional: true)]
-    public ?string $callback_url;
+    #[Optional('callback_url')]
+    public ?string $callbackURL;
 
     public function __construct()
     {
@@ -52,13 +52,13 @@ final class PurchaseRequestVerificationCodeParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(?string $callback_url = null): self
+    public static function with(?string $callbackURL = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callback_url && $obj['callback_url'] = $callback_url;
+        null !== $callbackURL && $self['callbackURL'] = $callbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PurchaseRequestVerificationCodeParams implements BaseModel
      */
     public function withCallbackURL(string $callbackURL): self
     {
-        $obj = clone $this;
-        $obj['callback_url'] = $callbackURL;
+        $self = clone $this;
+        $self['callbackURL'] = $callbackURL;
 
-        return $obj;
+        return $self;
     }
 }

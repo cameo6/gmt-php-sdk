@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -19,13 +19,13 @@ final class DisplayName implements BaseModel
     /**
      * Name in English.
      */
-    #[Api]
+    #[Required]
     public string $en;
 
     /**
      * Name in Russian.
      */
-    #[Api]
+    #[Required]
     public string $ru;
 
     /**
@@ -54,12 +54,12 @@ final class DisplayName implements BaseModel
      */
     public static function with(string $en, string $ru): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['en'] = $en;
-        $obj['ru'] = $ru;
+        $self['en'] = $en;
+        $self['ru'] = $ru;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class DisplayName implements BaseModel
      */
     public function withEn(string $en): self
     {
-        $obj = clone $this;
-        $obj['en'] = $en;
+        $self = clone $this;
+        $self['en'] = $en;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class DisplayName implements BaseModel
      */
     public function withRu(string $ru): self
     {
-        $obj = clone $this;
-        $obj['ru'] = $ru;
+        $self = clone $this;
+        $self['ru'] = $ru;
 
-        return $obj;
+        return $self;
     }
 }

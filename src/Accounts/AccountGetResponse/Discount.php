@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Gmt\Accounts\AccountGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type DiscountShape = array{base_price: string, percent: float}
+ * @phpstan-type DiscountShape = array{basePrice: string, percent: float}
  */
 final class Discount implements BaseModel
 {
@@ -19,13 +19,13 @@ final class Discount implements BaseModel
     /**
      * Original price without discount.
      */
-    #[Api]
-    public string $base_price;
+    #[Required('base_price')]
+    public string $basePrice;
 
     /**
      * Discount percentage applied to this user.
      */
-    #[Api]
+    #[Required]
     public float $percent;
 
     /**
@@ -33,7 +33,7 @@ final class Discount implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * Discount::with(base_price: ..., percent: ...)
+     * Discount::with(basePrice: ..., percent: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,14 +52,14 @@ final class Discount implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $base_price, float $percent): self
+    public static function with(string $basePrice, float $percent): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['base_price'] = $base_price;
-        $obj['percent'] = $percent;
+        $self['basePrice'] = $basePrice;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Discount implements BaseModel
      */
     public function withBasePrice(string $basePrice): self
     {
-        $obj = clone $this;
-        $obj['base_price'] = $basePrice;
+        $self = clone $this;
+        $self['basePrice'] = $basePrice;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Discount implements BaseModel
      */
     public function withPercent(float $percent): self
     {
-        $obj = clone $this;
-        $obj['percent'] = $percent;
+        $self = clone $this;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 }

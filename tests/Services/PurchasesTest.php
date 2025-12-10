@@ -5,6 +5,7 @@ namespace Tests\Services;
 use Gmt\Client;
 use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseGetResponse;
+use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
 use Gmt\Purchases\PurchaseRefundResponse;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
@@ -38,7 +39,7 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->purchases->create(['country_code' => 'US']);
+        $result = $this->client->purchases->create(countryCode: 'US');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PurchaseNewResponse::class, $result);
@@ -51,7 +52,7 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->purchases->create(['country_code' => 'US']);
+        $result = $this->client->purchases->create(countryCode: 'US');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PurchaseNewResponse::class, $result);
@@ -77,10 +78,15 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->purchases->list(['page' => 1, 'page_size' => 50]);
+        $page = $this->client->purchases->list(page: 1, pageSize: 50);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $result);
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PurchaseListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -90,12 +96,19 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->purchases->list([
-            'page' => 1, 'page_size' => 50, 'status' => 'SUCCESS',
-        ]);
+        $page = $this->client->purchases->list(
+            page: 1,
+            pageSize: 50,
+            status: 'SUCCESS'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $result);
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PurchaseListResponse::class, $item);
+        }
     }
 
     #[Test]
@@ -118,7 +131,7 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $result = $this->client->purchases->requestVerificationCode(12345, []);
+        $result = $this->client->purchases->requestVerificationCode(12345);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(

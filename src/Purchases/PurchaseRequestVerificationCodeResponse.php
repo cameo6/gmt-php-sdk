@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase;
@@ -18,20 +16,18 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase\Verification;
 
 /**
  * @phpstan-type PurchaseRequestVerificationCodeResponseShape = array{
- *   code_request: CodeRequest, purchase: Purchase
+ *   codeRequest: CodeRequest, purchase: Purchase
  * }
  */
-final class PurchaseRequestVerificationCodeResponse implements BaseModel, ResponseConverter
+final class PurchaseRequestVerificationCodeResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseRequestVerificationCodeResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
+    #[Required('code_request')]
+    public CodeRequest $codeRequest;
 
-    #[Api]
-    public CodeRequest $code_request;
-
-    #[Api]
+    #[Required]
     public Purchase $purchase;
 
     /**
@@ -39,7 +35,7 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel, Respon
      *
      * To enforce required parameters use
      * ```
-     * PurchaseRequestVerificationCodeResponse::with(code_request: ..., purchase: ...)
+     * PurchaseRequestVerificationCodeResponse::with(codeRequest: ..., purchase: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,58 +58,58 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel, Respon
      *
      * @param CodeRequest|array{
      *   attempt: int,
-     *   max_attempts: int,
-     *   next_attempt_at: string|null,
-     *   retry_after: int|null,
+     *   maxAttempts: int,
+     *   nextAttemptAt: string|null,
+     *   retryAfter: int|null,
      *   status: value-of<Status>,
-     * } $code_request
+     * } $codeRequest
      * @param Purchase|array{
      *   id: int,
-     *   country_code: string,
-     *   created_at: string,
-     *   display_name: DisplayName,
-     *   phone_number: string,
+     *   countryCode: string,
+     *   createdAt: string,
+     *   displayName: DisplayName,
+     *   phoneNumber: string,
      *   price: Price,
      *   status: value-of<Purchase\Status>,
      *   verification: Verification|null,
      * } $purchase
      */
     public static function with(
-        CodeRequest|array $code_request,
+        CodeRequest|array $codeRequest,
         Purchase|array $purchase
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['code_request'] = $code_request;
-        $obj['purchase'] = $purchase;
+        $self['codeRequest'] = $codeRequest;
+        $self['purchase'] = $purchase;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * @param CodeRequest|array{
      *   attempt: int,
-     *   max_attempts: int,
-     *   next_attempt_at: string|null,
-     *   retry_after: int|null,
+     *   maxAttempts: int,
+     *   nextAttemptAt: string|null,
+     *   retryAfter: int|null,
      *   status: value-of<Status>,
      * } $codeRequest
      */
     public function withCodeRequest(CodeRequest|array $codeRequest): self
     {
-        $obj = clone $this;
-        $obj['code_request'] = $codeRequest;
+        $self = clone $this;
+        $self['codeRequest'] = $codeRequest;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * @param Purchase|array{
      *   id: int,
-     *   country_code: string,
-     *   created_at: string,
-     *   display_name: DisplayName,
-     *   phone_number: string,
+     *   countryCode: string,
+     *   createdAt: string,
+     *   displayName: DisplayName,
+     *   phoneNumber: string,
      *   price: Price,
      *   status: value-of<Purchase\Status>,
      *   verification: Verification|null,
@@ -121,9 +117,9 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel, Respon
      */
     public function withPurchase(Purchase|array $purchase): self
     {
-        $obj = clone $this;
-        $obj['purchase'] = $purchase;
+        $self = clone $this;
+        $self['purchase'] = $purchase;
 
-        return $obj;
+        return $self;
     }
 }

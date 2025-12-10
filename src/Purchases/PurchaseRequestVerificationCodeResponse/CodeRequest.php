@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
@@ -12,9 +12,9 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
 /**
  * @phpstan-type CodeRequestShape = array{
  *   attempt: int,
- *   max_attempts: int,
- *   next_attempt_at: string|null,
- *   retry_after: int|null,
+ *   maxAttempts: int,
+ *   nextAttemptAt: string|null,
+ *   retryAfter: int|null,
  *   status: value-of<Status>,
  * }
  */
@@ -26,33 +26,33 @@ final class CodeRequest implements BaseModel
     /**
      * Current attempt number.
      */
-    #[Api]
+    #[Required]
     public int $attempt;
 
     /**
      * Maximum number of attempts.
      */
-    #[Api]
-    public int $max_attempts;
+    #[Required('max_attempts')]
+    public int $maxAttempts;
 
     /**
      * ISO timestamp of next attempt (null if not scheduled).
      */
-    #[Api]
-    public ?string $next_attempt_at;
+    #[Required('next_attempt_at')]
+    public ?string $nextAttemptAt;
 
     /**
      * Seconds until next attempt (null if not scheduled).
      */
-    #[Api]
-    public ?int $retry_after;
+    #[Required('retry_after')]
+    public ?int $retryAfter;
 
     /**
      * Current status of the code request.
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
@@ -62,9 +62,9 @@ final class CodeRequest implements BaseModel
      * ```
      * CodeRequest::with(
      *   attempt: ...,
-     *   max_attempts: ...,
-     *   next_attempt_at: ...,
-     *   retry_after: ...,
+     *   maxAttempts: ...,
+     *   nextAttemptAt: ...,
+     *   retryAfter: ...,
      *   status: ...,
      * )
      * ```
@@ -94,20 +94,20 @@ final class CodeRequest implements BaseModel
      */
     public static function with(
         int $attempt,
-        int $max_attempts,
-        ?string $next_attempt_at,
-        ?int $retry_after,
+        int $maxAttempts,
+        ?string $nextAttemptAt,
+        ?int $retryAfter,
         Status|string $status,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['attempt'] = $attempt;
-        $obj['max_attempts'] = $max_attempts;
-        $obj['next_attempt_at'] = $next_attempt_at;
-        $obj['retry_after'] = $retry_after;
-        $obj['status'] = $status;
+        $self['attempt'] = $attempt;
+        $self['maxAttempts'] = $maxAttempts;
+        $self['nextAttemptAt'] = $nextAttemptAt;
+        $self['retryAfter'] = $retryAfter;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class CodeRequest implements BaseModel
      */
     public function withAttempt(int $attempt): self
     {
-        $obj = clone $this;
-        $obj['attempt'] = $attempt;
+        $self = clone $this;
+        $self['attempt'] = $attempt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class CodeRequest implements BaseModel
      */
     public function withMaxAttempts(int $maxAttempts): self
     {
-        $obj = clone $this;
-        $obj['max_attempts'] = $maxAttempts;
+        $self = clone $this;
+        $self['maxAttempts'] = $maxAttempts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class CodeRequest implements BaseModel
      */
     public function withNextAttemptAt(?string $nextAttemptAt): self
     {
-        $obj = clone $this;
-        $obj['next_attempt_at'] = $nextAttemptAt;
+        $self = clone $this;
+        $self['nextAttemptAt'] = $nextAttemptAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class CodeRequest implements BaseModel
      */
     public function withRetryAfter(?int $retryAfter): self
     {
-        $obj = clone $this;
-        $obj['retry_after'] = $retryAfter;
+        $self = clone $this;
+        $self['retryAfter'] = $retryAfter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,9 +161,9 @@ final class CodeRequest implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

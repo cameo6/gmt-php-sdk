@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Gmt\Service;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * Successful response.
@@ -17,29 +15,27 @@ use Gmt\Core\Conversion\Contracts\ResponseConverter;
  *   epochMs: int, iso: string, timezone: string
  * }
  */
-final class ServiceGetServerTimeResponse implements BaseModel, ResponseConverter
+final class ServiceGetServerTimeResponse implements BaseModel
 {
     /** @use SdkModel<ServiceGetServerTimeResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Current server time in milliseconds since Unix epoch.
      */
-    #[Api]
+    #[Required]
     public int $epochMs;
 
     /**
      * Current server time in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $iso;
 
     /**
      * Server timezone.
      */
-    #[Api]
+    #[Required]
     public string $timezone;
 
     /**
@@ -74,13 +70,13 @@ final class ServiceGetServerTimeResponse implements BaseModel, ResponseConverter
         string $iso,
         string $timezone
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['epochMs'] = $epochMs;
-        $obj['iso'] = $iso;
-        $obj['timezone'] = $timezone;
+        $self['epochMs'] = $epochMs;
+        $self['iso'] = $iso;
+        $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -88,10 +84,10 @@ final class ServiceGetServerTimeResponse implements BaseModel, ResponseConverter
      */
     public function withEpochMs(int $epochMs): self
     {
-        $obj = clone $this;
-        $obj['epochMs'] = $epochMs;
+        $self = clone $this;
+        $self['epochMs'] = $epochMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +95,10 @@ final class ServiceGetServerTimeResponse implements BaseModel, ResponseConverter
      */
     public function withISO(string $iso): self
     {
-        $obj = clone $this;
-        $obj['iso'] = $iso;
+        $self = clone $this;
+        $self['iso'] = $iso;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,9 +106,9 @@ final class ServiceGetServerTimeResponse implements BaseModel, ResponseConverter
      */
     public function withTimezone(string $timezone): self
     {
-        $obj = clone $this;
-        $obj['timezone'] = $timezone;
+        $self = clone $this;
+        $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 }

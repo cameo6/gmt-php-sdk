@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseRefundResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
 
 /**
  * @phpstan-type RefundShape = array{
- *   amount: Amount, reason: string, refunded_at: string
+ *   amount: Amount, reason: string, refundedAt: string
  * }
  */
 final class Refund implements BaseModel
@@ -22,27 +22,27 @@ final class Refund implements BaseModel
     /**
      * Refunded amount (full purchase price).
      */
-    #[Api]
+    #[Required]
     public Amount $amount;
 
     /**
      * Refund reason.
      */
-    #[Api]
+    #[Required]
     public string $reason;
 
     /**
      * Refund timestamp in ISO 8601 format.
      */
-    #[Api]
-    public string $refunded_at;
+    #[Required('refunded_at')]
+    public string $refundedAt;
 
     /**
      * `new Refund()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Refund::with(amount: ..., reason: ..., refunded_at: ...)
+     * Refund::with(amount: ..., reason: ..., refundedAt: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -61,33 +61,33 @@ final class Refund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Amount|array{amount: string, currency_code: string} $amount
+     * @param Amount|array{amount: string, currencyCode: string} $amount
      */
     public static function with(
         Amount|array $amount,
         string $reason,
-        string $refunded_at
+        string $refundedAt
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['reason'] = $reason;
-        $obj['refunded_at'] = $refunded_at;
+        $self['amount'] = $amount;
+        $self['reason'] = $reason;
+        $self['refundedAt'] = $refundedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * Refunded amount (full purchase price).
      *
-     * @param Amount|array{amount: string, currency_code: string} $amount
+     * @param Amount|array{amount: string, currencyCode: string} $amount
      */
     public function withAmount(Amount|array $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Refund implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Refund implements BaseModel
      */
     public function withRefundedAt(string $refundedAt): self
     {
-        $obj = clone $this;
-        $obj['refunded_at'] = $refundedAt;
+        $self = clone $this;
+        $self['refundedAt'] = $refundedAt;
 
-        return $obj;
+        return $self;
     }
 }

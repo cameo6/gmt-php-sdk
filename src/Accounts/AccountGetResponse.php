@@ -8,48 +8,44 @@ use Gmt\Accounts\AccountGetResponse\Discount;
 use Gmt\Accounts\AccountGetResponse\DisplayName;
 use Gmt\Accounts\AccountGetResponse\Price;
 use Gmt\Accounts\AccountGetResponse\Tag;
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 
 /**
  * @phpstan-type AccountGetResponseShape = array{
  *   available: bool,
- *   country_code: string,
+ *   countryCode: string,
  *   discount: Discount,
- *   display_name: DisplayName,
+ *   displayName: DisplayName,
  *   price: Price,
  *   tags: list<value-of<Tag>>,
  * }
  */
-final class AccountGetResponse implements BaseModel, ResponseConverter
+final class AccountGetResponse implements BaseModel
 {
     /** @use SdkModel<AccountGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Indicates if account is available for purchase.
      */
-    #[Api]
+    #[Required]
     public bool $available;
 
     /**
      * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
      */
-    #[Api]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
-    #[Api]
+    #[Required]
     public Discount $discount;
 
-    #[Api]
-    public DisplayName $display_name;
+    #[Required('display_name')]
+    public DisplayName $displayName;
 
-    #[Api]
+    #[Required]
     public Price $price;
 
     /**
@@ -57,7 +53,7 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      *
      * @var list<value-of<Tag>> $tags
      */
-    #[Api(list: Tag::class)]
+    #[Required(list: Tag::class)]
     public array $tags;
 
     /**
@@ -67,9 +63,9 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      * ```
      * AccountGetResponse::with(
      *   available: ...,
-     *   country_code: ...,
+     *   countryCode: ...,
      *   discount: ...,
-     *   display_name: ...,
+     *   displayName: ...,
      *   price: ...,
      *   tags: ...,
      * )
@@ -97,29 +93,29 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Discount|array{base_price: string, percent: float} $discount
-     * @param DisplayName|array{en: string, ru: string} $display_name
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param Discount|array{basePrice: string, percent: float} $discount
+     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param Price|array{amount: string, currencyCode: string} $price
      * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
         bool $available,
-        string $country_code,
+        string $countryCode,
         Discount|array $discount,
-        DisplayName|array $display_name,
+        DisplayName|array $displayName,
         Price|array $price,
         array $tags,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['available'] = $available;
-        $obj['country_code'] = $country_code;
-        $obj['discount'] = $discount;
-        $obj['display_name'] = $display_name;
-        $obj['price'] = $price;
-        $obj['tags'] = $tags;
+        $self['available'] = $available;
+        $self['countryCode'] = $countryCode;
+        $self['discount'] = $discount;
+        $self['displayName'] = $displayName;
+        $self['price'] = $price;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +123,10 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      */
     public function withAvailable(bool $available): self
     {
-        $obj = clone $this;
-        $obj['available'] = $available;
+        $self = clone $this;
+        $self['available'] = $available;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,21 +134,21 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param Discount|array{base_price: string, percent: float} $discount
+     * @param Discount|array{basePrice: string, percent: float} $discount
      */
     public function withDiscount(Discount|array $discount): self
     {
-        $obj = clone $this;
-        $obj['discount'] = $discount;
+        $self = clone $this;
+        $self['discount'] = $discount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -160,21 +156,21 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
-        $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param Price|array{amount: string, currencyCode: string} $price
      */
     public function withPrice(Price|array $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -184,9 +180,9 @@ final class AccountGetResponse implements BaseModel, ResponseConverter
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

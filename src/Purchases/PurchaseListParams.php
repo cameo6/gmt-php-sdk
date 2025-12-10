@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -25,7 +26,7 @@ use Gmt\Purchases\PurchaseListParams\Status;
  * @see Gmt\Services\PurchasesService::list()
  *
  * @phpstan-type PurchaseListParamsShape = array{
- *   page: int, page_size: int, status?: Status|value-of<Status>
+ *   page: int, pageSize: int, status?: Status|value-of<Status>
  * }
  */
 final class PurchaseListParams implements BaseModel
@@ -37,14 +38,14 @@ final class PurchaseListParams implements BaseModel
     /**
      * Page number.
      */
-    #[Api]
+    #[Required]
     public int $page;
 
     /**
      * Number of items per page.
      */
-    #[Api]
-    public int $page_size;
+    #[Required]
+    public int $pageSize;
 
     /**
      * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
@@ -59,7 +60,7 @@ final class PurchaseListParams implements BaseModel
      *
      * @var value-of<Status>|null $status
      */
-    #[Api(enum: Status::class, optional: true)]
+    #[Optional(enum: Status::class)]
     public ?string $status;
 
     /**
@@ -67,7 +68,7 @@ final class PurchaseListParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PurchaseListParams::with(page: ..., page_size: ...)
+     * PurchaseListParams::with(page: ..., pageSize: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -90,17 +91,17 @@ final class PurchaseListParams implements BaseModel
      */
     public static function with(
         int $page = 1,
-        int $page_size = 50,
+        int $pageSize = 50,
         Status|string|null $status = null
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['page'] = $page;
-        $obj['page_size'] = $page_size;
+        $self['page'] = $page;
+        $self['pageSize'] = $pageSize;
 
-        null !== $status && $obj['status'] = $status;
+        null !== $status && $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -108,10 +109,10 @@ final class PurchaseListParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,10 +120,10 @@ final class PurchaseListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -140,9 +141,9 @@ final class PurchaseListParams implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

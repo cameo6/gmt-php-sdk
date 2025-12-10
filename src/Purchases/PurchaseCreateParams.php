@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -24,7 +24,7 @@ use Gmt\Core\Contracts\BaseModel;
  *
  * @see Gmt\Services\PurchasesService::create()
  *
- * @phpstan-type PurchaseCreateParamsShape = array{country_code: string}
+ * @phpstan-type PurchaseCreateParamsShape = array{countryCode: string}
  */
 final class PurchaseCreateParams implements BaseModel
 {
@@ -35,15 +35,15 @@ final class PurchaseCreateParams implements BaseModel
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
     /**
      * `new PurchaseCreateParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * PurchaseCreateParams::with(country_code: ...)
+     * PurchaseCreateParams::with(countryCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -62,13 +62,13 @@ final class PurchaseCreateParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $country_code): self
+    public static function with(string $countryCode): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['country_code'] = $country_code;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -76,9 +76,9 @@ final class PurchaseCreateParams implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 }

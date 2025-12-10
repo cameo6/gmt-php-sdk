@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Gmt\Accounts\AccountGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
- * @phpstan-type PriceShape = array{amount: string, currency_code: string}
+ * @phpstan-type PriceShape = array{amount: string, currencyCode: string}
  */
 final class Price implements BaseModel
 {
@@ -19,21 +19,21 @@ final class Price implements BaseModel
     /**
      * Monetary amount as a string with up to 2 decimal places.
      */
-    #[Api]
+    #[Required]
     public string $amount;
 
     /**
      * ISO 4217 currency code.
      */
-    #[Api]
-    public string $currency_code;
+    #[Required('currency_code')]
+    public string $currencyCode;
 
     /**
      * `new Price()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Price::with(amount: ..., currency_code: ...)
+     * Price::with(amount: ..., currencyCode: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,14 +52,14 @@ final class Price implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      */
-    public static function with(string $amount, string $currency_code): self
+    public static function with(string $amount, string $currencyCode): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['currency_code'] = $currency_code;
+        $self['amount'] = $amount;
+        $self['currencyCode'] = $currencyCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -67,10 +67,10 @@ final class Price implements BaseModel
      */
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -78,9 +78,9 @@ final class Price implements BaseModel
      */
     public function withCurrencyCode(string $currencyCode): self
     {
-        $obj = clone $this;
-        $obj['currency_code'] = $currencyCode;
+        $self = clone $this;
+        $self['currencyCode'] = $currencyCode;
 
-        return $obj;
+        return $self;
     }
 }

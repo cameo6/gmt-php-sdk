@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Gmt\Accounts;
 
 use Gmt\Accounts\AccountListParams\Sort;
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -16,7 +17,7 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\AccountsService::list()
  *
  * @phpstan-type AccountListParamsShape = array{
- *   page: int, page_size: int, sort: Sort|value-of<Sort>, country_codes?: string
+ *   page: int, pageSize: int, sort: Sort|value-of<Sort>, countryCodes?: string
  * }
  */
 final class AccountListParams implements BaseModel
@@ -28,35 +29,35 @@ final class AccountListParams implements BaseModel
     /**
      * Page number.
      */
-    #[Api]
+    #[Required]
     public int $page;
 
     /**
      * Number of items per page.
      */
-    #[Api]
-    public int $page_size;
+    #[Required]
+    public int $pageSize;
 
     /**
      * Sort order for accounts.
      *
      * @var value-of<Sort> $sort
      */
-    #[Api(enum: Sort::class)]
+    #[Required(enum: Sort::class)]
     public string $sort;
 
     /**
      * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      */
-    #[Api(optional: true)]
-    public ?string $country_codes;
+    #[Optional]
+    public ?string $countryCodes;
 
     /**
      * `new AccountListParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * AccountListParams::with(page: ..., page_size: ..., sort: ...)
+     * AccountListParams::with(page: ..., pageSize: ..., sort: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -79,19 +80,19 @@ final class AccountListParams implements BaseModel
      */
     public static function with(
         int $page = 1,
-        int $page_size = 50,
+        int $pageSize = 50,
         Sort|string $sort = 'name_asc',
-        ?string $country_codes = null,
+        ?string $countryCodes = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['page'] = $page;
-        $obj['page_size'] = $page_size;
-        $obj['sort'] = $sort;
+        $self['page'] = $page;
+        $self['pageSize'] = $pageSize;
+        $self['sort'] = $sort;
 
-        null !== $country_codes && $obj['country_codes'] = $country_codes;
+        null !== $countryCodes && $self['countryCodes'] = $countryCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -99,10 +100,10 @@ final class AccountListParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -110,10 +111,10 @@ final class AccountListParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['page_size'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -123,10 +124,10 @@ final class AccountListParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -134,9 +135,9 @@ final class AccountListParams implements BaseModel
      */
     public function withCountryCodes(string $countryCodes): self
     {
-        $obj = clone $this;
-        $obj['country_codes'] = $countryCodes;
+        $self = clone $this;
+        $self['countryCodes'] = $countryCodes;
 
-        return $obj;
+        return $self;
     }
 }

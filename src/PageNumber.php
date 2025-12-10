@@ -2,7 +2,7 @@
 
 namespace Gmt;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkPage;
 use Gmt\Core\Contracts\BaseModel;
@@ -11,7 +11,6 @@ use Gmt\Core\Conversion;
 use Gmt\Core\Conversion\Contracts\Converter;
 use Gmt\Core\Conversion\Contracts\ConverterSource;
 use Gmt\Core\Conversion\ListOf;
-use Gmt\Core\Util;
 use Gmt\PageNumber\Pagination;
 use Psr\Http\Message\ResponseInterface;
 
@@ -33,10 +32,10 @@ final class PageNumber implements BaseModel, BasePage
     use SdkPage;
 
     /** @var list<TItem>|null $items */
-    #[Api(list: 'mixed', optional: true)]
+    #[Optional(list: 'mixed')]
     public ?array $items;
 
-    #[Api(optional: true)]
+    #[Optional]
     public ?Pagination $pagination;
 
     /**
@@ -48,25 +47,24 @@ final class PageNumber implements BaseModel, BasePage
      *   query: array<string,mixed>,
      *   headers: array<string,string|list<string>|null>,
      *   body: mixed,
-     * } $request
+     * } $requestInfo
      */
     public function __construct(
         private string|Converter|ConverterSource $convert,
         private Client $client,
-        private array $request,
+        private array $requestInfo,
         private RequestOptions $options,
-        ResponseInterface $response,
+        private ResponseInterface $response,
+        private mixed $parsedBody,
     ) {
         $this->initialize();
 
-        $data = Util::decodeContent($response);
-
-        if (!is_array($data)) {
+        if (!is_array($this->parsedBody)) {
             return;
         }
 
         // @phpstan-ignore-next-line argument.type
-        self::__unserialize($data);
+        self::__unserialize($this->parsedBody);
 
         if ($this->offsetGet('items')) {
             $acc = Conversion::coerce(
@@ -102,15 +100,15 @@ final class PageNumber implements BaseModel, BasePage
     public function nextRequest(): ?array
     {
         /** @var int */
-        $curr = $this->pagination->current_page ?? null;
+        $curr = $this->pagination->currentPage ?? null;
         if (!($this
-            ->pagination->has_next ?? null) || !count($this->getItems()) || ($curr >= ($this
-            ->pagination->total_pages ?? null))) {
+            ->pagination->hasNext ?? null) || !count($this->getItems()) || ($curr >= ($this
+            ->pagination->totalPages ?? null))) {
             return null;
         }
 
         $nextRequest = array_merge_recursive(
-            $this->request,
+            $this->requestInfo,
             ['query' => $curr + 1]
         );
 

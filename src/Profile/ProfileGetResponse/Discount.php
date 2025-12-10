@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Profile\ProfileGetResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Discount\Level;
@@ -22,13 +22,13 @@ final class Discount implements BaseModel
      *
      * @var value-of<Level> $level
      */
-    #[Api(enum: Level::class)]
+    #[Required(enum: Level::class)]
     public string $level;
 
     /**
      * Discount percentage.
      */
-    #[Api]
+    #[Required]
     public float $percent;
 
     /**
@@ -59,12 +59,12 @@ final class Discount implements BaseModel
      */
     public static function with(Level|string $level, float $percent): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['level'] = $level;
-        $obj['percent'] = $percent;
+        $self['level'] = $level;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Discount implements BaseModel
      */
     public function withLevel(Level|string $level): self
     {
-        $obj = clone $this;
-        $obj['level'] = $level;
+        $self = clone $this;
+        $self['level'] = $level;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class Discount implements BaseModel
      */
     public function withPercent(float $percent): self
     {
-        $obj = clone $this;
-        $obj['percent'] = $percent;
+        $self = clone $this;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 }

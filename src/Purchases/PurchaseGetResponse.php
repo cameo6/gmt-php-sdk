@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Purchases\PurchaseGetResponse\DisplayName;
 use Gmt\Purchases\PurchaseGetResponse\Price;
 use Gmt\Purchases\PurchaseGetResponse\Status;
@@ -17,50 +15,48 @@ use Gmt\Purchases\PurchaseGetResponse\Verification;
 /**
  * @phpstan-type PurchaseGetResponseShape = array{
  *   id: int,
- *   country_code: string,
- *   created_at: string,
- *   display_name: DisplayName,
- *   phone_number: string,
+ *   countryCode: string,
+ *   createdAt: string,
+ *   displayName: DisplayName,
+ *   phoneNumber: string,
  *   price: Price,
  *   status: value-of<Status>,
  *   verification: Verification|null,
  * }
  */
-final class PurchaseGetResponse implements BaseModel, ResponseConverter
+final class PurchaseGetResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseGetResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Unique purchase identifier.
      */
-    #[Api]
+    #[Required]
     public int $id;
 
     /**
      * ISO 3166-1 alpha-2 country code.
      */
-    #[Api]
-    public string $country_code;
+    #[Required('country_code')]
+    public string $countryCode;
 
     /**
      * Purchase creation time in ISO 8601 format (UTC).
      */
-    #[Api]
-    public string $created_at;
+    #[Required('created_at')]
+    public string $createdAt;
 
-    #[Api]
-    public DisplayName $display_name;
+    #[Required('display_name')]
+    public DisplayName $displayName;
 
     /**
      * **E.164 International Format.** Phone number with country code prefix (e.g., `+12025550123` for US, `+79991234567` for Russia).
      *
      * **Usage.** This is your Telegram account login. Use it with `verification.code` and `verification.password` to access the account.
      */
-    #[Api]
-    public string $phone_number;
+    #[Required('phone_number')]
+    public string $phoneNumber;
 
     /**
      * **Final Price After Discount.** The actual amount deducted from your balance, with your personal discount already applied.
@@ -69,7 +65,7 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
      */
-    #[Api]
+    #[Required]
     public Price $price;
 
     /**
@@ -85,7 +81,7 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
@@ -95,7 +91,7 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      *
      * **Security.** Verification data is only visible to the purchase owner.
      */
-    #[Api]
+    #[Required]
     public ?Verification $verification;
 
     /**
@@ -105,10 +101,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      * ```
      * PurchaseGetResponse::with(
      *   id: ...,
-     *   country_code: ...,
-     *   created_at: ...,
-     *   display_name: ...,
-     *   phone_number: ...,
+     *   countryCode: ...,
+     *   createdAt: ...,
+     *   displayName: ...,
+     *   phoneNumber: ...,
      *   price: ...,
      *   status: ...,
      *   verification: ...,
@@ -139,35 +135,35 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayName|array{en: string, ru: string} $display_name
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param Price|array{amount: string, currencyCode: string} $price
      * @param Status|value-of<Status> $status
      * @param Verification|array{
-     *   code: string, password: string, received_at: string
+     *   code: string, password: string, receivedAt: string
      * }|null $verification
      */
     public static function with(
         int $id,
-        string $country_code,
-        string $created_at,
-        DisplayName|array $display_name,
-        string $phone_number,
+        string $countryCode,
+        string $createdAt,
+        DisplayName|array $displayName,
+        string $phoneNumber,
         Price|array $price,
         Status|string $status,
         Verification|array|null $verification,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['country_code'] = $country_code;
-        $obj['created_at'] = $created_at;
-        $obj['display_name'] = $display_name;
-        $obj['phone_number'] = $phone_number;
-        $obj['price'] = $price;
-        $obj['status'] = $status;
-        $obj['verification'] = $verification;
+        $self['id'] = $id;
+        $self['countryCode'] = $countryCode;
+        $self['createdAt'] = $createdAt;
+        $self['displayName'] = $displayName;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['price'] = $price;
+        $self['status'] = $status;
+        $self['verification'] = $verification;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -175,10 +171,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      */
     public function withID(int $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -186,10 +182,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['country_code'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -197,10 +193,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['created_at'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -208,10 +204,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
-        $obj = clone $this;
-        $obj['display_name'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -221,10 +217,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phone_number'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,14 +230,14 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
      *
-     * @param Price|array{amount: string, currency_code: string} $price
+     * @param Price|array{amount: string, currencyCode: string} $price
      */
     public function withPrice(Price|array $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -259,10 +255,10 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -273,15 +269,15 @@ final class PurchaseGetResponse implements BaseModel, ResponseConverter
      * **Security.** Verification data is only visible to the purchase owner.
      *
      * @param Verification|array{
-     *   code: string, password: string, received_at: string
+     *   code: string, password: string, receivedAt: string
      * }|null $verification
      */
     public function withVerification(
         Verification|array|null $verification
     ): self {
-        $obj = clone $this;
-        $obj['verification'] = $verification;
+        $self = clone $this;
+        $self['verification'] = $verification;
 
-        return $obj;
+        return $self;
     }
 }

@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\DisplayName;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\Price;
@@ -22,17 +20,15 @@ use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
  *   purchase: Purchase, refund: Refund
  * }
  */
-final class PurchaseRefundResponse implements BaseModel, ResponseConverter
+final class PurchaseRefundResponse implements BaseModel
 {
     /** @use SdkModel<PurchaseRefundResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
-    #[Api]
+    #[Required]
     public Purchase $purchase;
 
-    #[Api]
+    #[Required]
     public Refund $refund;
 
     /**
@@ -61,35 +57,35 @@ final class PurchaseRefundResponse implements BaseModel, ResponseConverter
      *
      * @param Purchase|array{
      *   id: int,
-     *   country_code: string,
-     *   created_at: string,
-     *   display_name: DisplayName,
-     *   phone_number: string,
+     *   countryCode: string,
+     *   createdAt: string,
+     *   displayName: DisplayName,
+     *   phoneNumber: string,
      *   price: Price,
      *   status: value-of<Status>,
      *   verification: Verification|null,
      * } $purchase
-     * @param Refund|array{amount: Amount, reason: string, refunded_at: string} $refund
+     * @param Refund|array{amount: Amount, reason: string, refundedAt: string} $refund
      */
     public static function with(
         Purchase|array $purchase,
         Refund|array $refund
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['purchase'] = $purchase;
-        $obj['refund'] = $refund;
+        $self['purchase'] = $purchase;
+        $self['refund'] = $refund;
 
-        return $obj;
+        return $self;
     }
 
     /**
      * @param Purchase|array{
      *   id: int,
-     *   country_code: string,
-     *   created_at: string,
-     *   display_name: DisplayName,
-     *   phone_number: string,
+     *   countryCode: string,
+     *   createdAt: string,
+     *   displayName: DisplayName,
+     *   phoneNumber: string,
      *   price: Price,
      *   status: value-of<Status>,
      *   verification: Verification|null,
@@ -97,20 +93,20 @@ final class PurchaseRefundResponse implements BaseModel, ResponseConverter
      */
     public function withPurchase(Purchase|array $purchase): self
     {
-        $obj = clone $this;
-        $obj['purchase'] = $purchase;
+        $self = clone $this;
+        $self['purchase'] = $purchase;
 
-        return $obj;
+        return $self;
     }
 
     /**
-     * @param Refund|array{amount: Amount, reason: string, refunded_at: string} $refund
+     * @param Refund|array{amount: Amount, reason: string, refundedAt: string} $refund
      */
     public function withRefund(Refund|array $refund): self
     {
-        $obj = clone $this;
-        $obj['refund'] = $refund;
+        $self = clone $this;
+        $self['refund'] = $refund;
 
-        return $obj;
+        return $self;
     }
 }

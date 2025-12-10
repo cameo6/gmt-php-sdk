@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Purchases\PurchaseListResponse;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
@@ -16,7 +16,7 @@ use Gmt\Core\Contracts\BaseModel;
  * **Security.** Verification data is only visible to the purchase owner.
  *
  * @phpstan-type VerificationShape = array{
- *   code: string, password: string, received_at: string
+ *   code: string, password: string, receivedAt: string
  * }
  */
 final class Verification implements BaseModel
@@ -27,13 +27,13 @@ final class Verification implements BaseModel
     /**
      * Verification code for account.
      */
-    #[Api]
+    #[Required]
     public string $code;
 
     /**
      * Account password.
      */
-    #[Api]
+    #[Required]
     public string $password;
 
     /**
@@ -45,15 +45,15 @@ final class Verification implements BaseModel
      *
      * **Note.** These timestamps may be identical if code is requested immediately after purchase.
      */
-    #[Api]
-    public string $received_at;
+    #[Required('received_at')]
+    public string $receivedAt;
 
     /**
      * `new Verification()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Verification::with(code: ..., password: ..., received_at: ...)
+     * Verification::with(code: ..., password: ..., receivedAt: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -75,15 +75,15 @@ final class Verification implements BaseModel
     public static function with(
         string $code,
         string $password,
-        string $received_at
+        string $receivedAt
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['code'] = $code;
-        $obj['password'] = $password;
-        $obj['received_at'] = $received_at;
+        $self['code'] = $code;
+        $self['password'] = $password;
+        $self['receivedAt'] = $receivedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -91,10 +91,10 @@ final class Verification implements BaseModel
      */
     public function withCode(string $code): self
     {
-        $obj = clone $this;
-        $obj['code'] = $code;
+        $self = clone $this;
+        $self['code'] = $code;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -102,10 +102,10 @@ final class Verification implements BaseModel
      */
     public function withPassword(string $password): self
     {
-        $obj = clone $this;
-        $obj['password'] = $password;
+        $self = clone $this;
+        $self['password'] = $password;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -119,9 +119,9 @@ final class Verification implements BaseModel
      */
     public function withReceivedAt(string $receivedAt): self
     {
-        $obj = clone $this;
-        $obj['received_at'] = $receivedAt;
+        $self = clone $this;
+        $self['receivedAt'] = $receivedAt;
 
-        return $obj;
+        return $self;
     }
 }

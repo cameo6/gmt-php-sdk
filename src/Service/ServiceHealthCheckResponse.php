@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Gmt\Service;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
-use Gmt\Core\Concerns\SdkResponse;
 use Gmt\Core\Contracts\BaseModel;
-use Gmt\Core\Conversion\Contracts\ResponseConverter;
 use Gmt\Service\ServiceHealthCheckResponse\Checks;
 use Gmt\Service\ServiceHealthCheckResponse\Status;
 
@@ -22,17 +21,15 @@ use Gmt\Service\ServiceHealthCheckResponse\Status;
  *   checks?: Checks|null,
  * }
  */
-final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
+final class ServiceHealthCheckResponse implements BaseModel
 {
     /** @use SdkModel<ServiceHealthCheckResponseShape> */
     use SdkModel;
 
-    use SdkResponse;
-
     /**
      * Current server time in ISO 8601 format.
      */
-    #[Api]
+    #[Required]
     public string $now;
 
     /**
@@ -40,19 +37,19 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
      *
      * @var value-of<Status> $status
      */
-    #[Api(enum: Status::class)]
+    #[Required(enum: Status::class)]
     public string $status;
 
     /**
      * API uptime in seconds.
      */
-    #[Api]
+    #[Required]
     public int $uptimeSeconds;
 
     /**
      * Detailed information about dependencies state.
      */
-    #[Api(optional: true)]
+    #[Optional]
     public ?Checks $checks;
 
     /**
@@ -91,15 +88,15 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
         int $uptimeSeconds,
         Checks|array|null $checks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['now'] = $now;
-        $obj['status'] = $status;
-        $obj['uptimeSeconds'] = $uptimeSeconds;
+        $self['now'] = $now;
+        $self['status'] = $status;
+        $self['uptimeSeconds'] = $uptimeSeconds;
 
-        null !== $checks && $obj['checks'] = $checks;
+        null !== $checks && $self['checks'] = $checks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,10 +104,10 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
      */
     public function withNow(string $now): self
     {
-        $obj = clone $this;
-        $obj['now'] = $now;
+        $self = clone $this;
+        $self['now'] = $now;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +117,10 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +128,10 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
      */
     public function withUptimeSeconds(int $uptimeSeconds): self
     {
-        $obj = clone $this;
-        $obj['uptimeSeconds'] = $uptimeSeconds;
+        $self = clone $this;
+        $self['uptimeSeconds'] = $uptimeSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -144,9 +141,9 @@ final class ServiceHealthCheckResponse implements BaseModel, ResponseConverter
      */
     public function withChecks(Checks|array $checks): self
     {
-        $obj = clone $this;
-        $obj['checks'] = $checks;
+        $self = clone $this;
+        $self['checks'] = $checks;
 
-        return $obj;
+        return $self;
     }
 }

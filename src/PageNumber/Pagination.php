@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Gmt\PageNumber;
 
-use Gmt\Core\Attributes\Api;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
  * @phpstan-type PaginationShape = array{
- *   current_page: int, has_next: bool, total_pages: int
+ *   currentPage: int, hasNext: bool, totalPages: int
  * }
  */
 final class Pagination implements BaseModel
@@ -18,21 +18,21 @@ final class Pagination implements BaseModel
     /** @use SdkModel<PaginationShape> */
     use SdkModel;
 
-    #[Api]
-    public int $current_page;
+    #[Required('current_page')]
+    public int $currentPage;
 
-    #[Api]
-    public bool $has_next;
+    #[Required('has_next')]
+    public bool $hasNext;
 
-    #[Api]
-    public int $total_pages;
+    #[Required('total_pages')]
+    public int $totalPages;
 
     /**
      * `new Pagination()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * Pagination::with(current_page: ..., has_next: ..., total_pages: ...)
+     * Pagination::with(currentPage: ..., hasNext: ..., totalPages: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
@@ -52,40 +52,40 @@ final class Pagination implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      */
     public static function with(
-        int $current_page,
-        bool $has_next,
-        int $total_pages
+        int $currentPage,
+        bool $hasNext,
+        int $totalPages
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['current_page'] = $current_page;
-        $obj['has_next'] = $has_next;
-        $obj['total_pages'] = $total_pages;
+        $self['currentPage'] = $currentPage;
+        $self['hasNext'] = $hasNext;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     public function withCurrentPage(int $currentPage): self
     {
-        $obj = clone $this;
-        $obj['current_page'] = $currentPage;
+        $self = clone $this;
+        $self['currentPage'] = $currentPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withHasNext(bool $hasNext): self
     {
-        $obj = clone $this;
-        $obj['has_next'] = $hasNext;
+        $self = clone $this;
+        $self['hasNext'] = $hasNext;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj['total_pages'] = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 }
