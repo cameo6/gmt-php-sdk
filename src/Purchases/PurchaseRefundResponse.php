@@ -71,12 +71,12 @@ final class PurchaseRefundResponse implements BaseModel
         Purchase|array $purchase,
         Refund|array $refund
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['purchase'] = $purchase;
-        $obj['refund'] = $refund;
+        $self['purchase'] = $purchase;
+        $self['refund'] = $refund;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -93,10 +93,10 @@ final class PurchaseRefundResponse implements BaseModel
      */
     public function withPurchase(Purchase|array $purchase): self
     {
-        $obj = clone $this;
-        $obj['purchase'] = $purchase;
+        $self = clone $this;
+        $self['purchase'] = $purchase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,9 +104,9 @@ final class PurchaseRefundResponse implements BaseModel
      */
     public function withRefund(Refund|array $refund): self
     {
-        $obj = clone $this;
-        $obj['refund'] = $refund;
+        $self = clone $this;
+        $self['refund'] = $refund;
 
-        return $obj;
+        return $self;
     }
 }

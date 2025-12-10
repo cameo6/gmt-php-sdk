@@ -88,15 +88,15 @@ final class ServiceHealthCheckResponse implements BaseModel
         int $uptimeSeconds,
         Checks|array|null $checks = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['now'] = $now;
-        $obj['status'] = $status;
-        $obj['uptimeSeconds'] = $uptimeSeconds;
+        $self['now'] = $now;
+        $self['status'] = $status;
+        $self['uptimeSeconds'] = $uptimeSeconds;
 
-        null !== $checks && $obj['checks'] = $checks;
+        null !== $checks && $self['checks'] = $checks;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -104,10 +104,10 @@ final class ServiceHealthCheckResponse implements BaseModel
      */
     public function withNow(string $now): self
     {
-        $obj = clone $this;
-        $obj['now'] = $now;
+        $self = clone $this;
+        $self['now'] = $now;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,10 +117,10 @@ final class ServiceHealthCheckResponse implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -128,10 +128,10 @@ final class ServiceHealthCheckResponse implements BaseModel
      */
     public function withUptimeSeconds(int $uptimeSeconds): self
     {
-        $obj = clone $this;
-        $obj['uptimeSeconds'] = $uptimeSeconds;
+        $self = clone $this;
+        $self['uptimeSeconds'] = $uptimeSeconds;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -141,9 +141,9 @@ final class ServiceHealthCheckResponse implements BaseModel
      */
     public function withChecks(Checks|array $checks): self
     {
-        $obj = clone $this;
-        $obj['checks'] = $checks;
+        $self = clone $this;
+        $self['checks'] = $checks;
 
-        return $obj;
+        return $self;
     }
 }

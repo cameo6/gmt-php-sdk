@@ -60,12 +60,12 @@ final class Price implements BaseModel
      */
     public static function with(string $amount, string $currencyCode): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['currencyCode'] = $currencyCode;
+        $self['amount'] = $amount;
+        $self['currencyCode'] = $currencyCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -73,10 +73,10 @@ final class Price implements BaseModel
      */
     public function withAmount(string $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,9 +84,9 @@ final class Price implements BaseModel
      */
     public function withCurrencyCode(string $currencyCode): self
     {
-        $obj = clone $this;
-        $obj['currencyCode'] = $currencyCode;
+        $self = clone $this;
+        $self['currencyCode'] = $currencyCode;
 
-        return $obj;
+        return $self;
     }
 }

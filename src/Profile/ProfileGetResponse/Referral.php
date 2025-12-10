@@ -101,15 +101,15 @@ final class Referral implements BaseModel
         Profit|array $profit,
         int $referralsCount,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['balance'] = $balance;
-        $obj['level'] = $level;
-        $obj['percent'] = $percent;
-        $obj['profit'] = $profit;
-        $obj['referralsCount'] = $referralsCount;
+        $self['balance'] = $balance;
+        $self['level'] = $level;
+        $self['percent'] = $percent;
+        $self['profit'] = $profit;
+        $self['referralsCount'] = $referralsCount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -122,10 +122,10 @@ final class Referral implements BaseModel
     public function withBalance(
         Balance|array $balance
     ): self {
-        $obj = clone $this;
-        $obj['balance'] = $balance;
+        $self = clone $this;
+        $self['balance'] = $balance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -135,10 +135,10 @@ final class Referral implements BaseModel
      */
     public function withLevel(Level|string $level): self
     {
-        $obj = clone $this;
-        $obj['level'] = $level;
+        $self = clone $this;
+        $self['level'] = $level;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -146,10 +146,10 @@ final class Referral implements BaseModel
      */
     public function withPercent(float $percent): self
     {
-        $obj = clone $this;
-        $obj['percent'] = $percent;
+        $self = clone $this;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -159,10 +159,10 @@ final class Referral implements BaseModel
      */
     public function withProfit(Profit|array $profit): self
     {
-        $obj = clone $this;
-        $obj['profit'] = $profit;
+        $self = clone $this;
+        $self['profit'] = $profit;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -170,9 +170,9 @@ final class Referral implements BaseModel
      */
     public function withReferralsCount(int $referralsCount): self
     {
-        $obj = clone $this;
-        $obj['referralsCount'] = $referralsCount;
+        $self = clone $this;
+        $self['referralsCount'] = $referralsCount;
 
-        return $obj;
+        return $self;
     }
 }

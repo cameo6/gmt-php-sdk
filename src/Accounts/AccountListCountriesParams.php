@@ -87,15 +87,15 @@ final class AccountListCountriesParams implements BaseModel
         Sort|string $sort = 'name_asc',
         ?string $countryCodes = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['page'] = $page;
-        $obj['pageSize'] = $pageSize;
-        $obj['sort'] = $sort;
+        $self['page'] = $page;
+        $self['pageSize'] = $pageSize;
+        $self['sort'] = $sort;
 
-        null !== $countryCodes && $obj['countryCodes'] = $countryCodes;
+        null !== $countryCodes && $self['countryCodes'] = $countryCodes;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class AccountListCountriesParams implements BaseModel
      */
     public function withPage(int $page): self
     {
-        $obj = clone $this;
-        $obj['page'] = $page;
+        $self = clone $this;
+        $self['page'] = $page;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class AccountListCountriesParams implements BaseModel
      */
     public function withPageSize(int $pageSize): self
     {
-        $obj = clone $this;
-        $obj['pageSize'] = $pageSize;
+        $self = clone $this;
+        $self['pageSize'] = $pageSize;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -127,10 +127,10 @@ final class AccountListCountriesParams implements BaseModel
      */
     public function withSort(Sort|string $sort): self
     {
-        $obj = clone $this;
-        $obj['sort'] = $sort;
+        $self = clone $this;
+        $self['sort'] = $sort;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -138,9 +138,9 @@ final class AccountListCountriesParams implements BaseModel
      */
     public function withCountryCodes(string $countryCodes): self
     {
-        $obj = clone $this;
-        $obj['countryCodes'] = $countryCodes;
+        $self = clone $this;
+        $self['countryCodes'] = $countryCodes;
 
-        return $obj;
+        return $self;
     }
 }

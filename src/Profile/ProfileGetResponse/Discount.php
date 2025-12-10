@@ -59,12 +59,12 @@ final class Discount implements BaseModel
      */
     public static function with(Level|string $level, float $percent): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['level'] = $level;
-        $obj['percent'] = $percent;
+        $self['level'] = $level;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -74,10 +74,10 @@ final class Discount implements BaseModel
      */
     public function withLevel(Level|string $level): self
     {
-        $obj = clone $this;
-        $obj['level'] = $level;
+        $self = clone $this;
+        $self['level'] = $level;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -85,9 +85,9 @@ final class Discount implements BaseModel
      */
     public function withPercent(float $percent): self
     {
-        $obj = clone $this;
-        $obj['percent'] = $percent;
+        $self = clone $this;
+        $self['percent'] = $percent;
 
-        return $obj;
+        return $self;
     }
 }

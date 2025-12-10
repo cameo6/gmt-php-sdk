@@ -81,12 +81,12 @@ final class WebhookTestParams implements BaseModel
         string $url,
         Type|string $type = 'success'
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['type'] = $type;
-        $obj['url'] = $url;
+        $self['type'] = $type;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -96,10 +96,10 @@ final class WebhookTestParams implements BaseModel
      */
     public function withType(Type|string $type): self
     {
-        $obj = clone $this;
-        $obj['type'] = $type;
+        $self = clone $this;
+        $self['type'] = $type;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -107,9 +107,9 @@ final class WebhookTestParams implements BaseModel
      */
     public function withURL(string $url): self
     {
-        $obj = clone $this;
-        $obj['url'] = $url;
+        $self = clone $this;
+        $self['url'] = $url;
 
-        return $obj;
+        return $self;
     }
 }

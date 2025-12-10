@@ -48,11 +48,11 @@ final class Statistics implements BaseModel
      */
     public static function with(int $totalPurchases): self
     {
-        $obj = new self;
+        $self = new self;
 
-        $obj['totalPurchases'] = $totalPurchases;
+        $self['totalPurchases'] = $totalPurchases;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -60,9 +60,9 @@ final class Statistics implements BaseModel
      */
     public function withTotalPurchases(int $totalPurchases): self
     {
-        $obj = clone $this;
-        $obj['totalPurchases'] = $totalPurchases;
+        $self = clone $this;
+        $self['totalPurchases'] = $totalPurchases;
 
-        return $obj;
+        return $self;
     }
 }
