@@ -70,13 +70,13 @@ final class ServiceGetServerTimeResponse implements BaseModel
         string $iso,
         string $timezone
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['epochMs'] = $epochMs;
-        $obj['iso'] = $iso;
-        $obj['timezone'] = $timezone;
+        $self['epochMs'] = $epochMs;
+        $self['iso'] = $iso;
+        $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class ServiceGetServerTimeResponse implements BaseModel
      */
     public function withEpochMs(int $epochMs): self
     {
-        $obj = clone $this;
-        $obj['epochMs'] = $epochMs;
+        $self = clone $this;
+        $self['epochMs'] = $epochMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class ServiceGetServerTimeResponse implements BaseModel
      */
     public function withISO(string $iso): self
     {
-        $obj = clone $this;
-        $obj['iso'] = $iso;
+        $self = clone $this;
+        $self['iso'] = $iso;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class ServiceGetServerTimeResponse implements BaseModel
      */
     public function withTimezone(string $timezone): self
     {
-        $obj = clone $this;
-        $obj['timezone'] = $timezone;
+        $self = clone $this;
+        $self['timezone'] = $timezone;
 
-        return $obj;
+        return $self;
     }
 }

@@ -99,15 +99,15 @@ final class CodeRequest implements BaseModel
         ?int $retryAfter,
         Status|string $status,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['attempt'] = $attempt;
-        $obj['maxAttempts'] = $maxAttempts;
-        $obj['nextAttemptAt'] = $nextAttemptAt;
-        $obj['retryAfter'] = $retryAfter;
-        $obj['status'] = $status;
+        $self['attempt'] = $attempt;
+        $self['maxAttempts'] = $maxAttempts;
+        $self['nextAttemptAt'] = $nextAttemptAt;
+        $self['retryAfter'] = $retryAfter;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -115,10 +115,10 @@ final class CodeRequest implements BaseModel
      */
     public function withAttempt(int $attempt): self
     {
-        $obj = clone $this;
-        $obj['attempt'] = $attempt;
+        $self = clone $this;
+        $self['attempt'] = $attempt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -126,10 +126,10 @@ final class CodeRequest implements BaseModel
      */
     public function withMaxAttempts(int $maxAttempts): self
     {
-        $obj = clone $this;
-        $obj['maxAttempts'] = $maxAttempts;
+        $self = clone $this;
+        $self['maxAttempts'] = $maxAttempts;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -137,10 +137,10 @@ final class CodeRequest implements BaseModel
      */
     public function withNextAttemptAt(?string $nextAttemptAt): self
     {
-        $obj = clone $this;
-        $obj['nextAttemptAt'] = $nextAttemptAt;
+        $self = clone $this;
+        $self['nextAttemptAt'] = $nextAttemptAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -148,10 +148,10 @@ final class CodeRequest implements BaseModel
      */
     public function withRetryAfter(?int $retryAfter): self
     {
-        $obj = clone $this;
-        $obj['retryAfter'] = $retryAfter;
+        $self = clone $this;
+        $self['retryAfter'] = $retryAfter;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,9 +161,9 @@ final class CodeRequest implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 }

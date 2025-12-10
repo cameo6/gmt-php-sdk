@@ -78,12 +78,12 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
         CodeRequest|array $codeRequest,
         Purchase|array $purchase
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['codeRequest'] = $codeRequest;
-        $obj['purchase'] = $purchase;
+        $self['codeRequest'] = $codeRequest;
+        $self['purchase'] = $purchase;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -97,10 +97,10 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
      */
     public function withCodeRequest(CodeRequest|array $codeRequest): self
     {
-        $obj = clone $this;
-        $obj['codeRequest'] = $codeRequest;
+        $self = clone $this;
+        $self['codeRequest'] = $codeRequest;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -117,9 +117,9 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
      */
     public function withPurchase(Purchase|array $purchase): self
     {
-        $obj = clone $this;
-        $obj['purchase'] = $purchase;
+        $self = clone $this;
+        $self['purchase'] = $purchase;
 
-        return $obj;
+        return $self;
     }
 }

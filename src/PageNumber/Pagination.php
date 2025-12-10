@@ -56,36 +56,36 @@ final class Pagination implements BaseModel
         bool $hasNext,
         int $totalPages
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['currentPage'] = $currentPage;
-        $obj['hasNext'] = $hasNext;
-        $obj['totalPages'] = $totalPages;
+        $self['currentPage'] = $currentPage;
+        $self['hasNext'] = $hasNext;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 
     public function withCurrentPage(int $currentPage): self
     {
-        $obj = clone $this;
-        $obj['currentPage'] = $currentPage;
+        $self = clone $this;
+        $self['currentPage'] = $currentPage;
 
-        return $obj;
+        return $self;
     }
 
     public function withHasNext(bool $hasNext): self
     {
-        $obj = clone $this;
-        $obj['hasNext'] = $hasNext;
+        $self = clone $this;
+        $self['hasNext'] = $hasNext;
 
-        return $obj;
+        return $self;
     }
 
     public function withTotalPages(int $totalPages): self
     {
-        $obj = clone $this;
-        $obj['totalPages'] = $totalPages;
+        $self = clone $this;
+        $self['totalPages'] = $totalPages;
 
-        return $obj;
+        return $self;
     }
 }

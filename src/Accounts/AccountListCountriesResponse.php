@@ -93,15 +93,15 @@ final class AccountListCountriesResponse implements BaseModel
         Price|array $price,
         array $tags,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['available'] = $available;
-        $obj['countryCode'] = $countryCode;
-        $obj['displayName'] = $displayName;
-        $obj['price'] = $price;
-        $obj['tags'] = $tags;
+        $self['available'] = $available;
+        $self['countryCode'] = $countryCode;
+        $self['displayName'] = $displayName;
+        $self['price'] = $price;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -109,10 +109,10 @@ final class AccountListCountriesResponse implements BaseModel
      */
     public function withAvailable(bool $available): self
     {
-        $obj = clone $this;
-        $obj['available'] = $available;
+        $self = clone $this;
+        $self['available'] = $available;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -120,10 +120,10 @@ final class AccountListCountriesResponse implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -131,10 +131,10 @@ final class AccountListCountriesResponse implements BaseModel
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -142,10 +142,10 @@ final class AccountListCountriesResponse implements BaseModel
      */
     public function withPrice(Price|array $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -155,9 +155,9 @@ final class AccountListCountriesResponse implements BaseModel
      */
     public function withTags(array $tags): self
     {
-        $obj = clone $this;
-        $obj['tags'] = $tags;
+        $self = clone $this;
+        $self['tags'] = $tags;
 
-        return $obj;
+        return $self;
     }
 }

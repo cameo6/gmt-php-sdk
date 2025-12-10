@@ -86,16 +86,16 @@ final class WebhookTestResponse implements BaseModel
         ?string $responseBody = null,
         ?int $responseTimeMs = null,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['success'] = $success;
+        $self['success'] = $success;
 
-        null !== $error && $obj['error'] = $error;
-        null !== $httpCode && $obj['httpCode'] = $httpCode;
-        null !== $responseBody && $obj['responseBody'] = $responseBody;
-        null !== $responseTimeMs && $obj['responseTimeMs'] = $responseTimeMs;
+        null !== $error && $self['error'] = $error;
+        null !== $httpCode && $self['httpCode'] = $httpCode;
+        null !== $responseBody && $self['responseBody'] = $responseBody;
+        null !== $responseTimeMs && $self['responseTimeMs'] = $responseTimeMs;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -103,10 +103,10 @@ final class WebhookTestResponse implements BaseModel
      */
     public function withSuccess(bool $success): self
     {
-        $obj = clone $this;
-        $obj['success'] = $success;
+        $self = clone $this;
+        $self['success'] = $success;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -114,10 +114,10 @@ final class WebhookTestResponse implements BaseModel
      */
     public function withError(string $error): self
     {
-        $obj = clone $this;
-        $obj['error'] = $error;
+        $self = clone $this;
+        $self['error'] = $error;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -125,10 +125,10 @@ final class WebhookTestResponse implements BaseModel
      */
     public function withHTTPCode(int $httpCode): self
     {
-        $obj = clone $this;
-        $obj['httpCode'] = $httpCode;
+        $self = clone $this;
+        $self['httpCode'] = $httpCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -136,10 +136,10 @@ final class WebhookTestResponse implements BaseModel
      */
     public function withResponseBody(string $responseBody): self
     {
-        $obj = clone $this;
-        $obj['responseBody'] = $responseBody;
+        $self = clone $this;
+        $self['responseBody'] = $responseBody;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -147,9 +147,9 @@ final class WebhookTestResponse implements BaseModel
      */
     public function withResponseTimeMs(int $responseTimeMs): self
     {
-        $obj = clone $this;
-        $obj['responseTimeMs'] = $responseTimeMs;
+        $self = clone $this;
+        $self['responseTimeMs'] = $responseTimeMs;
 
-        return $obj;
+        return $self;
     }
 }

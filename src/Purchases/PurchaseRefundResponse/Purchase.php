@@ -152,18 +152,18 @@ final class Purchase implements BaseModel
         Status|string $status,
         Verification|array|null $verification,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['id'] = $id;
-        $obj['countryCode'] = $countryCode;
-        $obj['createdAt'] = $createdAt;
-        $obj['displayName'] = $displayName;
-        $obj['phoneNumber'] = $phoneNumber;
-        $obj['price'] = $price;
-        $obj['status'] = $status;
-        $obj['verification'] = $verification;
+        $self['id'] = $id;
+        $self['countryCode'] = $countryCode;
+        $self['createdAt'] = $createdAt;
+        $self['displayName'] = $displayName;
+        $self['phoneNumber'] = $phoneNumber;
+        $self['price'] = $price;
+        $self['status'] = $status;
+        $self['verification'] = $verification;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -171,10 +171,10 @@ final class Purchase implements BaseModel
      */
     public function withID(int $id): self
     {
-        $obj = clone $this;
-        $obj['id'] = $id;
+        $self = clone $this;
+        $self['id'] = $id;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -182,10 +182,10 @@ final class Purchase implements BaseModel
      */
     public function withCountryCode(string $countryCode): self
     {
-        $obj = clone $this;
-        $obj['countryCode'] = $countryCode;
+        $self = clone $this;
+        $self['countryCode'] = $countryCode;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -193,10 +193,10 @@ final class Purchase implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -204,10 +204,10 @@ final class Purchase implements BaseModel
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
-        $obj = clone $this;
-        $obj['displayName'] = $displayName;
+        $self = clone $this;
+        $self['displayName'] = $displayName;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -217,10 +217,10 @@ final class Purchase implements BaseModel
      */
     public function withPhoneNumber(string $phoneNumber): self
     {
-        $obj = clone $this;
-        $obj['phoneNumber'] = $phoneNumber;
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -234,10 +234,10 @@ final class Purchase implements BaseModel
      */
     public function withPrice(Price|array $price): self
     {
-        $obj = clone $this;
-        $obj['price'] = $price;
+        $self = clone $this;
+        $self['price'] = $price;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -255,10 +255,10 @@ final class Purchase implements BaseModel
      */
     public function withStatus(Status|string $status): self
     {
-        $obj = clone $this;
-        $obj['status'] = $status;
+        $self = clone $this;
+        $self['status'] = $status;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -275,9 +275,9 @@ final class Purchase implements BaseModel
     public function withVerification(
         Verification|array|null $verification
     ): self {
-        $obj = clone $this;
-        $obj['verification'] = $verification;
+        $self = clone $this;
+        $self['verification'] = $verification;
 
-        return $obj;
+        return $self;
     }
 }

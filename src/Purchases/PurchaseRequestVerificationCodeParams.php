@@ -54,11 +54,11 @@ final class PurchaseRequestVerificationCodeParams implements BaseModel
      */
     public static function with(?string $callbackURL = null): self
     {
-        $obj = new self;
+        $self = new self;
 
-        null !== $callbackURL && $obj['callbackURL'] = $callbackURL;
+        null !== $callbackURL && $self['callbackURL'] = $callbackURL;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -68,9 +68,9 @@ final class PurchaseRequestVerificationCodeParams implements BaseModel
      */
     public function withCallbackURL(string $callbackURL): self
     {
-        $obj = clone $this;
-        $obj['callbackURL'] = $callbackURL;
+        $self = clone $this;
+        $self['callbackURL'] = $callbackURL;
 
-        return $obj;
+        return $self;
     }
 }

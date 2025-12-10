@@ -121,17 +121,17 @@ final class ProfileGetResponse implements BaseModel
         string $telegramID,
         ?string $telegramUsername,
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['balance'] = $balance;
-        $obj['createdAt'] = $createdAt;
-        $obj['discount'] = $discount;
-        $obj['referral'] = $referral;
-        $obj['statistics'] = $statistics;
-        $obj['telegramID'] = $telegramID;
-        $obj['telegramUsername'] = $telegramUsername;
+        $self['balance'] = $balance;
+        $self['createdAt'] = $createdAt;
+        $self['discount'] = $discount;
+        $self['referral'] = $referral;
+        $self['statistics'] = $statistics;
+        $self['telegramID'] = $telegramID;
+        $self['telegramUsername'] = $telegramUsername;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -139,10 +139,10 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withBalance(Balance|array $balance): self
     {
-        $obj = clone $this;
-        $obj['balance'] = $balance;
+        $self = clone $this;
+        $self['balance'] = $balance;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -150,10 +150,10 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withCreatedAt(string $createdAt): self
     {
-        $obj = clone $this;
-        $obj['createdAt'] = $createdAt;
+        $self = clone $this;
+        $self['createdAt'] = $createdAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -161,10 +161,10 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withDiscount(Discount|array $discount): self
     {
-        $obj = clone $this;
-        $obj['discount'] = $discount;
+        $self = clone $this;
+        $self['discount'] = $discount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -178,10 +178,10 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withReferral(Referral|array $referral): self
     {
-        $obj = clone $this;
-        $obj['referral'] = $referral;
+        $self = clone $this;
+        $self['referral'] = $referral;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -189,10 +189,10 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withStatistics(Statistics|array $statistics): self
     {
-        $obj = clone $this;
-        $obj['statistics'] = $statistics;
+        $self = clone $this;
+        $self['statistics'] = $statistics;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -200,10 +200,10 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withTelegramID(string $telegramID): self
     {
-        $obj = clone $this;
-        $obj['telegramID'] = $telegramID;
+        $self = clone $this;
+        $self['telegramID'] = $telegramID;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -211,9 +211,9 @@ final class ProfileGetResponse implements BaseModel
      */
     public function withTelegramUsername(?string $telegramUsername): self
     {
-        $obj = clone $this;
-        $obj['telegramUsername'] = $telegramUsername;
+        $self = clone $this;
+        $self['telegramUsername'] = $telegramUsername;
 
-        return $obj;
+        return $self;
     }
 }

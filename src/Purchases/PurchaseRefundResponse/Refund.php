@@ -68,13 +68,13 @@ final class Refund implements BaseModel
         string $reason,
         string $refundedAt
     ): self {
-        $obj = new self;
+        $self = new self;
 
-        $obj['amount'] = $amount;
-        $obj['reason'] = $reason;
-        $obj['refundedAt'] = $refundedAt;
+        $self['amount'] = $amount;
+        $self['reason'] = $reason;
+        $self['refundedAt'] = $refundedAt;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -84,10 +84,10 @@ final class Refund implements BaseModel
      */
     public function withAmount(Amount|array $amount): self
     {
-        $obj = clone $this;
-        $obj['amount'] = $amount;
+        $self = clone $this;
+        $self['amount'] = $amount;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -95,10 +95,10 @@ final class Refund implements BaseModel
      */
     public function withReason(string $reason): self
     {
-        $obj = clone $this;
-        $obj['reason'] = $reason;
+        $self = clone $this;
+        $self['reason'] = $reason;
 
-        return $obj;
+        return $self;
     }
 
     /**
@@ -106,9 +106,9 @@ final class Refund implements BaseModel
      */
     public function withRefundedAt(string $refundedAt): self
     {
-        $obj = clone $this;
-        $obj['refundedAt'] = $refundedAt;
+        $self = clone $this;
+        $self['refundedAt'] = $refundedAt;
 
-        return $obj;
+        return $self;
     }
 }
