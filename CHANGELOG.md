@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.8.0 (2025-12-10)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.7.0...v0.8.0)
+
+### ⚠ BREAKING CHANGES
+
+* use camel casing for all class properties
+
+### Features
+
+* add `BaseResponse` class for accessing raw responses ([8f42c5c](https://github.com/cameo6/gmt-php-sdk/commit/8f42c5ca17fe112d2dddf31dbd8c0896eea7e983))
+* split out services into normal & raw types ([058ff2f](https://github.com/cameo6/gmt-php-sdk/commit/058ff2fbad7d7f6295495a191660eb6262232617))
+* use camel casing for all class properties ([c654af6](https://github.com/cameo6/gmt-php-sdk/commit/c654af61ced0c903c3410e5f31fbd5fe2e0376a4))
+
+
+### Chores
+
+* ensure constant values are marked as optional in array types ([0fad587](https://github.com/cameo6/gmt-php-sdk/commit/0fad58707f63d23f369569a9e6cae4fd27fbfeed))
+* **internal:** improve pagination tests ([e1ef9ea](https://github.com/cameo6/gmt-php-sdk/commit/e1ef9ea238cdc324dc796df87001a2a730e6f021))
+* switch from `#[Api(optional: true|false)]` to `#[Required]|#[Optional]` for annotations ([22c4c10](https://github.com/cameo6/gmt-php-sdk/commit/22c4c10212a8b0ada0f0b346863aec29203f35e1))
+* use `$self = clone $this;` instead of `$obj = clone $this;` ([42d78f1](https://github.com/cameo6/gmt-php-sdk/commit/42d78f1a6f00ee1c897fb174a7a72ec2fecdbf78))
+
 ## 0.7.0 (2025-12-08)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/cameo6/gmt-php-sdk/compare/v0.6.0...v0.7.0)
