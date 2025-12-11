@@ -10,6 +10,7 @@ use Gmt\Accounts\AccountListParams\Sort;
 use Gmt\Accounts\AccountListResponse;
 use Gmt\Client;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Core\Util;
 use Gmt\PageNumber;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\AccountsContract;
@@ -69,14 +70,14 @@ final class AccountsService implements AccountsContract
         ?string $countryCodes = null,
         ?RequestOptions $requestOptions = null,
     ): PageNumber {
-        $params = [
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'sort' => $sort,
-            'countryCodes' => $countryCodes,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+                'countryCodes' => $countryCodes,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -105,14 +106,14 @@ final class AccountsService implements AccountsContract
         ?string $countryCodes = null,
         ?RequestOptions $requestOptions = null,
     ): PageNumber {
-        $params = [
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'sort' => $sort,
-            'countryCodes' => $countryCodes,
-        ];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            [
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+                'countryCodes' => $countryCodes,
+            ],
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->listCountries(params: $params, requestOptions: $requestOptions);

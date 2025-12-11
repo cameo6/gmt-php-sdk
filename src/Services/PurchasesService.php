@@ -6,6 +6,7 @@ namespace Gmt\Services;
 
 use Gmt\Client;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Core\Util;
 use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams\Status;
@@ -54,7 +55,7 @@ final class PurchasesService implements PurchasesContract
         string $countryCode,
         ?RequestOptions $requestOptions = null
     ): PurchaseNewResponse {
-        $params = ['countryCode' => $countryCode];
+        $params = Util::removeNulls(['countryCode' => $countryCode]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
@@ -119,9 +120,9 @@ final class PurchasesService implements PurchasesContract
         string|Status|null $status = null,
         ?RequestOptions $requestOptions = null,
     ): PageNumber {
-        $params = ['page' => $page, 'pageSize' => $pageSize, 'status' => $status];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(
+            ['page' => $page, 'pageSize' => $pageSize, 'status' => $status]
+        );
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->list(params: $params, requestOptions: $requestOptions);
@@ -179,9 +180,7 @@ final class PurchasesService implements PurchasesContract
         ?string $callbackURL = null,
         ?RequestOptions $requestOptions = null,
     ): PurchaseRequestVerificationCodeResponse {
-        $params = ['callbackURL' => $callbackURL];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['callbackURL' => $callbackURL]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->requestVerificationCode($purchaseID, params: $params, requestOptions: $requestOptions);

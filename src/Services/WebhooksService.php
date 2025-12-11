@@ -6,6 +6,7 @@ namespace Gmt\Services;
 
 use Gmt\Client;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Core\Util;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\WebhooksContract;
 use Gmt\Webhooks\WebhookTestParams\Type;
@@ -53,9 +54,7 @@ final class WebhooksService implements WebhooksContract
         string|Type $type = 'success',
         ?RequestOptions $requestOptions = null,
     ): WebhookTestResponse {
-        $params = ['type' => $type, 'url' => $url];
-        // @phpstan-ignore-next-line function.impossibleType
-        $params = array_filter($params, callback: static fn ($v) => !is_null($v));
+        $params = Util::removeNulls(['type' => $type, 'url' => $url]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->test(params: $params, requestOptions: $requestOptions);
