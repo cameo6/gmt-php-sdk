@@ -13,13 +13,17 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type DiscountShape from \Gmt\Accounts\AccountGetResponse\Discount
+ * @phpstan-import-type DisplayNameShape from \Gmt\Accounts\AccountGetResponse\DisplayName
+ * @phpstan-import-type PriceShape from \Gmt\Accounts\AccountGetResponse\Price
+ *
  * @phpstan-type AccountGetResponseShape = array{
  *   available: bool,
  *   countryCode: string,
- *   discount: Discount,
- *   displayName: DisplayName,
- *   price: Price,
- *   tags: list<value-of<Tag>>,
+ *   discount: Discount|DiscountShape,
+ *   displayName: DisplayName|DisplayNameShape,
+ *   price: Price|PriceShape,
+ *   tags: list<Tag|value-of<Tag>>,
  * }
  */
 final class AccountGetResponse implements BaseModel
@@ -93,9 +97,9 @@ final class AccountGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Discount|array{basePrice: string, percent: float} $discount
-     * @param DisplayName|array{en: string, ru: string} $displayName
-     * @param Price|array{amount: string, currencyCode: string} $price
+     * @param DiscountShape $discount
+     * @param DisplayNameShape $displayName
+     * @param PriceShape $price
      * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
@@ -141,7 +145,7 @@ final class AccountGetResponse implements BaseModel
     }
 
     /**
-     * @param Discount|array{basePrice: string, percent: float} $discount
+     * @param DiscountShape $discount
      */
     public function withDiscount(Discount|array $discount): self
     {
@@ -152,7 +156,7 @@ final class AccountGetResponse implements BaseModel
     }
 
     /**
-     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param DisplayNameShape $displayName
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
@@ -163,7 +167,7 @@ final class AccountGetResponse implements BaseModel
     }
 
     /**
-     * @param Price|array{amount: string, currencyCode: string} $price
+     * @param PriceShape $price
      */
     public function withPrice(Price|array $price): self
     {

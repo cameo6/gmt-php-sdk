@@ -10,7 +10,9 @@ use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Discount\Level;
 
 /**
- * @phpstan-type DiscountShape = array{level: value-of<Level>, percent: float}
+ * @phpstan-type DiscountShape = array{
+ *   level: Level|value-of<Level>, percent: float
+ * }
  */
 final class Discount implements BaseModel
 {

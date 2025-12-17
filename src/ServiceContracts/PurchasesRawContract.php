@@ -22,7 +22,7 @@ interface PurchasesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PurchaseCreateParams $params
+     * @param array<string,mixed>|PurchaseCreateParams $params
      *
      * @return BaseResponse<PurchaseNewResponse>
      *
@@ -50,7 +50,7 @@ interface PurchasesRawContract
     /**
      * @api
      *
-     * @param array<mixed>|PurchaseListParams $params
+     * @param array<string,mixed>|PurchaseListParams $params
      *
      * @return BaseResponse<PageNumber<PurchaseListResponse>>
      *
@@ -79,7 +79,7 @@ interface PurchasesRawContract
      * @api
      *
      * @param int $purchaseID unique purchase identifier
-     * @param array<mixed>|PurchaseRequestVerificationCodeParams $params
+     * @param array<string,mixed>|PurchaseRequestVerificationCodeParams $params
      *
      * @return BaseResponse<PurchaseRequestVerificationCodeResponse>
      *

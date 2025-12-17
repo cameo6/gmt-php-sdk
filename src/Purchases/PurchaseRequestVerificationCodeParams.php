@@ -25,7 +25,7 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\PurchasesService::requestVerificationCode()
  *
  * @phpstan-type PurchaseRequestVerificationCodeParamsShape = array{
- *   callbackURL?: string
+ *   callbackURL?: string|null
  * }
  */
 final class PurchaseRequestVerificationCodeParams implements BaseModel

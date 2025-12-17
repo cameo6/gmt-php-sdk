@@ -33,7 +33,7 @@ interface AccountsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AccountListParams $params
+     * @param array<string,mixed>|AccountListParams $params
      *
      * @return BaseResponse<PageNumber<AccountListResponse>>
      *
@@ -47,7 +47,7 @@ interface AccountsRawContract
     /**
      * @api
      *
-     * @param array<mixed>|AccountListCountriesParams $params
+     * @param array<string,mixed>|AccountListCountriesParams $params
      *
      * @return BaseResponse<PageNumber<AccountListCountriesResponse>>
      *

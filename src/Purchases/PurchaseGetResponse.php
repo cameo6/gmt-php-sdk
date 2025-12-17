@@ -13,15 +13,19 @@ use Gmt\Purchases\PurchaseGetResponse\Status;
 use Gmt\Purchases\PurchaseGetResponse\Verification;
 
 /**
+ * @phpstan-import-type DisplayNameShape from \Gmt\Purchases\PurchaseGetResponse\DisplayName
+ * @phpstan-import-type PriceShape from \Gmt\Purchases\PurchaseGetResponse\Price
+ * @phpstan-import-type VerificationShape from \Gmt\Purchases\PurchaseGetResponse\Verification
+ *
  * @phpstan-type PurchaseGetResponseShape = array{
  *   id: int,
  *   countryCode: string,
  *   createdAt: string,
- *   displayName: DisplayName,
+ *   displayName: DisplayName|DisplayNameShape,
  *   phoneNumber: string,
- *   price: Price,
- *   status: value-of<Status>,
- *   verification: Verification|null,
+ *   price: Price|PriceShape,
+ *   status: Status|value-of<Status>,
+ *   verification: null|Verification|VerificationShape,
  * }
  */
 final class PurchaseGetResponse implements BaseModel
@@ -135,12 +139,10 @@ final class PurchaseGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayName|array{en: string, ru: string} $displayName
-     * @param Price|array{amount: string, currencyCode: string} $price
+     * @param DisplayNameShape $displayName
+     * @param PriceShape $price
      * @param Status|value-of<Status> $status
-     * @param Verification|array{
-     *   code: string, password: string, receivedAt: string
-     * }|null $verification
+     * @param VerificationShape|null $verification
      */
     public static function with(
         int $id,
@@ -200,7 +202,7 @@ final class PurchaseGetResponse implements BaseModel
     }
 
     /**
-     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param DisplayNameShape $displayName
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
@@ -230,7 +232,7 @@ final class PurchaseGetResponse implements BaseModel
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
      *
-     * @param Price|array{amount: string, currencyCode: string} $price
+     * @param PriceShape $price
      */
     public function withPrice(Price|array $price): self
     {
@@ -268,9 +270,7 @@ final class PurchaseGetResponse implements BaseModel
      *
      * **Security.** Verification data is only visible to the purchase owner.
      *
-     * @param Verification|array{
-     *   code: string, password: string, receivedAt: string
-     * }|null $verification
+     * @param VerificationShape|null $verification
      */
     public function withVerification(
         Verification|array|null $verification

@@ -12,11 +12,14 @@ use Gmt\Profile\ProfileGetResponse\Referral\Level;
 use Gmt\Profile\ProfileGetResponse\Referral\Profit;
 
 /**
+ * @phpstan-import-type BalanceShape from \Gmt\Profile\ProfileGetResponse\Referral\Balance
+ * @phpstan-import-type ProfitShape from \Gmt\Profile\ProfileGetResponse\Referral\Profit
+ *
  * @phpstan-type ReferralShape = array{
- *   balance: \Gmt\Profile\ProfileGetResponse\Referral\Balance,
- *   level: value-of<Level>,
+ *   balance: \Gmt\Profile\ProfileGetResponse\Referral\Balance|BalanceShape,
+ *   level: Level|value-of<Level>,
  *   percent: float,
- *   profit: Profit,
+ *   profit: Profit|ProfitShape,
  *   referralsCount: int,
  * }
  */
@@ -88,11 +91,9 @@ final class Referral implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Balance|array{
-     *   amount: string, currencyCode: string
-     * } $balance
+     * @param BalanceShape $balance
      * @param Level|value-of<Level> $level
-     * @param Profit|array{amount: string, currencyCode: string} $profit
+     * @param ProfitShape $profit
      */
     public static function with(
         Balance|array $balance,
@@ -115,9 +116,7 @@ final class Referral implements BaseModel
     /**
      * Current referral balance available for withdrawal.
      *
-     * @param Balance|array{
-     *   amount: string, currencyCode: string
-     * } $balance
+     * @param BalanceShape $balance
      */
     public function withBalance(
         Balance|array $balance
@@ -155,7 +154,7 @@ final class Referral implements BaseModel
     /**
      * Total lifetime earnings from referral commissions.
      *
-     * @param Profit|array{amount: string, currencyCode: string} $profit
+     * @param ProfitShape $profit
      */
     public function withProfit(Profit|array $profit): self
     {

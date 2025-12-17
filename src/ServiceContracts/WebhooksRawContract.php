@@ -15,7 +15,7 @@ interface WebhooksRawContract
     /**
      * @api
      *
-     * @param array<mixed>|WebhookTestParams $params
+     * @param array<string,mixed>|WebhookTestParams $params
      *
      * @return BaseResponse<WebhookTestResponse>
      *

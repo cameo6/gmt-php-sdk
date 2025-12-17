@@ -9,20 +9,23 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Balance;
 use Gmt\Profile\ProfileGetResponse\Discount;
-use Gmt\Profile\ProfileGetResponse\Discount\Level;
 use Gmt\Profile\ProfileGetResponse\Referral;
-use Gmt\Profile\ProfileGetResponse\Referral\Profit;
 use Gmt\Profile\ProfileGetResponse\Statistics;
 
 /**
  * Successful response.
  *
+ * @phpstan-import-type BalanceShape from \Gmt\Profile\ProfileGetResponse\Balance
+ * @phpstan-import-type DiscountShape from \Gmt\Profile\ProfileGetResponse\Discount
+ * @phpstan-import-type ReferralShape from \Gmt\Profile\ProfileGetResponse\Referral
+ * @phpstan-import-type StatisticsShape from \Gmt\Profile\ProfileGetResponse\Statistics
+ *
  * @phpstan-type ProfileGetResponseShape = array{
- *   balance: Balance,
+ *   balance: Balance|BalanceShape,
  *   createdAt: string,
- *   discount: Discount,
- *   referral: Referral,
- *   statistics: Statistics,
+ *   discount: Discount|DiscountShape,
+ *   referral: Referral|ReferralShape,
+ *   statistics: Statistics|StatisticsShape,
  *   telegramID: string,
  *   telegramUsername: string|null,
  * }
@@ -101,16 +104,10 @@ final class ProfileGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Balance|array{amount: string, currencyCode: string} $balance
-     * @param Discount|array{level: value-of<Level>, percent: float} $discount
-     * @param Referral|array{
-     *   balance: Referral\Balance,
-     *   level: value-of<Referral\Level>,
-     *   percent: float,
-     *   profit: Profit,
-     *   referralsCount: int,
-     * } $referral
-     * @param Statistics|array{totalPurchases: int} $statistics
+     * @param BalanceShape $balance
+     * @param DiscountShape $discount
+     * @param ReferralShape $referral
+     * @param StatisticsShape $statistics
      */
     public static function with(
         Balance|array $balance,
@@ -135,7 +132,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param Balance|array{amount: string, currencyCode: string} $balance
+     * @param BalanceShape $balance
      */
     public function withBalance(Balance|array $balance): self
     {
@@ -157,7 +154,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param Discount|array{level: value-of<Level>, percent: float} $discount
+     * @param DiscountShape $discount
      */
     public function withDiscount(Discount|array $discount): self
     {
@@ -168,13 +165,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param Referral|array{
-     *   balance: Referral\Balance,
-     *   level: value-of<Referral\Level>,
-     *   percent: float,
-     *   profit: Profit,
-     *   referralsCount: int,
-     * } $referral
+     * @param ReferralShape $referral
      */
     public function withReferral(Referral|array $referral): self
     {
@@ -185,7 +176,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param Statistics|array{totalPurchases: int} $statistics
+     * @param StatisticsShape $statistics
      */
     public function withStatistics(Statistics|array $statistics): self
     {

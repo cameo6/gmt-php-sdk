@@ -17,7 +17,10 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\AccountsService::list()
  *
  * @phpstan-type AccountListParamsShape = array{
- *   page: int, pageSize: int, sort: Sort|value-of<Sort>, countryCodes?: string
+ *   page: int,
+ *   pageSize: int,
+ *   sort: Sort|value-of<Sort>,
+ *   countryCodes?: string|null,
  * }
  */
 final class AccountListParams implements BaseModel

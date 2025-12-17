@@ -12,13 +12,16 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type DisplayNameShape from \Gmt\Accounts\AccountListCountriesResponse\DisplayName
+ * @phpstan-import-type PriceShape from \Gmt\Accounts\AccountListCountriesResponse\Price
+ *
  * @phpstan-type AccountListCountriesResponseShape = array{
  *   available: bool,
  *   countryCode: string,
- *   displayName: DisplayName,
+ *   displayName: DisplayName|DisplayNameShape,
  *   emoji: string,
- *   price: Price,
- *   tags: list<value-of<Tag>>,
+ *   price: Price|PriceShape,
+ *   tags: list<Tag|value-of<Tag>>,
  * }
  */
 final class AccountListCountriesResponse implements BaseModel
@@ -95,8 +98,8 @@ final class AccountListCountriesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayName|array{en: string, ru: string} $displayName
-     * @param Price|array{amount: string, currencyCode: string} $price
+     * @param DisplayNameShape $displayName
+     * @param PriceShape $price
      * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
@@ -142,7 +145,7 @@ final class AccountListCountriesResponse implements BaseModel
     }
 
     /**
-     * @param DisplayName|array{en: string, ru: string} $displayName
+     * @param DisplayNameShape $displayName
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
@@ -164,7 +167,7 @@ final class AccountListCountriesResponse implements BaseModel
     }
 
     /**
-     * @param Price|array{amount: string, currencyCode: string} $price
+     * @param PriceShape $price
      */
     public function withPrice(Price|array $price): self
     {

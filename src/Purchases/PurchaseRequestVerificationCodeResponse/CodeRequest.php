@@ -15,7 +15,7 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
  *   maxAttempts: int,
  *   nextAttemptAt: string|null,
  *   retryAfter: int|null,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  * }
  */
 final class CodeRequest implements BaseModel

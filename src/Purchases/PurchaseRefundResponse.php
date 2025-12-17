@@ -8,16 +8,14 @@ use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase;
-use Gmt\Purchases\PurchaseRefundResponse\Purchase\DisplayName;
-use Gmt\Purchases\PurchaseRefundResponse\Purchase\Price;
-use Gmt\Purchases\PurchaseRefundResponse\Purchase\Status;
-use Gmt\Purchases\PurchaseRefundResponse\Purchase\Verification;
 use Gmt\Purchases\PurchaseRefundResponse\Refund;
-use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
 
 /**
+ * @phpstan-import-type PurchaseShape from \Gmt\Purchases\PurchaseRefundResponse\Purchase
+ * @phpstan-import-type RefundShape from \Gmt\Purchases\PurchaseRefundResponse\Refund
+ *
  * @phpstan-type PurchaseRefundResponseShape = array{
- *   purchase: Purchase, refund: Refund
+ *   purchase: Purchase|PurchaseShape, refund: Refund|RefundShape
  * }
  */
 final class PurchaseRefundResponse implements BaseModel
@@ -55,17 +53,8 @@ final class PurchaseRefundResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Purchase|array{
-     *   id: int,
-     *   countryCode: string,
-     *   createdAt: string,
-     *   displayName: DisplayName,
-     *   phoneNumber: string,
-     *   price: Price,
-     *   status: value-of<Status>,
-     *   verification: Verification|null,
-     * } $purchase
-     * @param Refund|array{amount: Amount, reason: string, refundedAt: string} $refund
+     * @param PurchaseShape $purchase
+     * @param RefundShape $refund
      */
     public static function with(
         Purchase|array $purchase,
@@ -80,16 +69,7 @@ final class PurchaseRefundResponse implements BaseModel
     }
 
     /**
-     * @param Purchase|array{
-     *   id: int,
-     *   countryCode: string,
-     *   createdAt: string,
-     *   displayName: DisplayName,
-     *   phoneNumber: string,
-     *   price: Price,
-     *   status: value-of<Status>,
-     *   verification: Verification|null,
-     * } $purchase
+     * @param PurchaseShape $purchase
      */
     public function withPurchase(Purchase|array $purchase): self
     {
@@ -100,7 +80,7 @@ final class PurchaseRefundResponse implements BaseModel
     }
 
     /**
-     * @param Refund|array{amount: Amount, reason: string, refundedAt: string} $refund
+     * @param RefundShape $refund
      */
     public function withRefund(Refund|array $refund): self
     {

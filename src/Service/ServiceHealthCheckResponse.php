@@ -14,11 +14,13 @@ use Gmt\Service\ServiceHealthCheckResponse\Status;
 /**
  * Successful response.
  *
+ * @phpstan-import-type ChecksShape from \Gmt\Service\ServiceHealthCheckResponse\Checks
+ *
  * @phpstan-type ServiceHealthCheckResponseShape = array{
  *   now: string,
- *   status: value-of<Status>,
+ *   status: Status|value-of<Status>,
  *   uptimeSeconds: int,
- *   checks?: Checks|null,
+ *   checks?: null|Checks|ChecksShape,
  * }
  */
 final class ServiceHealthCheckResponse implements BaseModel
@@ -80,7 +82,7 @@ final class ServiceHealthCheckResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
-     * @param Checks|array{database: bool, redis: bool} $checks
+     * @param ChecksShape $checks
      */
     public static function with(
         string $now,
@@ -137,7 +139,7 @@ final class ServiceHealthCheckResponse implements BaseModel
     /**
      * Detailed information about dependencies state.
      *
-     * @param Checks|array{database: bool, redis: bool} $checks
+     * @param ChecksShape $checks
      */
     public function withChecks(Checks|array $checks): self
     {

@@ -26,7 +26,7 @@ use Gmt\Purchases\PurchaseListParams\Status;
  * @see Gmt\Services\PurchasesService::list()
  *
  * @phpstan-type PurchaseListParamsShape = array{
- *   page: int, pageSize: int, status?: Status|value-of<Status>
+ *   page: int, pageSize: int, status?: null|Status|value-of<Status>
  * }
  */
 final class PurchaseListParams implements BaseModel

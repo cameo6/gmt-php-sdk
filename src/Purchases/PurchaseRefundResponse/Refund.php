@@ -10,8 +10,10 @@ use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRefundResponse\Refund\Amount;
 
 /**
+ * @phpstan-import-type AmountShape from \Gmt\Purchases\PurchaseRefundResponse\Refund\Amount
+ *
  * @phpstan-type RefundShape = array{
- *   amount: Amount, reason: string, refundedAt: string
+ *   amount: Amount|AmountShape, reason: string, refundedAt: string
  * }
  */
 final class Refund implements BaseModel
@@ -61,7 +63,7 @@ final class Refund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Amount|array{amount: string, currencyCode: string} $amount
+     * @param AmountShape $amount
      */
     public static function with(
         Amount|array $amount,
@@ -80,7 +82,7 @@ final class Refund implements BaseModel
     /**
      * Refunded amount (full purchase price).
      *
-     * @param Amount|array{amount: string, currencyCode: string} $amount
+     * @param AmountShape $amount
      */
     public function withAmount(Amount|array $amount): self
     {

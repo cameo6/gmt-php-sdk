@@ -8,15 +8,14 @@ use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest\Status;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase\DisplayName;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase\Price;
-use Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase\Verification;
 
 /**
+ * @phpstan-import-type CodeRequestShape from \Gmt\Purchases\PurchaseRequestVerificationCodeResponse\CodeRequest
+ * @phpstan-import-type PurchaseShape from \Gmt\Purchases\PurchaseRequestVerificationCodeResponse\Purchase
+ *
  * @phpstan-type PurchaseRequestVerificationCodeResponseShape = array{
- *   codeRequest: CodeRequest, purchase: Purchase
+ *   codeRequest: CodeRequest|CodeRequestShape, purchase: Purchase|PurchaseShape
  * }
  */
 final class PurchaseRequestVerificationCodeResponse implements BaseModel
@@ -56,23 +55,8 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CodeRequest|array{
-     *   attempt: int,
-     *   maxAttempts: int,
-     *   nextAttemptAt: string|null,
-     *   retryAfter: int|null,
-     *   status: value-of<Status>,
-     * } $codeRequest
-     * @param Purchase|array{
-     *   id: int,
-     *   countryCode: string,
-     *   createdAt: string,
-     *   displayName: DisplayName,
-     *   phoneNumber: string,
-     *   price: Price,
-     *   status: value-of<Purchase\Status>,
-     *   verification: Verification|null,
-     * } $purchase
+     * @param CodeRequestShape $codeRequest
+     * @param PurchaseShape $purchase
      */
     public static function with(
         CodeRequest|array $codeRequest,
@@ -87,13 +71,7 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
     }
 
     /**
-     * @param CodeRequest|array{
-     *   attempt: int,
-     *   maxAttempts: int,
-     *   nextAttemptAt: string|null,
-     *   retryAfter: int|null,
-     *   status: value-of<Status>,
-     * } $codeRequest
+     * @param CodeRequestShape $codeRequest
      */
     public function withCodeRequest(CodeRequest|array $codeRequest): self
     {
@@ -104,16 +82,7 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
     }
 
     /**
-     * @param Purchase|array{
-     *   id: int,
-     *   countryCode: string,
-     *   createdAt: string,
-     *   displayName: DisplayName,
-     *   phoneNumber: string,
-     *   price: Price,
-     *   status: value-of<Purchase\Status>,
-     *   verification: Verification|null,
-     * } $purchase
+     * @param PurchaseShape $purchase
      */
     public function withPurchase(Purchase|array $purchase): self
     {
