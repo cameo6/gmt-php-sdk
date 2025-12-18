@@ -82,7 +82,7 @@ final class ServiceHealthCheckResponse implements BaseModel
      * You must use named parameters to construct any parameters with a default value.
      *
      * @param Status|value-of<Status> $status
-     * @param ChecksShape $checks
+     * @param Checks|ChecksShape|null $checks
      */
     public static function with(
         string $now,
@@ -139,7 +139,7 @@ final class ServiceHealthCheckResponse implements BaseModel
     /**
      * Detailed information about dependencies state.
      *
-     * @param ChecksShape $checks
+     * @param Checks|ChecksShape $checks
      */
     public function withChecks(Checks|array $checks): self
     {

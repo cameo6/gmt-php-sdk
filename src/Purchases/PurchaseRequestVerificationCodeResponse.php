@@ -55,8 +55,8 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param CodeRequestShape $codeRequest
-     * @param PurchaseShape $purchase
+     * @param CodeRequest|CodeRequestShape $codeRequest
+     * @param Purchase|PurchaseShape $purchase
      */
     public static function with(
         CodeRequest|array $codeRequest,
@@ -71,7 +71,7 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
     }
 
     /**
-     * @param CodeRequestShape $codeRequest
+     * @param CodeRequest|CodeRequestShape $codeRequest
      */
     public function withCodeRequest(CodeRequest|array $codeRequest): self
     {
@@ -82,7 +82,7 @@ final class PurchaseRequestVerificationCodeResponse implements BaseModel
     }
 
     /**
-     * @param PurchaseShape $purchase
+     * @param Purchase|PurchaseShape $purchase
      */
     public function withPurchase(Purchase|array $purchase): self
     {

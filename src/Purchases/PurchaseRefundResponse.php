@@ -53,8 +53,8 @@ final class PurchaseRefundResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param PurchaseShape $purchase
-     * @param RefundShape $refund
+     * @param Purchase|PurchaseShape $purchase
+     * @param Refund|RefundShape $refund
      */
     public static function with(
         Purchase|array $purchase,
@@ -69,7 +69,7 @@ final class PurchaseRefundResponse implements BaseModel
     }
 
     /**
-     * @param PurchaseShape $purchase
+     * @param Purchase|PurchaseShape $purchase
      */
     public function withPurchase(Purchase|array $purchase): self
     {
@@ -80,7 +80,7 @@ final class PurchaseRefundResponse implements BaseModel
     }
 
     /**
-     * @param RefundShape $refund
+     * @param Refund|RefundShape $refund
      */
     public function withRefund(Refund|array $refund): self
     {

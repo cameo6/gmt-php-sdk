@@ -104,10 +104,10 @@ final class ProfileGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BalanceShape $balance
-     * @param DiscountShape $discount
-     * @param ReferralShape $referral
-     * @param StatisticsShape $statistics
+     * @param Balance|BalanceShape $balance
+     * @param Discount|DiscountShape $discount
+     * @param Referral|ReferralShape $referral
+     * @param Statistics|StatisticsShape $statistics
      */
     public static function with(
         Balance|array $balance,
@@ -132,7 +132,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param BalanceShape $balance
+     * @param Balance|BalanceShape $balance
      */
     public function withBalance(Balance|array $balance): self
     {
@@ -154,7 +154,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param DiscountShape $discount
+     * @param Discount|DiscountShape $discount
      */
     public function withDiscount(Discount|array $discount): self
     {
@@ -165,7 +165,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param ReferralShape $referral
+     * @param Referral|ReferralShape $referral
      */
     public function withReferral(Referral|array $referral): self
     {
@@ -176,7 +176,7 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * @param StatisticsShape $statistics
+     * @param Statistics|StatisticsShape $statistics
      */
     public function withStatistics(Statistics|array $statistics): self
     {

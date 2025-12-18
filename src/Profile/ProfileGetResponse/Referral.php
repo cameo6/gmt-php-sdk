@@ -91,9 +91,9 @@ final class Referral implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param BalanceShape $balance
+     * @param Balance|BalanceShape $balance
      * @param Level|value-of<Level> $level
-     * @param ProfitShape $profit
+     * @param Profit|ProfitShape $profit
      */
     public static function with(
         Balance|array $balance,
@@ -116,7 +116,7 @@ final class Referral implements BaseModel
     /**
      * Current referral balance available for withdrawal.
      *
-     * @param BalanceShape $balance
+     * @param Balance|BalanceShape $balance
      */
     public function withBalance(
         Balance|array $balance
@@ -154,7 +154,7 @@ final class Referral implements BaseModel
     /**
      * Total lifetime earnings from referral commissions.
      *
-     * @param ProfitShape $profit
+     * @param Profit|ProfitShape $profit
      */
     public function withProfit(Profit|array $profit): self
     {

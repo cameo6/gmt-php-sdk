@@ -98,8 +98,8 @@ final class AccountListCountriesResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayNameShape $displayName
-     * @param PriceShape $price
+     * @param DisplayName|DisplayNameShape $displayName
+     * @param Price|PriceShape $price
      * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
@@ -145,7 +145,7 @@ final class AccountListCountriesResponse implements BaseModel
     }
 
     /**
-     * @param DisplayNameShape $displayName
+     * @param DisplayName|DisplayNameShape $displayName
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
@@ -167,7 +167,7 @@ final class AccountListCountriesResponse implements BaseModel
     }
 
     /**
-     * @param PriceShape $price
+     * @param Price|PriceShape $price
      */
     public function withPrice(Price|array $price): self
     {

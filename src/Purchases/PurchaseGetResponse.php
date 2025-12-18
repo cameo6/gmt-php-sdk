@@ -139,10 +139,10 @@ final class PurchaseGetResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param DisplayNameShape $displayName
-     * @param PriceShape $price
+     * @param DisplayName|DisplayNameShape $displayName
+     * @param Price|PriceShape $price
      * @param Status|value-of<Status> $status
-     * @param VerificationShape|null $verification
+     * @param Verification|VerificationShape|null $verification
      */
     public static function with(
         int $id,
@@ -202,7 +202,7 @@ final class PurchaseGetResponse implements BaseModel
     }
 
     /**
-     * @param DisplayNameShape $displayName
+     * @param DisplayName|DisplayNameShape $displayName
      */
     public function withDisplayName(DisplayName|array $displayName): self
     {
@@ -232,7 +232,7 @@ final class PurchaseGetResponse implements BaseModel
      *
      * **Discount eligibility.** Based on your total successful purchase count. Higher volume = bigger discounts.
      *
-     * @param PriceShape $price
+     * @param Price|PriceShape $price
      */
     public function withPrice(Price|array $price): self
     {
@@ -270,7 +270,7 @@ final class PurchaseGetResponse implements BaseModel
      *
      * **Security.** Verification data is only visible to the purchase owner.
      *
-     * @param VerificationShape|null $verification
+     * @param Verification|VerificationShape|null $verification
      */
     public function withVerification(
         Verification|array|null $verification

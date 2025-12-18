@@ -63,7 +63,7 @@ final class Refund implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param AmountShape $amount
+     * @param Amount|AmountShape $amount
      */
     public static function with(
         Amount|array $amount,
@@ -82,7 +82,7 @@ final class Refund implements BaseModel
     /**
      * Refunded amount (full purchase price).
      *
-     * @param AmountShape $amount
+     * @param Amount|AmountShape $amount
      */
     public function withAmount(Amount|array $amount): self
     {
