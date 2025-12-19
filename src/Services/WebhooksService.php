@@ -54,7 +54,7 @@ final class WebhooksService implements WebhooksContract
         string|Type $type = 'success',
         ?RequestOptions $requestOptions = null,
     ): WebhookTestResponse {
-        $params = Util::removeNulls(['type' => $type, 'url' => $url]);
+        $params = Util::removeNulls(['url' => $url, 'type' => $type]);
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->test(params: $params, requestOptions: $requestOptions);

@@ -6,7 +6,6 @@ namespace Gmt\Accounts;
 
 use Gmt\Accounts\AccountListCountriesParams\Sort;
 use Gmt\Core\Attributes\Optional;
-use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -17,10 +16,10 @@ use Gmt\Core\Contracts\BaseModel;
  * @see Gmt\Services\AccountsService::listCountries()
  *
  * @phpstan-type AccountListCountriesParamsShape = array{
- *   page: int,
- *   pageSize: int,
- *   sort: Sort|value-of<Sort>,
  *   countryCodes?: string|null,
+ *   page?: int|null,
+ *   pageSize?: int|null,
+ *   sort?: null|Sort|value-of<Sort>,
  * }
  */
 final class AccountListCountriesParams implements BaseModel
@@ -30,48 +29,31 @@ final class AccountListCountriesParams implements BaseModel
     use SdkParams;
 
     /**
-     * Page number.
-     */
-    #[Required]
-    public int $page;
-
-    /**
-     * Number of items per page.
-     */
-    #[Required]
-    public int $pageSize;
-
-    /**
-     * Sort order for accounts.
-     *
-     * @var value-of<Sort> $sort
-     */
-    #[Required(enum: Sort::class)]
-    public string $sort;
-
-    /**
      * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      */
     #[Optional]
     public ?string $countryCodes;
 
     /**
-     * `new AccountListCountriesParams()` is missing required properties by the API.
-     *
-     * To enforce required parameters use
-     * ```
-     * AccountListCountriesParams::with(page: ..., pageSize: ..., sort: ...)
-     * ```
-     *
-     * Otherwise ensure the following setters are called
-     *
-     * ```
-     * (new AccountListCountriesParams)
-     *   ->withPage(...)
-     *   ->withPageSize(...)
-     *   ->withSort(...)
-     * ```
+     * Page number.
      */
+    #[Optional]
+    public ?int $page;
+
+    /**
+     * Number of items per page.
+     */
+    #[Optional]
+    public ?int $pageSize;
+
+    /**
+     * Sort order for accounts.
+     *
+     * @var value-of<Sort>|null $sort
+     */
+    #[Optional(enum: Sort::class)]
+    public ?string $sort;
+
     public function __construct()
     {
         $this->initialize();
@@ -82,21 +64,31 @@ final class AccountListCountriesParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Sort|value-of<Sort> $sort
+     * @param Sort|value-of<Sort>|null $sort
      */
     public static function with(
-        int $page = 1,
-        int $pageSize = 50,
-        Sort|string $sort = 'name_asc',
         ?string $countryCodes = null,
+        ?int $page = null,
+        ?int $pageSize = null,
+        Sort|string|null $sort = null,
     ): self {
         $self = new self;
 
-        $self['page'] = $page;
-        $self['pageSize'] = $pageSize;
-        $self['sort'] = $sort;
-
         null !== $countryCodes && $self['countryCodes'] = $countryCodes;
+        null !== $page && $self['page'] = $page;
+        null !== $pageSize && $self['pageSize'] = $pageSize;
+        null !== $sort && $self['sort'] = $sort;
+
+        return $self;
+    }
+
+    /**
+     * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
+     */
+    public function withCountryCodes(string $countryCodes): self
+    {
+        $self = clone $this;
+        $self['countryCodes'] = $countryCodes;
 
         return $self;
     }
@@ -132,17 +124,6 @@ final class AccountListCountriesParams implements BaseModel
     {
         $self = clone $this;
         $self['sort'] = $sort;
-
-        return $self;
-    }
-
-    /**
-     * Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
-     */
-    public function withCountryCodes(string $countryCodes): self
-    {
-        $self = clone $this;
-        $self['countryCodes'] = $countryCodes;
 
         return $self;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Webhooks;
 
+use Gmt\Core\Attributes\Optional;
 use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
@@ -28,7 +29,7 @@ use Gmt\Webhooks\WebhookTestParams\Type;
  * @see Gmt\Services\WebhooksService::test()
  *
  * @phpstan-type WebhookTestParamsShape = array{
- *   type: Type|value-of<Type>, url: string
+ *   url: string, type?: null|Type|value-of<Type>
  * }
  */
 final class WebhookTestParams implements BaseModel
@@ -38,31 +39,31 @@ final class WebhookTestParams implements BaseModel
     use SdkParams;
 
     /**
-     * Webhook payload type to send: `success` or `failed`.
-     *
-     * @var value-of<Type> $type
-     */
-    #[Required(enum: Type::class)]
-    public string $type;
-
-    /**
      * Webhook endpoint URL. Must be a valid URL.
      */
     #[Required]
     public string $url;
 
     /**
+     * Webhook payload type to send: `success` or `failed`.
+     *
+     * @var value-of<Type>|null $type
+     */
+    #[Optional(enum: Type::class)]
+    public ?string $type;
+
+    /**
      * `new WebhookTestParams()` is missing required properties by the API.
      *
      * To enforce required parameters use
      * ```
-     * WebhookTestParams::with(type: ..., url: ...)
+     * WebhookTestParams::with(url: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new WebhookTestParams)->withType(...)->withURL(...)
+     * (new WebhookTestParams)->withURL(...)
      * ```
      */
     public function __construct()
@@ -75,15 +76,25 @@ final class WebhookTestParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
-     * @param Type|value-of<Type> $type
+     * @param Type|value-of<Type>|null $type
      */
-    public static function with(
-        string $url,
-        Type|string $type = 'success'
-    ): self {
+    public static function with(string $url, Type|string|null $type = null): self
+    {
         $self = new self;
 
-        $self['type'] = $type;
+        $self['url'] = $url;
+
+        null !== $type && $self['type'] = $type;
+
+        return $self;
+    }
+
+    /**
+     * Webhook endpoint URL. Must be a valid URL.
+     */
+    public function withURL(string $url): self
+    {
+        $self = clone $this;
         $self['url'] = $url;
 
         return $self;
@@ -98,17 +109,6 @@ final class WebhookTestParams implements BaseModel
     {
         $self = clone $this;
         $self['type'] = $type;
-
-        return $self;
-    }
-
-    /**
-     * Webhook endpoint URL. Must be a valid URL.
-     */
-    public function withURL(string $url): self
-    {
-        $self = clone $this;
-        $self['url'] = $url;
 
         return $self;
     }

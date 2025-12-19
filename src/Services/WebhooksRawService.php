@@ -39,7 +39,7 @@ final class WebhooksRawService implements WebhooksRawContract
      * **No persistence.** Test webhooks are not stored in delivery history.
      *
      * @param array{
-     *   type: 'success'|'failed'|Type, url: string
+     *   url: string, type?: 'success'|'failed'|Type
      * }|WebhookTestParams $params
      *
      * @return BaseResponse<WebhookTestResponse>

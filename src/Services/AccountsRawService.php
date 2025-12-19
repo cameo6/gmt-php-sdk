@@ -56,10 +56,10 @@ final class AccountsRawService implements AccountsRawContract
      * Returns paginated list of accounts with filtering and sorting options.
      *
      * @param array{
-     *   page: int,
-     *   pageSize: int,
-     *   sort: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort,
      *   countryCodes?: string,
+     *   page?: int,
+     *   pageSize?: int,
+     *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort,
      * }|AccountListParams $params
      *
      * @return BaseResponse<PageNumber<AccountListResponse>>
@@ -81,7 +81,7 @@ final class AccountsRawService implements AccountsRawContract
             path: 'v1/accounts/',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageSize' => 'page_size', 'countryCodes' => 'country_codes']
+                ['countryCodes' => 'country_codes', 'pageSize' => 'page_size']
             ),
             options: $options,
             convert: AccountListResponse::class,
@@ -95,10 +95,10 @@ final class AccountsRawService implements AccountsRawContract
      * Returns a list of all available countries from providers with prices and availability. No authentication required.
      *
      * @param array{
-     *   page: int,
-     *   pageSize: int,
-     *   sort: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|AccountListCountriesParams\Sort,
      *   countryCodes?: string,
+     *   page?: int,
+     *   pageSize?: int,
+     *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|AccountListCountriesParams\Sort,
      * }|AccountListCountriesParams $params
      *
      * @return BaseResponse<PageNumber<AccountListCountriesResponse>>
@@ -120,7 +120,7 @@ final class AccountsRawService implements AccountsRawContract
             path: 'v1/accounts/countries',
             query: Util::array_transform_keys(
                 $parsed,
-                ['pageSize' => 'page_size', 'countryCodes' => 'country_codes']
+                ['countryCodes' => 'country_codes', 'pageSize' => 'page_size']
             ),
             options: $options,
             convert: AccountListCountriesResponse::class,

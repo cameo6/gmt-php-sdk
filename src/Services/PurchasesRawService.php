@@ -110,7 +110,9 @@ final class PurchasesRawService implements PurchasesRawContract
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
      * @param array{
-     *   page: int, pageSize: int, status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status
+     *   page?: int,
+     *   pageSize?: int,
+     *   status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status,
      * }|PurchaseListParams $params
      *
      * @return BaseResponse<PageNumber<PurchaseListResponse>>

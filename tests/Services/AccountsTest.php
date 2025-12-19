@@ -50,34 +50,7 @@ final class AccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->accounts->list(
-            page: 1,
-            pageSize: 50,
-            sort: 'price_asc'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(AccountListResponse::class, $item);
-        }
-    }
-
-    #[Test]
-    public function testListWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $page = $this->client->accounts->list(
-            page: 1,
-            pageSize: 50,
-            sort: 'price_asc',
-            countryCodes: 'US,RU,GB'
-        );
+        $page = $this->client->accounts->list();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PageNumber::class, $page);
@@ -95,34 +68,7 @@ final class AccountsTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->accounts->listCountries(
-            page: 1,
-            pageSize: 50,
-            sort: 'price_asc'
-        );
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(PageNumber::class, $page);
-
-        if ($item = $page->getItems()[0] ?? null) {
-            // @phpstan-ignore-next-line method.alreadyNarrowedType
-            $this->assertInstanceOf(AccountListCountriesResponse::class, $item);
-        }
-    }
-
-    #[Test]
-    public function testListCountriesWithOptionalParams(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $page = $this->client->accounts->listCountries(
-            page: 1,
-            pageSize: 50,
-            sort: 'price_asc',
-            countryCodes: 'US,RU,GB'
-        );
+        $page = $this->client->accounts->listCountries();
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PageNumber::class, $page);

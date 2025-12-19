@@ -54,28 +54,28 @@ final class AccountsService implements AccountsContract
      *
      * Returns paginated list of accounts with filtering and sorting options.
      *
+     * @param string $countryCodes Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      * @param int $page page number
      * @param int $pageSize number of items per page
      * @param 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort $sort sort order for accounts
-     * @param string $countryCodes Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      *
      * @return PageNumber<AccountListResponse>
      *
      * @throws APIException
      */
     public function list(
+        ?string $countryCodes = null,
         int $page = 1,
         int $pageSize = 50,
         string|Sort $sort = 'name_asc',
-        ?string $countryCodes = null,
         ?RequestOptions $requestOptions = null,
     ): PageNumber {
         $params = Util::removeNulls(
             [
+                'countryCodes' => $countryCodes,
                 'page' => $page,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
-                'countryCodes' => $countryCodes,
             ],
         );
 
@@ -90,28 +90,28 @@ final class AccountsService implements AccountsContract
      *
      * Returns a list of all available countries from providers with prices and availability. No authentication required.
      *
+     * @param string $countryCodes Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      * @param int $page page number
      * @param int $pageSize number of items per page
      * @param 'price_asc'|'price_desc'|'name_asc'|'name_desc'|\Gmt\Accounts\AccountListCountriesParams\Sort $sort sort order for accounts
-     * @param string $countryCodes Filter by country codes. Comma-separated list of ISO 3166-1 alpha-2 codes (e.g., 'US,RU,GB').
      *
      * @return PageNumber<AccountListCountriesResponse>
      *
      * @throws APIException
      */
     public function listCountries(
+        ?string $countryCodes = null,
         int $page = 1,
         int $pageSize = 50,
         string|\Gmt\Accounts\AccountListCountriesParams\Sort $sort = 'name_asc',
-        ?string $countryCodes = null,
         ?RequestOptions $requestOptions = null,
     ): PageNumber {
         $params = Util::removeNulls(
             [
+                'countryCodes' => $countryCodes,
                 'page' => $page,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
-                'countryCodes' => $countryCodes,
             ],
         );
 
