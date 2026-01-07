@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Gmt\Core\Contracts;
 
 /**
- * @internal
+ * @phpstan-import-type NormalizedRequest from \Gmt\Core\BaseClient
  *
- * @phpstan-import-type normalized_request from \Gmt\Core\BaseClient
+ * @internal
  *
  * @template Item
  *
