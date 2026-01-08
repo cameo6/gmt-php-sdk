@@ -11,6 +11,9 @@ use Gmt\Service\ServiceGetServerTimeResponse;
 use Gmt\Service\ServiceHealthCheckResponse;
 use Gmt\ServiceContracts\ServiceContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class ServiceService implements ServiceContract
 {
     /**
@@ -31,10 +34,12 @@ final class ServiceService implements ServiceContract
      *
      * Useful for client synchronization and checking clock drift.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function getServerTime(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ServiceGetServerTimeResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->getServerTime(requestOptions: $requestOptions);
@@ -47,10 +52,12 @@ final class ServiceService implements ServiceContract
      *
      * Returns basic service status, current time, and process uptime.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function healthCheck(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ServiceHealthCheckResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->healthCheck(requestOptions: $requestOptions);

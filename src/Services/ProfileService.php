@@ -10,6 +10,9 @@ use Gmt\Profile\ProfileGetResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\ProfileContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class ProfileService implements ProfileContract
 {
     /**
@@ -30,10 +33,12 @@ final class ProfileService implements ProfileContract
      *
      * Returns detailed user profile information including balances, statistics, and program levels.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @throws APIException
      */
     public function retrieve(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): ProfileGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(requestOptions: $requestOptions);

@@ -17,6 +17,9 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\PurchasesContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class PurchasesService implements PurchasesContract
 {
     /**
@@ -48,12 +51,13 @@ final class PurchasesService implements PurchasesContract
      * **Country availability.** Accounts may become unavailable between checking `/accounts` and creating purchase. Always handle availability errors gracefully.
      *
      * @param string $countryCode ISO 3166-1 alpha-2 country code
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function create(
         string $countryCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PurchaseNewResponse {
         $params = Util::removeNulls(['countryCode' => $countryCode]);
 
@@ -71,12 +75,13 @@ final class PurchasesService implements PurchasesContract
      * **Security.** Verification data is only visible to the purchase owner.
      *
      * @param int $purchaseID unique purchase identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PurchaseGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve($purchaseID, requestOptions: $requestOptions);
@@ -100,7 +105,7 @@ final class PurchasesService implements PurchasesContract
      *
      * @param int $page page number
      * @param int $pageSize number of items per page
-     * @param 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status $status **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
+     * @param Status|value-of<Status> $status **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
      *
      * **Important.** Status is immutable once set to `SUCCESS`, `ERROR`, or `REFUND`.
      *
@@ -109,6 +114,7 @@ final class PurchasesService implements PurchasesContract
      * - `SUCCESS` - code ready.
      * - `ERROR` - provider failed.
      * - `REFUND` - money returned.
+     * @param RequestOpts|null $requestOptions
      *
      * @return PageNumber<PurchaseListResponse>
      *
@@ -117,8 +123,8 @@ final class PurchasesService implements PurchasesContract
     public function list(
         int $page = 1,
         int $pageSize = 50,
-        string|Status|null $status = null,
-        ?RequestOptions $requestOptions = null,
+        Status|string|null $status = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PageNumber {
         $params = Util::removeNulls(
             ['page' => $page, 'pageSize' => $pageSize, 'status' => $status]
@@ -140,12 +146,13 @@ final class PurchasesService implements PurchasesContract
      * - At least 20 minutes since purchase creation
      *
      * @param int $purchaseID unique purchase identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function refund(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): PurchaseRefundResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->refund($purchaseID, requestOptions: $requestOptions);
@@ -172,13 +179,14 @@ final class PurchasesService implements PurchasesContract
      * @param string $callbackURL URL to receive webhook notification when code is received. POST request will be sent with either `WebhookSuccessPayload` or `WebhookFailedPayload`.
      *
      * **Retry policy.** If your endpoint does not return HTTP 200, webhook will be retried up to 3 times with delays: immediately, after 10 seconds, after 30 seconds. Any non-200 response triggers retry.
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function requestVerificationCode(
         int $purchaseID,
         ?string $callbackURL = null,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): PurchaseRequestVerificationCodeResponse {
         $params = Util::removeNulls(['callbackURL' => $callbackURL]);
 

@@ -12,6 +12,9 @@ use Gmt\Service\ServiceGetServerTimeResponse;
 use Gmt\Service\ServiceHealthCheckResponse;
 use Gmt\ServiceContracts\ServiceRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class ServiceRawService implements ServiceRawContract
 {
     // @phpstan-ignore-next-line
@@ -25,12 +28,14 @@ final class ServiceRawService implements ServiceRawContract
      *
      * Useful for client synchronization and checking clock drift.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ServiceGetServerTimeResponse>
      *
      * @throws APIException
      */
     public function getServerTime(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -46,12 +51,14 @@ final class ServiceRawService implements ServiceRawContract
      *
      * Returns basic service status, current time, and process uptime.
      *
+     * @param RequestOpts|null $requestOptions
+     *
      * @return BaseResponse<ServiceHealthCheckResponse>
      *
      * @throws APIException
      */
     public function healthCheck(
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(

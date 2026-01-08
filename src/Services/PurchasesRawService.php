@@ -21,6 +21,9 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\PurchasesRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class PurchasesRawService implements PurchasesRawContract
 {
     // @phpstan-ignore-next-line
@@ -45,6 +48,7 @@ final class PurchasesRawService implements PurchasesRawContract
      * **Country availability.** Accounts may become unavailable between checking `/accounts` and creating purchase. Always handle availability errors gracefully.
      *
      * @param array{countryCode: string}|PurchaseCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseNewResponse>
      *
@@ -52,7 +56,7 @@ final class PurchasesRawService implements PurchasesRawContract
      */
     public function create(
         array|PurchaseCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PurchaseCreateParams::parseRequest(
             $params,
@@ -77,6 +81,7 @@ final class PurchasesRawService implements PurchasesRawContract
      * **Security.** Verification data is only visible to the purchase owner.
      *
      * @param int $purchaseID unique purchase identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseGetResponse>
      *
@@ -84,7 +89,7 @@ final class PurchasesRawService implements PurchasesRawContract
      */
     public function retrieve(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -110,10 +115,9 @@ final class PurchasesRawService implements PurchasesRawContract
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
      * @param array{
-     *   page?: int,
-     *   pageSize?: int,
-     *   status?: 'PENDING'|'SUCCESS'|'ERROR'|'REFUND'|Status,
+     *   page?: int, pageSize?: int, status?: Status|value-of<Status>
      * }|PurchaseListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PageNumber<PurchaseListResponse>>
      *
@@ -121,7 +125,7 @@ final class PurchasesRawService implements PurchasesRawContract
      */
     public function list(
         array|PurchaseListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PurchaseListParams::parseRequest(
             $params,
@@ -149,6 +153,7 @@ final class PurchasesRawService implements PurchasesRawContract
      * - At least 20 minutes since purchase creation
      *
      * @param int $purchaseID unique purchase identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseRefundResponse>
      *
@@ -156,7 +161,7 @@ final class PurchasesRawService implements PurchasesRawContract
      */
     public function refund(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -184,6 +189,7 @@ final class PurchasesRawService implements PurchasesRawContract
      *
      * @param int $purchaseID unique purchase identifier
      * @param array{callbackURL?: string}|PurchaseRequestVerificationCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseRequestVerificationCodeResponse>
      *
@@ -192,7 +198,7 @@ final class PurchasesRawService implements PurchasesRawContract
     public function requestVerificationCode(
         int $purchaseID,
         array|PurchaseRequestVerificationCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = PurchaseRequestVerificationCodeParams::parseRequest(
             $params,

@@ -18,6 +18,9 @@ use Gmt\PageNumber;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\AccountsRawContract;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class AccountsRawService implements AccountsRawContract
 {
     // @phpstan-ignore-next-line
@@ -32,6 +35,7 @@ final class AccountsRawService implements AccountsRawContract
      * Returns detailed information about account for specific country including pricing and discount information.
      *
      * @param string $countryCode ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccountGetResponse>
      *
@@ -39,7 +43,7 @@ final class AccountsRawService implements AccountsRawContract
      */
     public function retrieve(
         string $countryCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
@@ -56,11 +60,9 @@ final class AccountsRawService implements AccountsRawContract
      * Returns paginated list of accounts with filtering and sorting options.
      *
      * @param array{
-     *   countryCodes?: string,
-     *   page?: int,
-     *   pageSize?: int,
-     *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|Sort,
+     *   countryCodes?: string, page?: int, pageSize?: int, sort?: Sort|value-of<Sort>
      * }|AccountListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PageNumber<AccountListResponse>>
      *
@@ -68,7 +70,7 @@ final class AccountsRawService implements AccountsRawContract
      */
     public function list(
         array|AccountListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccountListParams::parseRequest(
             $params,
@@ -98,8 +100,9 @@ final class AccountsRawService implements AccountsRawContract
      *   countryCodes?: string,
      *   page?: int,
      *   pageSize?: int,
-     *   sort?: 'price_asc'|'price_desc'|'name_asc'|'name_desc'|AccountListCountriesParams\Sort,
+     *   sort?: AccountListCountriesParams\Sort|value-of<AccountListCountriesParams\Sort>,
      * }|AccountListCountriesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PageNumber<AccountListCountriesResponse>>
      *
@@ -107,7 +110,7 @@ final class AccountsRawService implements AccountsRawContract
      */
     public function listCountries(
         array|AccountListCountriesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = AccountListCountriesParams::parseRequest(
             $params,

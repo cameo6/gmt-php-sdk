@@ -13,6 +13,9 @@ use Gmt\Webhooks\WebhookTestParams;
 use Gmt\Webhooks\WebhookTestParams\Type;
 use Gmt\Webhooks\WebhookTestResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class WebhooksRawService implements WebhooksRawContract
 {
     // @phpstan-ignore-next-line
@@ -38,9 +41,8 @@ final class WebhooksRawService implements WebhooksRawContract
      *
      * **No persistence.** Test webhooks are not stored in delivery history.
      *
-     * @param array{
-     *   url: string, type?: 'success'|'failed'|Type
-     * }|WebhookTestParams $params
+     * @param array{url: string, type?: Type|value-of<Type>}|WebhookTestParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<WebhookTestResponse>
      *
@@ -48,7 +50,7 @@ final class WebhooksRawService implements WebhooksRawContract
      */
     public function test(
         array|WebhookTestParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse {
         [$parsed, $options] = WebhookTestParams::parseRequest(
             $params,

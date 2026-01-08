@@ -12,6 +12,9 @@ use Gmt\ServiceContracts\WebhooksContract;
 use Gmt\Webhooks\WebhookTestParams\Type;
 use Gmt\Webhooks\WebhookTestResponse;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 final class WebhooksService implements WebhooksContract
 {
     /**
@@ -45,14 +48,15 @@ final class WebhooksService implements WebhooksContract
      * **No persistence.** Test webhooks are not stored in delivery history.
      *
      * @param string $url Webhook endpoint URL. Must be a valid URL.
-     * @param 'success'|'failed'|Type $type webhook payload type to send: `success` or `failed`
+     * @param Type|value-of<Type> $type webhook payload type to send: `success` or `failed`
+     * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function test(
         string $url,
-        string|Type $type = 'success',
-        ?RequestOptions $requestOptions = null,
+        Type|string $type = 'success',
+        RequestOptions|array|null $requestOptions = null,
     ): WebhookTestResponse {
         $params = Util::removeNulls(['url' => $url, 'type' => $type]);
 

@@ -17,12 +17,16 @@ use Gmt\Purchases\PurchaseRequestVerificationCodeParams;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 interface PurchasesRawContract
 {
     /**
      * @api
      *
      * @param array<string,mixed>|PurchaseCreateParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseNewResponse>
      *
@@ -30,13 +34,14 @@ interface PurchasesRawContract
      */
     public function create(
         array|PurchaseCreateParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param int $purchaseID unique purchase identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseGetResponse>
      *
@@ -44,13 +49,14 @@ interface PurchasesRawContract
      */
     public function retrieve(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|PurchaseListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PageNumber<PurchaseListResponse>>
      *
@@ -58,13 +64,14 @@ interface PurchasesRawContract
      */
     public function list(
         array|PurchaseListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param int $purchaseID unique purchase identifier
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseRefundResponse>
      *
@@ -72,7 +79,7 @@ interface PurchasesRawContract
      */
     public function refund(
         int $purchaseID,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
@@ -80,6 +87,7 @@ interface PurchasesRawContract
      *
      * @param int $purchaseID unique purchase identifier
      * @param array<string,mixed>|PurchaseRequestVerificationCodeParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PurchaseRequestVerificationCodeResponse>
      *
@@ -88,6 +96,6 @@ interface PurchasesRawContract
     public function requestVerificationCode(
         int $purchaseID,
         array|PurchaseRequestVerificationCodeParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }

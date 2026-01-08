@@ -14,12 +14,16 @@ use Gmt\Core\Exceptions\APIException;
 use Gmt\PageNumber;
 use Gmt\RequestOptions;
 
+/**
+ * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
+ */
 interface AccountsRawContract
 {
     /**
      * @api
      *
      * @param string $countryCode ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<AccountGetResponse>
      *
@@ -27,13 +31,14 @@ interface AccountsRawContract
      */
     public function retrieve(
         string $countryCode,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AccountListParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PageNumber<AccountListResponse>>
      *
@@ -41,13 +46,14 @@ interface AccountsRawContract
      */
     public function list(
         array|AccountListParams $params,
-        ?RequestOptions $requestOptions = null
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**
      * @api
      *
      * @param array<string,mixed>|AccountListCountriesParams $params
+     * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<PageNumber<AccountListCountriesResponse>>
      *
@@ -55,6 +61,6 @@ interface AccountsRawContract
      */
     public function listCountries(
         array|AccountListCountriesParams $params,
-        ?RequestOptions $requestOptions = null,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 }
