@@ -78,7 +78,29 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Prism tests are disabled');
         }
 
-        $page = $this->client->purchases->list();
+        $page = $this->client->purchases->list(page: 1, pageSize: 50);
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(PageNumber::class, $page);
+
+        if ($item = $page->getItems()[0] ?? null) {
+            // @phpstan-ignore-next-line method.alreadyNarrowedType
+            $this->assertInstanceOf(PurchaseListResponse::class, $item);
+        }
+    }
+
+    #[Test]
+    public function testListWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $page = $this->client->purchases->list(
+            page: 1,
+            pageSize: 50,
+            status: 'SUCCESS'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PageNumber::class, $page);

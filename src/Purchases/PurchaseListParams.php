@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gmt\Purchases;
 
 use Gmt\Core\Attributes\Optional;
+use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
@@ -25,7 +26,7 @@ use Gmt\Purchases\PurchaseListParams\Status;
  * @see Gmt\Services\PurchasesService::list()
  *
  * @phpstan-type PurchaseListParamsShape = array{
- *   page?: int|null, pageSize?: int|null, status?: null|Status|value-of<Status>
+ *   page: int, pageSize: int, status?: null|Status|value-of<Status>
  * }
  */
 final class PurchaseListParams implements BaseModel
@@ -37,14 +38,14 @@ final class PurchaseListParams implements BaseModel
     /**
      * Page number.
      */
-    #[Optional]
-    public ?int $page;
+    #[Required]
+    public int $page;
 
     /**
      * Number of items per page.
      */
-    #[Optional]
-    public ?int $pageSize;
+    #[Required]
+    public int $pageSize;
 
     /**
      * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
@@ -62,6 +63,20 @@ final class PurchaseListParams implements BaseModel
     #[Optional(enum: Status::class)]
     public ?string $status;
 
+    /**
+     * `new PurchaseListParams()` is missing required properties by the API.
+     *
+     * To enforce required parameters use
+     * ```
+     * PurchaseListParams::with(page: ..., pageSize: ...)
+     * ```
+     *
+     * Otherwise ensure the following setters are called
+     *
+     * ```
+     * (new PurchaseListParams)->withPage(...)->withPageSize(...)
+     * ```
+     */
     public function __construct()
     {
         $this->initialize();
@@ -75,14 +90,15 @@ final class PurchaseListParams implements BaseModel
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
-        ?int $page = null,
-        ?int $pageSize = null,
+        int $page = 1,
+        int $pageSize = 50,
         Status|string|null $status = null
     ): self {
         $self = new self;
 
-        null !== $page && $self['page'] = $page;
-        null !== $pageSize && $self['pageSize'] = $pageSize;
+        $self['page'] = $page;
+        $self['pageSize'] = $pageSize;
+
         null !== $status && $self['status'] = $status;
 
         return $self;

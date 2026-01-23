@@ -35,6 +35,7 @@ final class WebhooksTest extends TestCase
         }
 
         $result = $this->client->webhooks->test(
+            type: 'success',
             url: 'https://example.com/webhooks/handler'
         );
 
@@ -50,8 +51,8 @@ final class WebhooksTest extends TestCase
         }
 
         $result = $this->client->webhooks->test(
-            url: 'https://example.com/webhooks/handler',
-            type: 'success'
+            type: 'success',
+            url: 'https://example.com/webhooks/handler'
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
