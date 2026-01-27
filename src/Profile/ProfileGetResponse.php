@@ -21,12 +21,14 @@ use Gmt\Profile\ProfileGetResponse\Statistics;
  * @phpstan-import-type StatisticsShape from \Gmt\Profile\ProfileGetResponse\Statistics
  *
  * @phpstan-type ProfileGetResponseShape = array{
+ *   id: string,
  *   balance: Balance|BalanceShape,
  *   createdAt: string,
  *   discount: Discount|DiscountShape,
+ *   login: string|null,
  *   referral: Referral|ReferralShape,
  *   statistics: Statistics|StatisticsShape,
- *   telegramID: string,
+ *   telegramID: string|null,
  *   telegramUsername: string|null,
  * }
  */
@@ -34,6 +36,12 @@ final class ProfileGetResponse implements BaseModel
 {
     /** @use SdkModel<ProfileGetResponseShape> */
     use SdkModel;
+
+    /**
+     * User Database ID.
+     */
+    #[Required]
+    public string $id;
 
     #[Required]
     public Balance $balance;
@@ -47,6 +55,12 @@ final class ProfileGetResponse implements BaseModel
     #[Required]
     public Discount $discount;
 
+    /**
+     * Web username.
+     */
+    #[Required]
+    public ?string $login;
+
     #[Required]
     public Referral $referral;
 
@@ -54,10 +68,10 @@ final class ProfileGetResponse implements BaseModel
     public Statistics $statistics;
 
     /**
-     * User's Telegram ID.
+     * User's Telegram ID (null for web-only users).
      */
     #[Required('telegram_id')]
-    public string $telegramID;
+    public ?string $telegramID;
 
     /**
      * User's Telegram username.
@@ -71,9 +85,11 @@ final class ProfileGetResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * ProfileGetResponse::with(
+     *   id: ...,
      *   balance: ...,
      *   createdAt: ...,
      *   discount: ...,
+     *   login: ...,
      *   referral: ...,
      *   statistics: ...,
      *   telegramID: ...,
@@ -85,9 +101,11 @@ final class ProfileGetResponse implements BaseModel
      *
      * ```
      * (new ProfileGetResponse)
+     *   ->withID(...)
      *   ->withBalance(...)
      *   ->withCreatedAt(...)
      *   ->withDiscount(...)
+     *   ->withLogin(...)
      *   ->withReferral(...)
      *   ->withStatistics(...)
      *   ->withTelegramID(...)
@@ -110,23 +128,38 @@ final class ProfileGetResponse implements BaseModel
      * @param Statistics|StatisticsShape $statistics
      */
     public static function with(
+        string $id,
         Balance|array $balance,
         string $createdAt,
         Discount|array $discount,
+        ?string $login,
         Referral|array $referral,
         Statistics|array $statistics,
-        string $telegramID,
+        ?string $telegramID,
         ?string $telegramUsername,
     ): self {
         $self = new self;
 
+        $self['id'] = $id;
         $self['balance'] = $balance;
         $self['createdAt'] = $createdAt;
         $self['discount'] = $discount;
+        $self['login'] = $login;
         $self['referral'] = $referral;
         $self['statistics'] = $statistics;
         $self['telegramID'] = $telegramID;
         $self['telegramUsername'] = $telegramUsername;
+
+        return $self;
+    }
+
+    /**
+     * User Database ID.
+     */
+    public function withID(string $id): self
+    {
+        $self = clone $this;
+        $self['id'] = $id;
 
         return $self;
     }
@@ -165,6 +198,17 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
+     * Web username.
+     */
+    public function withLogin(?string $login): self
+    {
+        $self = clone $this;
+        $self['login'] = $login;
+
+        return $self;
+    }
+
+    /**
      * @param Referral|ReferralShape $referral
      */
     public function withReferral(Referral|array $referral): self
@@ -187,9 +231,9 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * User's Telegram ID.
+     * User's Telegram ID (null for web-only users).
      */
-    public function withTelegramID(string $telegramID): self
+    public function withTelegramID(?string $telegramID): self
     {
         $self = clone $this;
         $self['telegramID'] = $telegramID;

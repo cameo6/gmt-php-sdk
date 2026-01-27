@@ -16,4 +16,8 @@ enum Sort: string
     case NAME_ASC = 'name_asc';
 
     case NAME_DESC = 'name_desc';
+
+    case POPULARITY_ASC = 'popularity_asc';
+
+    case POPULARITY_DESC = 'popularity_desc';
 }
