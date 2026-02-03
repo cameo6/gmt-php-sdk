@@ -3,6 +3,7 @@
 namespace Tests\Services;
 
 use Gmt\Client;
+use Gmt\Core\Util;
 use Gmt\Service\ServiceGetServerTimeResponse;
 use Gmt\Service\ServiceHealthCheckResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
@@ -22,7 +23,7 @@ final class ServiceTest extends TestCase
     {
         parent::setUp();
 
-        $testUrl = getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
+        $testUrl = Util::getenv('TEST_API_BASE_URL') ?: 'http://127.0.0.1:4010';
         $client = new Client(apiKey: 'My API Key', baseUrl: $testUrl);
 
         $this->client = $client;
