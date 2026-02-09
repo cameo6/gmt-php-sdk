@@ -16,6 +16,7 @@ use Gmt\Purchases\PurchaseRefundResponse;
 use Gmt\Purchases\PurchaseRequestVerificationCodeResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\PurchasesContract;
+use Gmt\Services\Purchases\BulkService;
 
 /**
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
@@ -28,11 +29,17 @@ final class PurchasesService implements PurchasesContract
     public PurchasesRawService $raw;
 
     /**
+     * @api
+     */
+    public BulkService $bulk;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new PurchasesRawService($client);
+        $this->bulk = new BulkService($client);
     }
 
     /**

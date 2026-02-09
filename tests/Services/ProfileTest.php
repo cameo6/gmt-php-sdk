@@ -4,7 +4,10 @@ namespace Tests\Services;
 
 use Gmt\Client;
 use Gmt\Core\Util;
+use Gmt\Profile\ProfileChangeLoginResponse;
+use Gmt\Profile\ProfileChangePasswordResponse;
 use Gmt\Profile\ProfileGetResponse;
+use Gmt\Profile\ProfileUnbindTelegramResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -39,5 +42,74 @@ final class ProfileTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ProfileGetResponse::class, $result);
+    }
+
+    #[Test]
+    public function testChangeLogin(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->profile->changeLogin(newLogin: 'username');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileChangeLoginResponse::class, $result);
+    }
+
+    #[Test]
+    public function testChangeLoginWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->profile->changeLogin(newLogin: 'username');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileChangeLoginResponse::class, $result);
+    }
+
+    #[Test]
+    public function testChangePassword(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->profile->changePassword(
+            newPassword: 'Password123'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileChangePasswordResponse::class, $result);
+    }
+
+    #[Test]
+    public function testChangePasswordWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->profile->changePassword(
+            newPassword: 'Password123'
+        );
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileChangePasswordResponse::class, $result);
+    }
+
+    #[Test]
+    public function testUnbindTelegram(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Prism tests are disabled');
+        }
+
+        $result = $this->client->profile->unbindTelegram();
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileUnbindTelegramResponse::class, $result);
     }
 }
