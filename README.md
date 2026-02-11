@@ -40,7 +40,7 @@ Parameters with a default value must be set by name.
 
 use Gmt\Client;
 
-$client = new Client(apiKey: getenv('x-api-key') ?: 'My API Key');
+$client = new Client(apiKey: getenv('GMT_API_KEY') ?: 'My API Key');
 
 $response = $client->service->healthCheck();
 
@@ -65,7 +65,7 @@ This library provides auto-paginating iterators with each list response, so you 
 
 use Gmt\Client;
 
-$client = new Client(apiKey: getenv('x-api-key') ?: 'My API Key');
+$client = new Client(apiKey: getenv('GMT_API_KEY') ?: 'My API Key');
 
 $page = $client->purchases->list(page: 1, pageSize: 100);
 

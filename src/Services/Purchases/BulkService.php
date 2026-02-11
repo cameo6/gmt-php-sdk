@@ -7,6 +7,7 @@ namespace Gmt\Services\Purchases;
 use Gmt\Client;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\Core\Util;
+use Gmt\Purchases\Bulk\BulkGetResponse;
 use Gmt\Purchases\Bulk\BulkNewResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\Purchases\BulkContract;
@@ -69,6 +70,44 @@ final class BulkService implements BulkContract
 
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->create(params: $params, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Returns the status of a bulk purchase, including details and link to download archive.
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $purchaseID,
+        RequestOptions|array|null $requestOptions = null
+    ): BulkGetResponse {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->retrieve($purchaseID, requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Download the archive file containing multiple accounts from a successful bulk purchase
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function download(
+        string $purchaseID,
+        RequestOptions|array|null $requestOptions = null
+    ): mixed {
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->download($purchaseID, requestOptions: $requestOptions);
 
         return $response->parse();
     }

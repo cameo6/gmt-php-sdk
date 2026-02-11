@@ -55,7 +55,7 @@ class Client extends BaseClient
         ?string $baseUrl = null,
         RequestOptions|array|null $requestOptions = null,
     ) {
-        $this->apiKey = (string) ($apiKey ?? Util::getenv('x-api-key'));
+        $this->apiKey = (string) ($apiKey ?? Util::getenv('GMT_API_KEY'));
 
         $baseUrl ??= Util::getenv('GMT_BASE_URL') ?: 'https://api.getmytg.com';
 

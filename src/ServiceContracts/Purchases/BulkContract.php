@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gmt\ServiceContracts\Purchases;
 
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Purchases\Bulk\BulkGetResponse;
 use Gmt\Purchases\Bulk\BulkNewResponse;
 use Gmt\RequestOptions;
 
@@ -31,4 +32,28 @@ interface BulkContract
         ?string $callbackURL = null,
         RequestOptions|array|null $requestOptions = null,
     ): BulkNewResponse;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function retrieve(
+        string $purchaseID,
+        RequestOptions|array|null $requestOptions = null
+    ): BulkGetResponse;
+
+    /**
+     * @api
+     *
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function download(
+        string $purchaseID,
+        RequestOptions|array|null $requestOptions = null
+    ): mixed;
 }
