@@ -9,6 +9,7 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseGetResponse\DisplayName;
 use Gmt\Purchases\PurchaseGetResponse\Price;
+use Gmt\Purchases\PurchaseGetResponse\PurchaseType;
 use Gmt\Purchases\PurchaseGetResponse\Status;
 use Gmt\Purchases\PurchaseGetResponse\Verification;
 
@@ -24,6 +25,7 @@ use Gmt\Purchases\PurchaseGetResponse\Verification;
  *   displayName: DisplayName|DisplayNameShape,
  *   phoneNumber: string|null,
  *   price: Price|PriceShape,
+ *   purchaseType: PurchaseType|value-of<PurchaseType>,
  *   status: Status|value-of<Status>,
  *   verification: null|Verification|VerificationShape,
  * }
@@ -73,6 +75,14 @@ final class PurchaseGetResponse implements BaseModel
     public Price $price;
 
     /**
+     * Type of purchase: SINGLE (regular), BULK (batch purchase), ADMIN (admin deduction).
+     *
+     * @var value-of<PurchaseType> $purchaseType
+     */
+    #[Required('purchase_type', enum: PurchaseType::class)]
+    public string $purchaseType;
+
+    /**
      * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
      *
      * **Important.** Status is immutable once set to `SUCCESS`, `ERROR`, or `REFUND`.
@@ -110,6 +120,7 @@ final class PurchaseGetResponse implements BaseModel
      *   displayName: ...,
      *   phoneNumber: ...,
      *   price: ...,
+     *   purchaseType: ...,
      *   status: ...,
      *   verification: ...,
      * )
@@ -125,6 +136,7 @@ final class PurchaseGetResponse implements BaseModel
      *   ->withDisplayName(...)
      *   ->withPhoneNumber(...)
      *   ->withPrice(...)
+     *   ->withPurchaseType(...)
      *   ->withStatus(...)
      *   ->withVerification(...)
      * ```
@@ -141,6 +153,7 @@ final class PurchaseGetResponse implements BaseModel
      *
      * @param DisplayName|DisplayNameShape $displayName
      * @param Price|PriceShape $price
+     * @param PurchaseType|value-of<PurchaseType> $purchaseType
      * @param Status|value-of<Status> $status
      * @param Verification|VerificationShape|null $verification
      */
@@ -151,6 +164,7 @@ final class PurchaseGetResponse implements BaseModel
         DisplayName|array $displayName,
         ?string $phoneNumber,
         Price|array $price,
+        PurchaseType|string $purchaseType,
         Status|string $status,
         Verification|array|null $verification,
     ): self {
@@ -162,6 +176,7 @@ final class PurchaseGetResponse implements BaseModel
         $self['displayName'] = $displayName;
         $self['phoneNumber'] = $phoneNumber;
         $self['price'] = $price;
+        $self['purchaseType'] = $purchaseType;
         $self['status'] = $status;
         $self['verification'] = $verification;
 
@@ -238,6 +253,19 @@ final class PurchaseGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['price'] = $price;
+
+        return $self;
+    }
+
+    /**
+     * Type of purchase: SINGLE (regular), BULK (batch purchase), ADMIN (admin deduction).
+     *
+     * @param PurchaseType|value-of<PurchaseType> $purchaseType
+     */
+    public function withPurchaseType(PurchaseType|string $purchaseType): self
+    {
+        $self = clone $this;
+        $self['purchaseType'] = $purchaseType;
 
         return $self;
     }
