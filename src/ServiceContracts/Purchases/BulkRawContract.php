@@ -7,7 +7,6 @@ namespace Gmt\ServiceContracts\Purchases;
 use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\Purchases\Bulk\BulkCreateParams;
-use Gmt\Purchases\Bulk\BulkGetResponse;
 use Gmt\Purchases\Bulk\BulkNewResponse;
 use Gmt\RequestOptions;
 
@@ -29,33 +28,5 @@ interface BulkRawContract
     public function create(
         array|BulkCreateParams $params,
         RequestOptions|array|null $requestOptions = null,
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<BulkGetResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieve(
-        string $purchaseID,
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse;
-
-    /**
-     * @api
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<mixed>
-     *
-     * @throws APIException
-     */
-    public function download(
-        string $purchaseID,
-        RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

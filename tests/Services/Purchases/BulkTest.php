@@ -4,7 +4,6 @@ namespace Tests\Services\Purchases;
 
 use Gmt\Client;
 use Gmt\Core\Util;
-use Gmt\Purchases\Bulk\BulkGetResponse;
 use Gmt\Purchases\Bulk\BulkNewResponse;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
@@ -60,31 +59,5 @@ final class BulkTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(BulkNewResponse::class, $result);
-    }
-
-    #[Test]
-    public function testRetrieve(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->purchases->bulk->retrieve('purchaseId');
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertInstanceOf(BulkGetResponse::class, $result);
-    }
-
-    #[Test]
-    public function testDownload(): void
-    {
-        if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
-        }
-
-        $result = $this->client->purchases->bulk->download('purchaseId');
-
-        // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
     }
 }

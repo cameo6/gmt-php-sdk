@@ -8,7 +8,6 @@ use Gmt\Client;
 use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\Purchases\Bulk\BulkCreateParams;
-use Gmt\Purchases\Bulk\BulkGetResponse;
 use Gmt\Purchases\Bulk\BulkNewResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\Purchases\BulkRawContract;
@@ -64,54 +63,6 @@ final class BulkRawService implements BulkRawContract
             body: (object) $parsed,
             options: $options,
             convert: BulkNewResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Returns the status of a bulk purchase, including details and link to download archive.
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<BulkGetResponse>
-     *
-     * @throws APIException
-     */
-    public function retrieve(
-        string $purchaseID,
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['v1/purchases/bulk/%1$s', $purchaseID],
-            options: $requestOptions,
-            convert: BulkGetResponse::class,
-        );
-    }
-
-    /**
-     * @api
-     *
-     * Download the archive file containing multiple accounts from a successful bulk purchase
-     *
-     * @param RequestOpts|null $requestOptions
-     *
-     * @return BaseResponse<mixed>
-     *
-     * @throws APIException
-     */
-    public function download(
-        string $purchaseID,
-        RequestOptions|array|null $requestOptions = null
-    ): BaseResponse {
-        // @phpstan-ignore-next-line return.type
-        return $this->client->request(
-            method: 'get',
-            path: ['v1/purchases/bulk/%1$s/download', $purchaseID],
-            options: $requestOptions,
-            convert: null,
         );
     }
 }

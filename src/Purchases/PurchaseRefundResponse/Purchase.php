@@ -22,7 +22,7 @@ use Gmt\Purchases\PurchaseRefundResponse\Purchase\Verification;
  *   countryCode: string,
  *   createdAt: string,
  *   displayName: DisplayName|DisplayNameShape,
- *   phoneNumber: string,
+ *   phoneNumber: string|null,
  *   price: Price|PriceShape,
  *   status: Status|value-of<Status>,
  *   verification: null|Verification|VerificationShape,
@@ -60,7 +60,7 @@ final class Purchase implements BaseModel
      * **Usage.** This is your Telegram account login. Use it with `verification.code` and `verification.password` to access the account.
      */
     #[Required('phone_number')]
-    public string $phoneNumber;
+    public ?string $phoneNumber;
 
     /**
      * **Final Price After Discount.** The actual amount deducted from your balance, with your personal discount already applied.
@@ -149,7 +149,7 @@ final class Purchase implements BaseModel
         string $countryCode,
         string $createdAt,
         DisplayName|array $displayName,
-        string $phoneNumber,
+        ?string $phoneNumber,
         Price|array $price,
         Status|string $status,
         Verification|array|null $verification,
@@ -217,7 +217,7 @@ final class Purchase implements BaseModel
      *
      * **Usage.** This is your Telegram account login. Use it with `verification.code` and `verification.password` to access the account.
      */
-    public function withPhoneNumber(string $phoneNumber): self
+    public function withPhoneNumber(?string $phoneNumber): self
     {
         $self = clone $this;
         $self['phoneNumber'] = $phoneNumber;
