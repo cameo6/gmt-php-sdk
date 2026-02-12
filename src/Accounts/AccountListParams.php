@@ -12,7 +12,17 @@ use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
- * Returns paginated list of accounts with filtering and sorting options.
+ * Returns paginated list of available accounts with **user-specific pricing** (personal discount applied).
+ *
+ * **Pricing.** Prices reflect the authenticated user's discount level. To see base prices without discount, use `GET /accounts/countries`.
+ *
+ * **Difference from `/accounts/countries`:**
+ * - Requires authentication
+ * - Prices include user's personal discount
+ *
+ * **Filtering.** Use `country_codes` to request specific countries (e.g., `US,RU,GB`).
+ *
+ * **Sorting options:** `price_asc`, `price_desc`, `name_asc`, `name_desc`, `popularity_asc`, `popularity_desc`.
  *
  * @see Gmt\Services\AccountsService::list()
  *

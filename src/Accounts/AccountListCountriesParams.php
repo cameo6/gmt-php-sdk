@@ -12,7 +12,15 @@ use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
- * Returns a list of all available countries from providers with prices and availability. No authentication required.
+ * Returns paginated list of all available countries with **base pricing** (no user discount applied). No authentication required.
+ *
+ * **Use case.** Public catalog for the website landing page. Shows general pricing and stock availability.
+ *
+ * **Pricing.** Prices are base prices before any user discount. For personalized pricing, use `GET /accounts` (requires authentication).
+ *
+ * **Filtering.** Use `country_codes` to request specific countries (e.g., `US,RU,GB`).
+ *
+ * **Sorting options:** `price_asc`, `price_desc`, `name_asc`, `name_desc`, `popularity_asc`, `popularity_desc`.
  *
  * @see Gmt\Services\AccountsService::listCountries()
  *

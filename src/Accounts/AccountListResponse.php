@@ -20,6 +20,7 @@ use Gmt\Core\Contracts\BaseModel;
  *   available: bool,
  *   countryCode: string,
  *   displayName: DisplayName|DisplayNameShape,
+ *   emoji: string,
  *   price: Price|PriceShape,
  *   tags: list<Tag|value-of<Tag>>,
  *   availableCount?: float|null,
@@ -45,6 +46,12 @@ final class AccountListResponse implements BaseModel
     #[Required('display_name')]
     public DisplayName $displayName;
 
+    /**
+     * Country flag emoji.
+     */
+    #[Required]
+    public string $emoji;
+
     #[Required]
     public Price $price;
 
@@ -68,7 +75,12 @@ final class AccountListResponse implements BaseModel
      * To enforce required parameters use
      * ```
      * AccountListResponse::with(
-     *   available: ..., countryCode: ..., displayName: ..., price: ..., tags: ...
+     *   available: ...,
+     *   countryCode: ...,
+     *   displayName: ...,
+     *   emoji: ...,
+     *   price: ...,
+     *   tags: ...,
      * )
      * ```
      *
@@ -79,6 +91,7 @@ final class AccountListResponse implements BaseModel
      *   ->withAvailable(...)
      *   ->withCountryCode(...)
      *   ->withDisplayName(...)
+     *   ->withEmoji(...)
      *   ->withPrice(...)
      *   ->withTags(...)
      * ```
@@ -101,6 +114,7 @@ final class AccountListResponse implements BaseModel
         bool $available,
         string $countryCode,
         DisplayName|array $displayName,
+        string $emoji,
         Price|array $price,
         array $tags,
         ?float $availableCount = null,
@@ -110,6 +124,7 @@ final class AccountListResponse implements BaseModel
         $self['available'] = $available;
         $self['countryCode'] = $countryCode;
         $self['displayName'] = $displayName;
+        $self['emoji'] = $emoji;
         $self['price'] = $price;
         $self['tags'] = $tags;
 
@@ -147,6 +162,17 @@ final class AccountListResponse implements BaseModel
     {
         $self = clone $this;
         $self['displayName'] = $displayName;
+
+        return $self;
+    }
+
+    /**
+     * Country flag emoji.
+     */
+    public function withEmoji(string $emoji): self
+    {
+        $self = clone $this;
+        $self['emoji'] = $emoji;
 
         return $self;
     }

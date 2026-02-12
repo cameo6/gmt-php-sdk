@@ -32,13 +32,13 @@ final class AccountListCountriesResponse implements BaseModel
     use SdkModel;
 
     /**
-     * Whether the country is available for purchase.
+     * Indicates if account is available for purchase.
      */
     #[Required]
     public bool $available;
 
     /**
-     * Country code (ISO 3166-1 alpha-2).
+     * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
      */
     #[Required('country_code')]
     public string $countryCode;
@@ -134,7 +134,7 @@ final class AccountListCountriesResponse implements BaseModel
     }
 
     /**
-     * Whether the country is available for purchase.
+     * Indicates if account is available for purchase.
      */
     public function withAvailable(bool $available): self
     {
@@ -145,7 +145,7 @@ final class AccountListCountriesResponse implements BaseModel
     }
 
     /**
-     * Country code (ISO 3166-1 alpha-2).
+     * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
      */
     public function withCountryCode(string $countryCode): self
     {
