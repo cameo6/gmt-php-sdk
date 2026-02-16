@@ -55,5 +55,5 @@ interface BulkContract
     public function download(
         string $purchaseID,
         RequestOptions|array|null $requestOptions = null
-    ): mixed;
+    ): string;
 }

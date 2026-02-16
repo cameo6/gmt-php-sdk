@@ -98,7 +98,7 @@ final class BulkRawService implements BulkRawContract
      *
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<mixed>
+     * @return BaseResponse<string>
      *
      * @throws APIException
      */
@@ -110,8 +110,9 @@ final class BulkRawService implements BulkRawContract
         return $this->client->request(
             method: 'get',
             path: ['v1/purchases/bulk/%1$s/download', $purchaseID],
+            headers: ['Accept' => 'application/zip'],
             options: $requestOptions,
-            convert: null,
+            convert: 'string',
         );
     }
 }

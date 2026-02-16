@@ -79,12 +79,12 @@ final class BulkTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Prism doesn\'t support application/zip responses');
         }
 
         $result = $this->client->purchases->bulk->download('purchase_id');
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertNull($result);
+        $this->assertIsString($result);
     }
 }

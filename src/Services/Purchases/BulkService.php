@@ -105,7 +105,7 @@ final class BulkService implements BulkContract
     public function download(
         string $purchaseID,
         RequestOptions|array|null $requestOptions = null
-    ): mixed {
+    ): string {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->download($purchaseID, requestOptions: $requestOptions);
 
