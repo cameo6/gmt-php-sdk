@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Gmt\Accounts;
 
+use Gmt\Accounts\AccountListResponse\BasePrice;
 use Gmt\Accounts\AccountListResponse\DisplayName;
 use Gmt\Accounts\AccountListResponse\Price;
 use Gmt\Accounts\AccountListResponse\Tag;
@@ -13,14 +14,17 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 
 /**
+ * @phpstan-import-type BasePriceShape from \Gmt\Accounts\AccountListResponse\BasePrice
  * @phpstan-import-type DisplayNameShape from \Gmt\Accounts\AccountListResponse\DisplayName
  * @phpstan-import-type PriceShape from \Gmt\Accounts\AccountListResponse\Price
  *
  * @phpstan-type AccountListResponseShape = array{
  *   available: bool,
+ *   basePrice: BasePrice|BasePriceShape,
  *   countryCode: string,
  *   displayName: DisplayName|DisplayNameShape,
  *   emoji: string,
+ *   popularityIndex: float,
  *   price: Price|PriceShape,
  *   tags: list<Tag|value-of<Tag>>,
  *   availableCount?: float|null,
@@ -37,6 +41,9 @@ final class AccountListResponse implements BaseModel
     #[Required]
     public bool $available;
 
+    #[Required('base_price')]
+    public BasePrice $basePrice;
+
     /**
      * ISO 3166-1 alpha-2 country code (e.g., US, RU, GB).
      */
@@ -51,6 +58,12 @@ final class AccountListResponse implements BaseModel
      */
     #[Required]
     public string $emoji;
+
+    /**
+     * Relative popularity of this country based on recent purchase volume.
+     */
+    #[Required('popularity_index')]
+    public float $popularityIndex;
 
     #[Required]
     public Price $price;
@@ -76,9 +89,11 @@ final class AccountListResponse implements BaseModel
      * ```
      * AccountListResponse::with(
      *   available: ...,
+     *   basePrice: ...,
      *   countryCode: ...,
      *   displayName: ...,
      *   emoji: ...,
+     *   popularityIndex: ...,
      *   price: ...,
      *   tags: ...,
      * )
@@ -89,9 +104,11 @@ final class AccountListResponse implements BaseModel
      * ```
      * (new AccountListResponse)
      *   ->withAvailable(...)
+     *   ->withBasePrice(...)
      *   ->withCountryCode(...)
      *   ->withDisplayName(...)
      *   ->withEmoji(...)
+     *   ->withPopularityIndex(...)
      *   ->withPrice(...)
      *   ->withTags(...)
      * ```
@@ -106,15 +123,18 @@ final class AccountListResponse implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param BasePrice|BasePriceShape $basePrice
      * @param DisplayName|DisplayNameShape $displayName
      * @param Price|PriceShape $price
      * @param list<Tag|value-of<Tag>> $tags
      */
     public static function with(
         bool $available,
+        BasePrice|array $basePrice,
         string $countryCode,
         DisplayName|array $displayName,
         string $emoji,
+        float $popularityIndex,
         Price|array $price,
         array $tags,
         ?float $availableCount = null,
@@ -122,9 +142,11 @@ final class AccountListResponse implements BaseModel
         $self = new self;
 
         $self['available'] = $available;
+        $self['basePrice'] = $basePrice;
         $self['countryCode'] = $countryCode;
         $self['displayName'] = $displayName;
         $self['emoji'] = $emoji;
+        $self['popularityIndex'] = $popularityIndex;
         $self['price'] = $price;
         $self['tags'] = $tags;
 
@@ -140,6 +162,17 @@ final class AccountListResponse implements BaseModel
     {
         $self = clone $this;
         $self['available'] = $available;
+
+        return $self;
+    }
+
+    /**
+     * @param BasePrice|BasePriceShape $basePrice
+     */
+    public function withBasePrice(BasePrice|array $basePrice): self
+    {
+        $self = clone $this;
+        $self['basePrice'] = $basePrice;
 
         return $self;
     }
@@ -173,6 +206,17 @@ final class AccountListResponse implements BaseModel
     {
         $self = clone $this;
         $self['emoji'] = $emoji;
+
+        return $self;
+    }
+
+    /**
+     * Relative popularity of this country based on recent purchase volume.
+     */
+    public function withPopularityIndex(float $popularityIndex): self
+    {
+        $self = clone $this;
+        $self['popularityIndex'] = $popularityIndex;
 
         return $self;
     }

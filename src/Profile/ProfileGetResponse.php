@@ -13,8 +13,6 @@ use Gmt\Profile\ProfileGetResponse\Referral;
 use Gmt\Profile\ProfileGetResponse\Statistics;
 
 /**
- * Successful response.
- *
  * @phpstan-import-type BalanceShape from \Gmt\Profile\ProfileGetResponse\Balance
  * @phpstan-import-type DiscountShape from \Gmt\Profile\ProfileGetResponse\Discount
  * @phpstan-import-type ReferralShape from \Gmt\Profile\ProfileGetResponse\Referral
