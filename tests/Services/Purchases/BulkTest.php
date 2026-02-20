@@ -79,7 +79,7 @@ final class BulkTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Mock server doesn\'t support application/zip responses');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->bulk->download('purchase_id');
