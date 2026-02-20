@@ -37,7 +37,7 @@ final class PurchasesTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->create(countryCode: 'US');
@@ -50,7 +50,7 @@ final class PurchasesTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->create(countryCode: 'US');
@@ -63,7 +63,7 @@ final class PurchasesTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->retrieve(12345);
@@ -76,7 +76,7 @@ final class PurchasesTest extends TestCase
     public function testList(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->purchases->list(page: 1, pageSize: 50);
@@ -94,7 +94,7 @@ final class PurchasesTest extends TestCase
     public function testListWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $page = $this->client->purchases->list(
@@ -116,7 +116,7 @@ final class PurchasesTest extends TestCase
     public function testRefund(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->refund(12345);
@@ -129,7 +129,7 @@ final class PurchasesTest extends TestCase
     public function testRequestVerificationCode(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->requestVerificationCode(12345);

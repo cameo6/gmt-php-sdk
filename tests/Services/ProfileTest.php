@@ -35,7 +35,7 @@ final class ProfileTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->profile->retrieve();
@@ -48,7 +48,7 @@ final class ProfileTest extends TestCase
     public function testChangeLogin(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->profile->changeLogin(newLogin: 'username');
@@ -61,7 +61,7 @@ final class ProfileTest extends TestCase
     public function testChangeLoginWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->profile->changeLogin(newLogin: 'username');
@@ -74,7 +74,7 @@ final class ProfileTest extends TestCase
     public function testChangePassword(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->profile->changePassword(
@@ -89,7 +89,7 @@ final class ProfileTest extends TestCase
     public function testChangePasswordWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->profile->changePassword(
@@ -104,7 +104,7 @@ final class ProfileTest extends TestCase
     public function testUnbindTelegram(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->profile->unbindTelegram();

@@ -33,7 +33,7 @@ final class ServiceTest extends TestCase
     public function testGetServerTime(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->service->getServerTime();
@@ -46,7 +46,7 @@ final class ServiceTest extends TestCase
     public function testHealthCheck(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->service->healthCheck();

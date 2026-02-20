@@ -33,7 +33,7 @@ final class BulkTest extends TestCase
     public function testCreate(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->bulk->create(
@@ -49,7 +49,7 @@ final class BulkTest extends TestCase
     public function testCreateWithOptionalParams(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->bulk->create(
@@ -66,7 +66,7 @@ final class BulkTest extends TestCase
     public function testRetrieve(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism tests are disabled');
+            $this->markTestSkipped('Mock server tests are disabled');
         }
 
         $result = $this->client->purchases->bulk->retrieve('purchase_id');
@@ -79,7 +79,7 @@ final class BulkTest extends TestCase
     public function testDownload(): void
     {
         if (UnsupportedMockTests::$skip) {
-            $this->markTestSkipped('Prism doesn\'t support application/zip responses');
+            $this->markTestSkipped('Mock server doesn\'t support application/zip responses');
         }
 
         $result = $this->client->purchases->bulk->download('purchase_id');
