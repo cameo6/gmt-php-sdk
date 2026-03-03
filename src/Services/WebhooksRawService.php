@@ -14,6 +14,31 @@ use Gmt\Webhooks\WebhookTestParams\Type;
 use Gmt\Webhooks\WebhookTestResponse;
 
 /**
+ * Webhook testing and documentation.
+ *
+ * ## Webhook Payload Types
+ *
+ * When you provide `callback_url` in `POST /purchases/:id/request-code`, your endpoint will receive one of the following payloads:
+ *
+ * - **WebhookSuccessPayload** — sent when verification code is successfully retrieved
+ * - **WebhookFailedPayload** — sent when code retrieval fails after all retry attempts
+ *
+ * When you provide `callback_url` in `POST /purchases/bulk`, your endpoint will receive:
+ *
+ * - **WebhookBulkReadyPayload** — sent when bulk archive is ready
+ *
+ * See the **Models** section below for detailed payload structure.
+ *
+ * ## Requirements
+ *
+ * - Your endpoint **must return HTTP 200** to acknowledge receipt
+ * - Response timeout: **5 seconds**
+ * - Failed deliveries are retried up to **3 times** (immediately, after 10s, after 30s)
+ *
+ * ## Testing
+ *
+ * Use `POST /v1/webhooks/test` to verify your endpoint. Get a temporary test URL at https://webhook.site
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class WebhooksRawService implements WebhooksRawContract

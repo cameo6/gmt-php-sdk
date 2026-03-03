@@ -13,6 +13,8 @@ use Gmt\Service\ServiceHealthCheckResponse;
 use Gmt\ServiceContracts\ServiceRawContract;
 
 /**
+ * Service endpoints for API health checks.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class ServiceRawService implements ServiceRawContract

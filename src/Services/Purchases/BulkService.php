@@ -13,6 +13,8 @@ use Gmt\RequestOptions;
 use Gmt\ServiceContracts\Purchases\BulkContract;
 
 /**
+ * Purchase history and management.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class BulkService implements BulkContract

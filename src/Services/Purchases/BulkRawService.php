@@ -14,6 +14,8 @@ use Gmt\RequestOptions;
 use Gmt\ServiceContracts\Purchases\BulkRawContract;
 
 /**
+ * Purchase history and management.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class BulkRawService implements BulkRawContract

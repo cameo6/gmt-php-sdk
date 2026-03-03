@@ -16,6 +16,15 @@ use Gmt\RequestOptions;
 use Gmt\ServiceContracts\AccountsContract;
 
 /**
+ * Browse and purchase Telegram accounts.
+ *
+ * **Endpoints overview:**
+ * - `GET /accounts/countries` — Public catalog with base prices (no auth required)
+ * - `GET /accounts` — Personalized list with user's discounted prices (auth required)
+ * - `GET /accounts/:country_code` — Detailed pricing breakdown with discount info (auth required)
+ *
+ * **Pricing model.** Base prices are set per country. Authenticated users may receive a personal discount based on their purchase history (discount level). Use `/accounts/:country_code` to see the full price breakdown.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class AccountsService implements AccountsContract

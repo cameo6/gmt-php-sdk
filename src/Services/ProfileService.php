@@ -15,6 +15,8 @@ use Gmt\RequestOptions;
 use Gmt\ServiceContracts\ProfileContract;
 
 /**
+ * User profile management.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class ProfileService implements ProfileContract

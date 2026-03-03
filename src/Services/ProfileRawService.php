@@ -17,6 +17,8 @@ use Gmt\RequestOptions;
 use Gmt\ServiceContracts\ProfileRawContract;
 
 /**
+ * User profile management.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class ProfileRawService implements ProfileRawContract

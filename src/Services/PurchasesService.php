@@ -19,6 +19,8 @@ use Gmt\ServiceContracts\PurchasesContract;
 use Gmt\Services\Purchases\BulkService;
 
 /**
+ * Purchase history and management.
+ *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class PurchasesService implements PurchasesContract
