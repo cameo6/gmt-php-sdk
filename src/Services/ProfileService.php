@@ -13,6 +13,8 @@ use Gmt\Profile\ProfileGetResponse;
 use Gmt\Profile\ProfileUnbindTelegramResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\ProfileContract;
+use Gmt\Services\Profile\DiscountService;
+use Gmt\Services\Profile\ReferralService;
 
 /**
  * User profile management.
@@ -27,11 +29,23 @@ final class ProfileService implements ProfileContract
     public ProfileRawService $raw;
 
     /**
+     * @api
+     */
+    public DiscountService $discount;
+
+    /**
+     * @api
+     */
+    public ReferralService $referral;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new ProfileRawService($client);
+        $this->discount = new DiscountService($client);
+        $this->referral = new ReferralService($client);
     }
 
     /**
