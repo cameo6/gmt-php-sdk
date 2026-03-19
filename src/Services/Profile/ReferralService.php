@@ -11,6 +11,7 @@ use Gmt\Profile\Referral\ReferralGetResponse;
 use Gmt\Profile\Referral\ReferralTransferBalanceResponse;
 use Gmt\RequestOptions;
 use Gmt\ServiceContracts\Profile\ReferralContract;
+use Gmt\Services\Profile\Referral\TransactionService;
 
 /**
  * User profile management.
@@ -25,11 +26,17 @@ final class ReferralService implements ReferralContract
     public ReferralRawService $raw;
 
     /**
+     * @api
+     */
+    public TransactionService $transaction;
+
+    /**
      * @internal
      */
     public function __construct(private Client $client)
     {
         $this->raw = new ReferralRawService($client);
+        $this->transaction = new TransactionService($client);
     }
 
     /**
