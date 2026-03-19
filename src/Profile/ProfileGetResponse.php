@@ -9,13 +9,11 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Balance;
 use Gmt\Profile\ProfileGetResponse\Discount;
-use Gmt\Profile\ProfileGetResponse\Referral;
 use Gmt\Profile\ProfileGetResponse\Statistics;
 
 /**
  * @phpstan-import-type BalanceShape from \Gmt\Profile\ProfileGetResponse\Balance
  * @phpstan-import-type DiscountShape from \Gmt\Profile\ProfileGetResponse\Discount
- * @phpstan-import-type ReferralShape from \Gmt\Profile\ProfileGetResponse\Referral
  * @phpstan-import-type StatisticsShape from \Gmt\Profile\ProfileGetResponse\Statistics
  *
  * @phpstan-type ProfileGetResponseShape = array{
@@ -24,7 +22,6 @@ use Gmt\Profile\ProfileGetResponse\Statistics;
  *   createdAt: string,
  *   discount: Discount|DiscountShape,
  *   login: string|null,
- *   referral: Referral|ReferralShape,
  *   statistics: Statistics|StatisticsShape,
  *   telegramID: string|null,
  *   telegramUsername: string|null,
@@ -60,9 +57,6 @@ final class ProfileGetResponse implements BaseModel
     public ?string $login;
 
     #[Required]
-    public Referral $referral;
-
-    #[Required]
     public Statistics $statistics;
 
     /**
@@ -88,7 +82,6 @@ final class ProfileGetResponse implements BaseModel
      *   createdAt: ...,
      *   discount: ...,
      *   login: ...,
-     *   referral: ...,
      *   statistics: ...,
      *   telegramID: ...,
      *   telegramUsername: ...,
@@ -104,7 +97,6 @@ final class ProfileGetResponse implements BaseModel
      *   ->withCreatedAt(...)
      *   ->withDiscount(...)
      *   ->withLogin(...)
-     *   ->withReferral(...)
      *   ->withStatistics(...)
      *   ->withTelegramID(...)
      *   ->withTelegramUsername(...)
@@ -122,7 +114,6 @@ final class ProfileGetResponse implements BaseModel
      *
      * @param Balance|BalanceShape $balance
      * @param Discount|DiscountShape $discount
-     * @param Referral|ReferralShape $referral
      * @param Statistics|StatisticsShape $statistics
      */
     public static function with(
@@ -131,7 +122,6 @@ final class ProfileGetResponse implements BaseModel
         string $createdAt,
         Discount|array $discount,
         ?string $login,
-        Referral|array $referral,
         Statistics|array $statistics,
         ?string $telegramID,
         ?string $telegramUsername,
@@ -143,7 +133,6 @@ final class ProfileGetResponse implements BaseModel
         $self['createdAt'] = $createdAt;
         $self['discount'] = $discount;
         $self['login'] = $login;
-        $self['referral'] = $referral;
         $self['statistics'] = $statistics;
         $self['telegramID'] = $telegramID;
         $self['telegramUsername'] = $telegramUsername;
@@ -202,17 +191,6 @@ final class ProfileGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['login'] = $login;
-
-        return $self;
-    }
-
-    /**
-     * @param Referral|ReferralShape $referral
-     */
-    public function withReferral(Referral|array $referral): self
-    {
-        $self = clone $this;
-        $self['referral'] = $referral;
 
         return $self;
     }
