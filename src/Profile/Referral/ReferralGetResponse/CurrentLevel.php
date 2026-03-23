@@ -7,13 +7,14 @@ namespace Gmt\Profile\Referral\ReferralGetResponse;
 use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
+use Gmt\Profile\Referral\ReferralGetResponse\CurrentLevel\Name;
 use Gmt\Profile\Referral\ReferralGetResponse\CurrentLevel\Progress;
 
 /**
  * @phpstan-import-type ProgressShape from \Gmt\Profile\Referral\ReferralGetResponse\CurrentLevel\Progress
  *
  * @phpstan-type CurrentLevelShape = array{
- *   name: string, percent: float, progress: Progress|ProgressShape
+ *   name: Name|value-of<Name>, percent: float, progress: Progress|ProgressShape
  * }
  */
 final class CurrentLevel implements BaseModel
@@ -23,8 +24,10 @@ final class CurrentLevel implements BaseModel
 
     /**
      * Name of the current referral level.
+     *
+     * @var value-of<Name> $name
      */
-    #[Required]
+    #[Required(enum: Name::class)]
     public string $name;
 
     /**
@@ -60,10 +63,11 @@ final class CurrentLevel implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Name|value-of<Name> $name
      * @param Progress|ProgressShape $progress
      */
     public static function with(
-        string $name,
+        Name|string $name,
         float $percent,
         Progress|array $progress
     ): self {
@@ -78,8 +82,10 @@ final class CurrentLevel implements BaseModel
 
     /**
      * Name of the current referral level.
+     *
+     * @param Name|value-of<Name> $name
      */
-    public function withName(string $name): self
+    public function withName(Name|string $name): self
     {
         $self = clone $this;
         $self['name'] = $name;

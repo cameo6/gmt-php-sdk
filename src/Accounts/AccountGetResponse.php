@@ -8,6 +8,7 @@ use Gmt\Accounts\AccountGetResponse\Discount;
 use Gmt\Accounts\AccountGetResponse\DisplayName;
 use Gmt\Accounts\AccountGetResponse\Price;
 use Gmt\Accounts\AccountGetResponse\Tag;
+use Gmt\Core\Attributes\Optional;
 use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
@@ -25,6 +26,7 @@ use Gmt\Core\Contracts\BaseModel;
  *   emoji: string,
  *   price: Price|PriceShape,
  *   tags: list<Tag|value-of<Tag>>,
+ *   availableCount?: float|null,
  * }
  */
 final class AccountGetResponse implements BaseModel
@@ -66,6 +68,12 @@ final class AccountGetResponse implements BaseModel
      */
     #[Required(list: Tag::class)]
     public array $tags;
+
+    /**
+     * Number of available accounts for this country.
+     */
+    #[Optional('available_count', nullable: true)]
+    public ?float $availableCount;
 
     /**
      * `new AccountGetResponse()` is missing required properties by the API.
@@ -119,6 +127,7 @@ final class AccountGetResponse implements BaseModel
         string $emoji,
         Price|array $price,
         array $tags,
+        ?float $availableCount = null,
     ): self {
         $self = new self;
 
@@ -129,6 +138,8 @@ final class AccountGetResponse implements BaseModel
         $self['emoji'] = $emoji;
         $self['price'] = $price;
         $self['tags'] = $tags;
+
+        null !== $availableCount && $self['availableCount'] = $availableCount;
 
         return $self;
     }
@@ -208,6 +219,17 @@ final class AccountGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['tags'] = $tags;
+
+        return $self;
+    }
+
+    /**
+     * Number of available accounts for this country.
+     */
+    public function withAvailableCount(?float $availableCount): self
+    {
+        $self = clone $this;
+        $self['availableCount'] = $availableCount;
 
         return $self;
     }

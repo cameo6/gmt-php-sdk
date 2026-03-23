@@ -7,10 +7,14 @@ namespace Gmt\Profile\Referral\ReferralGetResponse;
 use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
+use Gmt\Profile\Referral\ReferralGetResponse\Level\Name;
 
 /**
  * @phpstan-type LevelShape = array{
- *   name: string, percent: float, requiredDeposits: float, requiredReferrals: int
+ *   name: Name|value-of<Name>,
+ *   percent: float,
+ *   requiredDeposits: float,
+ *   requiredReferrals: int,
  * }
  */
 final class Level implements BaseModel
@@ -20,8 +24,10 @@ final class Level implements BaseModel
 
     /**
      * Name of the referral level.
+     *
+     * @var value-of<Name> $name
      */
-    #[Required]
+    #[Required(enum: Name::class)]
     public string $name;
 
     /**
@@ -71,9 +77,11 @@ final class Level implements BaseModel
      * Construct an instance from the required parameters.
      *
      * You must use named parameters to construct any parameters with a default value.
+     *
+     * @param Name|value-of<Name> $name
      */
     public static function with(
-        string $name,
+        Name|string $name,
         float $percent,
         float $requiredDeposits,
         int $requiredReferrals,
@@ -90,8 +98,10 @@ final class Level implements BaseModel
 
     /**
      * Name of the referral level.
+     *
+     * @param Name|value-of<Name> $name
      */
-    public function withName(string $name): self
+    public function withName(Name|string $name): self
     {
         $self = clone $this;
         $self['name'] = $name;

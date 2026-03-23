@@ -7,6 +7,7 @@ namespace Gmt\Profile\Referral\ReferralGetResponse;
 use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
+use Gmt\Profile\Referral\ReferralGetResponse\NextLevel\Name;
 use Gmt\Profile\Referral\ReferralGetResponse\NextLevel\Requirements;
 
 /**
@@ -15,7 +16,9 @@ use Gmt\Profile\Referral\ReferralGetResponse\NextLevel\Requirements;
  * @phpstan-import-type RequirementsShape from \Gmt\Profile\Referral\ReferralGetResponse\NextLevel\Requirements
  *
  * @phpstan-type NextLevelShape = array{
- *   name: string, percent: float, requirements: Requirements|RequirementsShape
+ *   name: Name|value-of<Name>,
+ *   percent: float,
+ *   requirements: Requirements|RequirementsShape,
  * }
  */
 final class NextLevel implements BaseModel
@@ -25,8 +28,10 @@ final class NextLevel implements BaseModel
 
     /**
      * Name of the next referral level.
+     *
+     * @var value-of<Name> $name
      */
-    #[Required]
+    #[Required(enum: Name::class)]
     public string $name;
 
     /**
@@ -62,10 +67,11 @@ final class NextLevel implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Name|value-of<Name> $name
      * @param Requirements|RequirementsShape $requirements
      */
     public static function with(
-        string $name,
+        Name|string $name,
         float $percent,
         Requirements|array $requirements
     ): self {
@@ -80,8 +86,10 @@ final class NextLevel implements BaseModel
 
     /**
      * Name of the next referral level.
+     *
+     * @param Name|value-of<Name> $name
      */
-    public function withName(string $name): self
+    public function withName(Name|string $name): self
     {
         $self = clone $this;
         $self['name'] = $name;
