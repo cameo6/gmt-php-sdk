@@ -12,6 +12,7 @@ use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseCreateParams;
 use Gmt\Purchases\PurchaseGetResponse;
 use Gmt\Purchases\PurchaseListParams;
+use Gmt\Purchases\PurchaseListParams\Sort;
 use Gmt\Purchases\PurchaseListParams\Status;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
@@ -117,7 +118,10 @@ final class PurchasesRawService implements PurchasesRawContract
      * **Filtering.** Combine `status` filter with pagination for subset queries (e.g., all successful purchases).
      *
      * @param array{
-     *   page: int, pageSize: int, status?: Status|value-of<Status>
+     *   page: int,
+     *   pageSize: int,
+     *   sort: Sort|value-of<Sort>,
+     *   status?: Status|value-of<Status>,
      * }|PurchaseListParams $params
      * @param RequestOpts|null $requestOptions
      *

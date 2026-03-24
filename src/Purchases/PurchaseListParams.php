@@ -9,6 +9,7 @@ use Gmt\Core\Attributes\Required;
 use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Concerns\SdkParams;
 use Gmt\Core\Contracts\BaseModel;
+use Gmt\Purchases\PurchaseListParams\Sort;
 use Gmt\Purchases\PurchaseListParams\Status;
 
 /**
@@ -26,7 +27,10 @@ use Gmt\Purchases\PurchaseListParams\Status;
  * @see Gmt\Services\PurchasesService::list()
  *
  * @phpstan-type PurchaseListParamsShape = array{
- *   page: int, pageSize: int, status?: null|Status|value-of<Status>
+ *   page: int,
+ *   pageSize: int,
+ *   sort: Sort|value-of<Sort>,
+ *   status?: null|Status|value-of<Status>,
  * }
  */
 final class PurchaseListParams implements BaseModel
@@ -46,6 +50,14 @@ final class PurchaseListParams implements BaseModel
      */
     #[Required]
     public int $pageSize;
+
+    /**
+     * Sort purchases by creation date.
+     *
+     * @var value-of<Sort> $sort
+     */
+    #[Required(enum: Sort::class)]
+    public string $sort;
 
     /**
      * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
@@ -68,13 +80,13 @@ final class PurchaseListParams implements BaseModel
      *
      * To enforce required parameters use
      * ```
-     * PurchaseListParams::with(page: ..., pageSize: ...)
+     * PurchaseListParams::with(page: ..., pageSize: ..., sort: ...)
      * ```
      *
      * Otherwise ensure the following setters are called
      *
      * ```
-     * (new PurchaseListParams)->withPage(...)->withPageSize(...)
+     * (new PurchaseListParams)->withPage(...)->withPageSize(...)->withSort(...)
      * ```
      */
     public function __construct()
@@ -87,17 +99,20 @@ final class PurchaseListParams implements BaseModel
      *
      * You must use named parameters to construct any parameters with a default value.
      *
+     * @param Sort|value-of<Sort> $sort
      * @param Status|value-of<Status>|null $status
      */
     public static function with(
         int $page = 1,
         int $pageSize = 50,
-        Status|string|null $status = null
+        Sort|string $sort = 'date_desc',
+        Status|string|null $status = null,
     ): self {
         $self = new self;
 
         $self['page'] = $page;
         $self['pageSize'] = $pageSize;
+        $self['sort'] = $sort;
 
         null !== $status && $self['status'] = $status;
 
@@ -122,6 +137,19 @@ final class PurchaseListParams implements BaseModel
     {
         $self = clone $this;
         $self['pageSize'] = $pageSize;
+
+        return $self;
+    }
+
+    /**
+     * Sort purchases by creation date.
+     *
+     * @param Sort|value-of<Sort> $sort
+     */
+    public function withSort(Sort|string $sort): self
+    {
+        $self = clone $this;
+        $self['sort'] = $sort;
 
         return $self;
     }

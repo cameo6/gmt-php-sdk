@@ -23,7 +23,6 @@ use Gmt\Purchases\PurchaseListResponse\Verification;
  *   countryCode: string,
  *   createdAt: string,
  *   displayName: DisplayName|DisplayNameShape,
- *   emoji: string,
  *   phoneNumber: string|null,
  *   price: Price|PriceShape,
  *   purchaseType: PurchaseType|value-of<PurchaseType>,
@@ -56,12 +55,6 @@ final class PurchaseListResponse implements BaseModel
 
     #[Required('display_name')]
     public DisplayName $displayName;
-
-    /**
-     * Country flag emoji.
-     */
-    #[Required]
-    public string $emoji;
 
     /**
      * **E.164 International Format.** Phone number with country code prefix (e.g., `+12025550123` for US, `+79991234567` for Russia).
@@ -125,7 +118,6 @@ final class PurchaseListResponse implements BaseModel
      *   countryCode: ...,
      *   createdAt: ...,
      *   displayName: ...,
-     *   emoji: ...,
      *   phoneNumber: ...,
      *   price: ...,
      *   purchaseType: ...,
@@ -142,7 +134,6 @@ final class PurchaseListResponse implements BaseModel
      *   ->withCountryCode(...)
      *   ->withCreatedAt(...)
      *   ->withDisplayName(...)
-     *   ->withEmoji(...)
      *   ->withPhoneNumber(...)
      *   ->withPrice(...)
      *   ->withPurchaseType(...)
@@ -171,7 +162,6 @@ final class PurchaseListResponse implements BaseModel
         string $countryCode,
         string $createdAt,
         DisplayName|array $displayName,
-        string $emoji,
         ?string $phoneNumber,
         Price|array $price,
         PurchaseType|string $purchaseType,
@@ -184,7 +174,6 @@ final class PurchaseListResponse implements BaseModel
         $self['countryCode'] = $countryCode;
         $self['createdAt'] = $createdAt;
         $self['displayName'] = $displayName;
-        $self['emoji'] = $emoji;
         $self['phoneNumber'] = $phoneNumber;
         $self['price'] = $price;
         $self['purchaseType'] = $purchaseType;
@@ -234,17 +223,6 @@ final class PurchaseListResponse implements BaseModel
     {
         $self = clone $this;
         $self['displayName'] = $displayName;
-
-        return $self;
-    }
-
-    /**
-     * Country flag emoji.
-     */
-    public function withEmoji(string $emoji): self
-    {
-        $self = clone $this;
-        $self['emoji'] = $emoji;
 
         return $self;
     }

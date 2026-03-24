@@ -9,6 +9,7 @@ use Gmt\Core\Exceptions\APIException;
 use Gmt\Core\Util;
 use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseGetResponse;
+use Gmt\Purchases\PurchaseListParams\Sort;
 use Gmt\Purchases\PurchaseListParams\Status;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
@@ -114,6 +115,7 @@ final class PurchasesService implements PurchasesContract
      *
      * @param int $page page number
      * @param int $pageSize number of items per page
+     * @param Sort|value-of<Sort> $sort Sort purchases by creation date
      * @param Status|value-of<Status> $status **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
      *
      * **Important.** Status is immutable once set to `SUCCESS`, `ERROR`, or `REFUND`.
@@ -132,11 +134,17 @@ final class PurchasesService implements PurchasesContract
     public function list(
         int $page = 1,
         int $pageSize = 50,
+        Sort|string $sort = 'date_desc',
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): PageNumber {
         $params = Util::removeNulls(
-            ['page' => $page, 'pageSize' => $pageSize, 'status' => $status]
+            [
+                'page' => $page,
+                'pageSize' => $pageSize,
+                'sort' => $sort,
+                'status' => $status,
+            ],
         );
 
         // @phpstan-ignore-next-line argument.type

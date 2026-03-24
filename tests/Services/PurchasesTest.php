@@ -79,7 +79,11 @@ final class PurchasesTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $page = $this->client->purchases->list(page: 1, pageSize: 50);
+        $page = $this->client->purchases->list(
+            page: 1,
+            pageSize: 50,
+            sort: 'date_desc'
+        );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(PageNumber::class, $page);
@@ -100,6 +104,7 @@ final class PurchasesTest extends TestCase
         $page = $this->client->purchases->list(
             page: 1,
             pageSize: 50,
+            sort: 'date_desc',
             status: 'SUCCESS'
         );
 

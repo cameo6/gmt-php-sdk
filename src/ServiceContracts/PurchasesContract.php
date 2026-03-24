@@ -7,6 +7,7 @@ namespace Gmt\ServiceContracts;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\PageNumber;
 use Gmt\Purchases\PurchaseGetResponse;
+use Gmt\Purchases\PurchaseListParams\Sort;
 use Gmt\Purchases\PurchaseListParams\Status;
 use Gmt\Purchases\PurchaseListResponse;
 use Gmt\Purchases\PurchaseNewResponse;
@@ -50,6 +51,7 @@ interface PurchasesContract
      *
      * @param int $page page number
      * @param int $pageSize number of items per page
+     * @param Sort|value-of<Sort> $sort Sort purchases by creation date
      * @param Status|value-of<Status> $status **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
      *
      * **Important.** Status is immutable once set to `SUCCESS`, `ERROR`, or `REFUND`.
@@ -68,6 +70,7 @@ interface PurchasesContract
     public function list(
         int $page = 1,
         int $pageSize = 50,
+        Sort|string $sort = 'date_desc',
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): PageNumber;

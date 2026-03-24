@@ -67,7 +67,7 @@ use Gmt\Client;
 
 $client = new Client(apiKey: getenv('GMT_API_KEY') ?: 'My API Key');
 
-$page = $client->purchases->list(page: 1, pageSize: 100);
+$page = $client->purchases->list(page: 1, pageSize: 100, sort: 'date_desc');
 
 var_dump($page);
 
