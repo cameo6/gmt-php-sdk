@@ -121,6 +121,7 @@ final class PurchasesRawService implements PurchasesRawContract
      *   page: int,
      *   pageSize: int,
      *   sort: Sort|value-of<Sort>,
+     *   phoneNumber?: string,
      *   status?: Status|value-of<Status>,
      * }|PurchaseListParams $params
      * @param RequestOpts|null $requestOptions
@@ -142,7 +143,10 @@ final class PurchasesRawService implements PurchasesRawContract
         return $this->client->request(
             method: 'get',
             path: 'v1/purchases/',
-            query: Util::array_transform_keys($parsed, ['pageSize' => 'page_size']),
+            query: Util::array_transform_keys(
+                $parsed,
+                ['pageSize' => 'page_size', 'phoneNumber' => 'phone_number']
+            ),
             options: $options,
             convert: PurchaseListResponse::class,
             page: PageNumber::class,

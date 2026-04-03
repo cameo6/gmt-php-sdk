@@ -116,6 +116,7 @@ final class PurchasesService implements PurchasesContract
      * @param int $page page number
      * @param int $pageSize number of items per page
      * @param Sort|value-of<Sort> $sort Sort purchases by creation date
+     * @param string $phoneNumber Filter purchases by phone number fragment (partial match). Example: '123' matches '+71234567890'.
      * @param Status|value-of<Status> $status **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
      *
      * **Important.** Status is immutable once set to `SUCCESS`, `ERROR`, or `REFUND`.
@@ -135,6 +136,7 @@ final class PurchasesService implements PurchasesContract
         int $page = 1,
         int $pageSize = 50,
         Sort|string $sort = 'date_desc',
+        ?string $phoneNumber = null,
         Status|string|null $status = null,
         RequestOptions|array|null $requestOptions = null,
     ): PageNumber {
@@ -143,6 +145,7 @@ final class PurchasesService implements PurchasesContract
                 'page' => $page,
                 'pageSize' => $pageSize,
                 'sort' => $sort,
+                'phoneNumber' => $phoneNumber,
                 'status' => $status,
             ],
         );

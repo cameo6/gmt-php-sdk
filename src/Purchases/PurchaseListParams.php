@@ -30,6 +30,7 @@ use Gmt\Purchases\PurchaseListParams\Status;
  *   page: int,
  *   pageSize: int,
  *   sort: Sort|value-of<Sort>,
+ *   phoneNumber?: string|null,
  *   status?: null|Status|value-of<Status>,
  * }
  */
@@ -58,6 +59,12 @@ final class PurchaseListParams implements BaseModel
      */
     #[Required(enum: Sort::class)]
     public string $sort;
+
+    /**
+     * Filter purchases by phone number fragment (partial match). Example: '123' matches '+71234567890'.
+     */
+    #[Optional]
+    public ?string $phoneNumber;
 
     /**
      * **Purchase Status Lifecycle.** `PENDING` (initial) → `SUCCESS` (after code request) or `ERROR` (provider failure). Any status can transition to `REFUND` via admin action.
@@ -106,6 +113,7 @@ final class PurchaseListParams implements BaseModel
         int $page = 1,
         int $pageSize = 50,
         Sort|string $sort = 'date_desc',
+        ?string $phoneNumber = null,
         Status|string|null $status = null,
     ): self {
         $self = new self;
@@ -114,6 +122,7 @@ final class PurchaseListParams implements BaseModel
         $self['pageSize'] = $pageSize;
         $self['sort'] = $sort;
 
+        null !== $phoneNumber && $self['phoneNumber'] = $phoneNumber;
         null !== $status && $self['status'] = $status;
 
         return $self;
@@ -150,6 +159,17 @@ final class PurchaseListParams implements BaseModel
     {
         $self = clone $this;
         $self['sort'] = $sort;
+
+        return $self;
+    }
+
+    /**
+     * Filter purchases by phone number fragment (partial match). Example: '123' matches '+71234567890'.
+     */
+    public function withPhoneNumber(string $phoneNumber): self
+    {
+        $self = clone $this;
+        $self['phoneNumber'] = $phoneNumber;
 
         return $self;
     }

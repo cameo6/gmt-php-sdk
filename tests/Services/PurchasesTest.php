@@ -105,7 +105,8 @@ final class PurchasesTest extends TestCase
             page: 1,
             pageSize: 50,
             sort: 'date_desc',
-            status: 'SUCCESS'
+            phoneNumber: '123',
+            status: 'SUCCESS',
         );
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
