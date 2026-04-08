@@ -8,6 +8,7 @@ use Gmt\Core\BaseClient;
 use Gmt\Core\Util;
 use Gmt\Services\AccountsService;
 use Gmt\Services\ProfileService;
+use Gmt\Services\PurchasesByHashService;
 use Gmt\Services\PurchasesService;
 use Gmt\Services\ServiceService;
 use Gmt\Services\TelegramService;
@@ -42,6 +43,11 @@ class Client extends BaseClient
      * @api
      */
     public PurchasesService $purchases;
+
+    /**
+     * @api
+     */
+    public PurchasesByHashService $purchasesByHash;
 
     /**
      * @api
@@ -95,6 +101,7 @@ class Client extends BaseClient
         $this->accounts = new AccountsService($this);
         $this->profile = new ProfileService($this);
         $this->purchases = new PurchasesService($this);
+        $this->purchasesByHash = new PurchasesByHashService($this);
         $this->telegram = new TelegramService($this);
         $this->webhooks = new WebhooksService($this);
     }
