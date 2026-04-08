@@ -10,6 +10,7 @@ use Gmt\Services\AccountsService;
 use Gmt\Services\ProfileService;
 use Gmt\Services\PurchasesService;
 use Gmt\Services\ServiceService;
+use Gmt\Services\TelegramService;
 use Gmt\Services\WebhooksService;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
@@ -41,6 +42,11 @@ class Client extends BaseClient
      * @api
      */
     public PurchasesService $purchases;
+
+    /**
+     * @api
+     */
+    public TelegramService $telegram;
 
     /**
      * @api
@@ -89,6 +95,7 @@ class Client extends BaseClient
         $this->accounts = new AccountsService($this);
         $this->profile = new ProfileService($this);
         $this->purchases = new PurchasesService($this);
+        $this->telegram = new TelegramService($this);
         $this->webhooks = new WebhooksService($this);
     }
 
