@@ -21,8 +21,6 @@ use Gmt\Telegram\Purchases\PurchaseNewPremiumResponse;
 use Gmt\Telegram\Purchases\PurchaseNewStarsResponse;
 
 /**
- * Stars and premium subscription for Telegram.
- *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class PurchasesRawService implements PurchasesRawContract

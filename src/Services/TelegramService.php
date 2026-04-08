@@ -14,8 +14,6 @@ use Gmt\Telegram\TelegramGetPremiumPriceResponse;
 use Gmt\Telegram\TelegramGetStarsPriceResponse;
 
 /**
- * Stars and premium subscription for Telegram.
- *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
 final class TelegramService implements TelegramContract
