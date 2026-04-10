@@ -16,7 +16,7 @@ use Gmt\Core\Contracts\BaseModel;
  * **Security.** Verification data is only visible to the purchase owner.
  *
  * @phpstan-type VerificationShape = array{
- *   code: string, password: string, receivedAt: string
+ *   code: string, password: string|null, receivedAt: string
  * }
  */
 final class Verification implements BaseModel
@@ -34,7 +34,7 @@ final class Verification implements BaseModel
      * Account password.
      */
     #[Required]
-    public string $password;
+    public ?string $password;
 
     /**
      * **Code Retrieval Timestamp.** Marks when verification code was successfully fetched from the provider (not when purchase was created).
@@ -74,7 +74,7 @@ final class Verification implements BaseModel
      */
     public static function with(
         string $code,
-        string $password,
+        ?string $password,
         string $receivedAt
     ): self {
         $self = new self;
@@ -100,7 +100,7 @@ final class Verification implements BaseModel
     /**
      * Account password.
      */
-    public function withPassword(string $password): self
+    public function withPassword(?string $password): self
     {
         $self = clone $this;
         $self['password'] = $password;
