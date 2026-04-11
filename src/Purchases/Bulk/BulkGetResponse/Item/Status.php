@@ -16,4 +16,6 @@ enum Status: string
     case ERROR = 'ERROR';
 
     case REFUND = 'REFUND';
+
+    case EXPIRED = 'EXPIRED';
 }
