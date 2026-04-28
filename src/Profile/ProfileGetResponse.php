@@ -21,6 +21,7 @@ use Gmt\Profile\ProfileGetResponse\Statistics;
  *   balance: Balance|BalanceShape,
  *   createdAt: string,
  *   discount: Discount|DiscountShape,
+ *   language: string,
  *   login: string|null,
  *   statistics: Statistics|StatisticsShape,
  *   telegramID: string|null,
@@ -49,6 +50,12 @@ final class ProfileGetResponse implements BaseModel
 
     #[Required]
     public Discount $discount;
+
+    /**
+     * Preferred user interface language.
+     */
+    #[Required]
+    public string $language;
 
     /**
      * Web username.
@@ -81,6 +88,7 @@ final class ProfileGetResponse implements BaseModel
      *   balance: ...,
      *   createdAt: ...,
      *   discount: ...,
+     *   language: ...,
      *   login: ...,
      *   statistics: ...,
      *   telegramID: ...,
@@ -96,6 +104,7 @@ final class ProfileGetResponse implements BaseModel
      *   ->withBalance(...)
      *   ->withCreatedAt(...)
      *   ->withDiscount(...)
+     *   ->withLanguage(...)
      *   ->withLogin(...)
      *   ->withStatistics(...)
      *   ->withTelegramID(...)
@@ -121,6 +130,7 @@ final class ProfileGetResponse implements BaseModel
         Balance|array $balance,
         string $createdAt,
         Discount|array $discount,
+        string $language,
         ?string $login,
         Statistics|array $statistics,
         ?string $telegramID,
@@ -132,6 +142,7 @@ final class ProfileGetResponse implements BaseModel
         $self['balance'] = $balance;
         $self['createdAt'] = $createdAt;
         $self['discount'] = $discount;
+        $self['language'] = $language;
         $self['login'] = $login;
         $self['statistics'] = $statistics;
         $self['telegramID'] = $telegramID;
@@ -180,6 +191,17 @@ final class ProfileGetResponse implements BaseModel
     {
         $self = clone $this;
         $self['discount'] = $discount;
+
+        return $self;
+    }
+
+    /**
+     * Preferred user interface language.
+     */
+    public function withLanguage(string $language): self
+    {
+        $self = clone $this;
+        $self['language'] = $language;
 
         return $self;
     }
