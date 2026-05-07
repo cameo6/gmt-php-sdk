@@ -6,6 +6,8 @@ namespace Gmt\ServiceContracts;
 
 use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Profile\ProfileChangeLanguageParams;
+use Gmt\Profile\ProfileChangeLanguageResponse;
 use Gmt\Profile\ProfileChangeLoginParams;
 use Gmt\Profile\ProfileChangeLoginResponse;
 use Gmt\Profile\ProfileChangePasswordParams;
@@ -30,6 +32,21 @@ interface ProfileRawContract
      */
     public function retrieve(
         RequestOptions|array|null $requestOptions = null
+    ): BaseResponse;
+
+    /**
+     * @api
+     *
+     * @param array<string,mixed>|ProfileChangeLanguageParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ProfileChangeLanguageResponse>
+     *
+     * @throws APIException
+     */
+    public function changeLanguage(
+        array|ProfileChangeLanguageParams $params,
+        RequestOptions|array|null $requestOptions = null,
     ): BaseResponse;
 
     /**

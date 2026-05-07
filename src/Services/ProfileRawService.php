@@ -7,6 +7,9 @@ namespace Gmt\Services;
 use Gmt\Client;
 use Gmt\Core\Contracts\BaseResponse;
 use Gmt\Core\Exceptions\APIException;
+use Gmt\Profile\ProfileChangeLanguageParams;
+use Gmt\Profile\ProfileChangeLanguageParams\Language;
+use Gmt\Profile\ProfileChangeLanguageResponse;
 use Gmt\Profile\ProfileChangeLoginParams;
 use Gmt\Profile\ProfileChangeLoginResponse;
 use Gmt\Profile\ProfileChangePasswordParams;
@@ -49,6 +52,39 @@ final class ProfileRawService implements ProfileRawContract
             path: 'v1/profile/',
             options: $requestOptions,
             convert: ProfileGetResponse::class,
+        );
+    }
+
+    /**
+     * @api
+     *
+     * Change the preferred user interface language on the website and in the bot.
+     *
+     * @param array{
+     *   language: Language|value-of<Language>
+     * }|ProfileChangeLanguageParams $params
+     * @param RequestOpts|null $requestOptions
+     *
+     * @return BaseResponse<ProfileChangeLanguageResponse>
+     *
+     * @throws APIException
+     */
+    public function changeLanguage(
+        array|ProfileChangeLanguageParams $params,
+        RequestOptions|array|null $requestOptions = null,
+    ): BaseResponse {
+        [$parsed, $options] = ProfileChangeLanguageParams::parseRequest(
+            $params,
+            $requestOptions,
+        );
+
+        // @phpstan-ignore-next-line return.type
+        return $this->client->request(
+            method: 'patch',
+            path: 'v1/profile/language',
+            body: (object) $parsed,
+            options: $options,
+            convert: ProfileChangeLanguageResponse::class,
         );
     }
 

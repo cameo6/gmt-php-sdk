@@ -4,6 +4,7 @@ namespace Tests\Services;
 
 use Gmt\Client;
 use Gmt\Core\Util;
+use Gmt\Profile\ProfileChangeLanguageResponse;
 use Gmt\Profile\ProfileChangeLoginResponse;
 use Gmt\Profile\ProfileChangePasswordResponse;
 use Gmt\Profile\ProfileGetResponse;
@@ -42,6 +43,32 @@ final class ProfileTest extends TestCase
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(ProfileGetResponse::class, $result);
+    }
+
+    #[Test]
+    public function testChangeLanguage(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->profile->changeLanguage(language: 'en');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileChangeLanguageResponse::class, $result);
+    }
+
+    #[Test]
+    public function testChangeLanguageWithOptionalParams(): void
+    {
+        if (UnsupportedMockTests::$skip) {
+            $this->markTestSkipped('Mock server tests are disabled');
+        }
+
+        $result = $this->client->profile->changeLanguage(language: 'en');
+
+        // @phpstan-ignore-next-line method.alreadyNarrowedType
+        $this->assertInstanceOf(ProfileChangeLanguageResponse::class, $result);
     }
 
     #[Test]

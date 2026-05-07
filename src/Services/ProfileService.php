@@ -7,6 +7,8 @@ namespace Gmt\Services;
 use Gmt\Client;
 use Gmt\Core\Exceptions\APIException;
 use Gmt\Core\Util;
+use Gmt\Profile\ProfileChangeLanguageParams\Language;
+use Gmt\Profile\ProfileChangeLanguageResponse;
 use Gmt\Profile\ProfileChangeLoginResponse;
 use Gmt\Profile\ProfileChangePasswordResponse;
 use Gmt\Profile\ProfileGetResponse;
@@ -62,6 +64,28 @@ final class ProfileService implements ProfileContract
     ): ProfileGetResponse {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->retrieve(requestOptions: $requestOptions);
+
+        return $response->parse();
+    }
+
+    /**
+     * @api
+     *
+     * Change the preferred user interface language on the website and in the bot.
+     *
+     * @param Language|value-of<Language> $language Preferred user interface language
+     * @param RequestOpts|null $requestOptions
+     *
+     * @throws APIException
+     */
+    public function changeLanguage(
+        Language|string $language,
+        RequestOptions|array|null $requestOptions = null
+    ): ProfileChangeLanguageResponse {
+        $params = Util::removeNulls(['language' => $language]);
+
+        // @phpstan-ignore-next-line argument.type
+        $response = $this->raw->changeLanguage(params: $params, requestOptions: $requestOptions);
 
         return $response->parse();
     }
