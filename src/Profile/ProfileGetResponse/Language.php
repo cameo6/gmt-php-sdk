@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Gmt\Profile\ProfileChangeLanguageParams;
+namespace Gmt\Profile\ProfileGetResponse;
 
 /**
- * Preferred user interface language.
+ * Preferred user interface language; null until the user selects one.
  */
 enum Language: string
 {

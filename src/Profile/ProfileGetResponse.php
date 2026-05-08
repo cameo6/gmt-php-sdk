@@ -9,6 +9,7 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Profile\ProfileGetResponse\Balance;
 use Gmt\Profile\ProfileGetResponse\Discount;
+use Gmt\Profile\ProfileGetResponse\Language;
 use Gmt\Profile\ProfileGetResponse\Statistics;
 
 /**
@@ -21,7 +22,7 @@ use Gmt\Profile\ProfileGetResponse\Statistics;
  *   balance: Balance|BalanceShape,
  *   createdAt: string,
  *   discount: Discount|DiscountShape,
- *   language: string,
+ *   language: null|Language|value-of<Language>,
  *   login: string|null,
  *   statistics: Statistics|StatisticsShape,
  *   telegramID: string|null,
@@ -52,10 +53,12 @@ final class ProfileGetResponse implements BaseModel
     public Discount $discount;
 
     /**
-     * Preferred user interface language.
+     * Preferred user interface language; null until the user selects one.
+     *
+     * @var value-of<Language>|null $language
      */
-    #[Required]
-    public string $language;
+    #[Required(enum: Language::class)]
+    public ?string $language;
 
     /**
      * Web username.
@@ -123,6 +126,7 @@ final class ProfileGetResponse implements BaseModel
      *
      * @param Balance|BalanceShape $balance
      * @param Discount|DiscountShape $discount
+     * @param Language|value-of<Language>|null $language
      * @param Statistics|StatisticsShape $statistics
      */
     public static function with(
@@ -130,7 +134,7 @@ final class ProfileGetResponse implements BaseModel
         Balance|array $balance,
         string $createdAt,
         Discount|array $discount,
-        string $language,
+        Language|string|null $language,
         ?string $login,
         Statistics|array $statistics,
         ?string $telegramID,
@@ -196,9 +200,11 @@ final class ProfileGetResponse implements BaseModel
     }
 
     /**
-     * Preferred user interface language.
+     * Preferred user interface language; null until the user selects one.
+     *
+     * @param Language|value-of<Language>|null $language
      */
-    public function withLanguage(string $language): self
+    public function withLanguage(Language|string|null $language): self
     {
         $self = clone $this;
         $self['language'] = $language;
