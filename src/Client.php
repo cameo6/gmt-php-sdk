@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Gmt;
 
 use Gmt\Core\BaseClient;
+use Gmt\Core\Implementation\StreamingHttpClient;
 use Gmt\Core\Util;
 use Gmt\Services\AccountsService;
 use Gmt\Services\ProfileService;
@@ -80,6 +81,11 @@ class Client extends BaseClient
             ),
             $requestOptions,
         );
+
+        if (is_null($options->streamingTransporter)) {
+            assert(!is_null($options->transporter));
+            $options->streamingTransporter = new StreamingHttpClient($options->transporter);
+        }
 
         /** @var array<string, string|null> $headers */
         $headers = [
