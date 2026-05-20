@@ -9,6 +9,7 @@ use Gmt\Core\Concerns\SdkModel;
 use Gmt\Core\Contracts\BaseModel;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\DisplayName;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\Price;
+use Gmt\Purchases\PurchaseRefundResponse\Purchase\PurchaseSource;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\PurchaseType;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\Status;
 use Gmt\Purchases\PurchaseRefundResponse\Purchase\Verification;
@@ -26,6 +27,7 @@ use Gmt\Purchases\PurchaseRefundResponse\Purchase\Verification;
  *   emoji: string,
  *   phoneNumber: string|null,
  *   price: Price|PriceShape,
+ *   purchaseSource: PurchaseSource|value-of<PurchaseSource>,
  *   purchaseType: PurchaseType|value-of<PurchaseType>,
  *   status: Status|value-of<Status>,
  *   verification: null|Verification|VerificationShape,
@@ -82,6 +84,14 @@ final class Purchase implements BaseModel
     public Price $price;
 
     /**
+     * Purchase channel: BOT (Telegram), WEB (site JWT), API (x-api-key).
+     *
+     * @var value-of<PurchaseSource> $purchaseSource
+     */
+    #[Required('purchase_source', enum: PurchaseSource::class)]
+    public string $purchaseSource;
+
+    /**
      * Type of purchase: SINGLE (regular), BULK (batch purchase), ADMIN (admin deduction).
      *
      * @var value-of<PurchaseType> $purchaseType
@@ -128,6 +138,7 @@ final class Purchase implements BaseModel
      *   emoji: ...,
      *   phoneNumber: ...,
      *   price: ...,
+     *   purchaseSource: ...,
      *   purchaseType: ...,
      *   status: ...,
      *   verification: ...,
@@ -145,6 +156,7 @@ final class Purchase implements BaseModel
      *   ->withEmoji(...)
      *   ->withPhoneNumber(...)
      *   ->withPrice(...)
+     *   ->withPurchaseSource(...)
      *   ->withPurchaseType(...)
      *   ->withStatus(...)
      *   ->withVerification(...)
@@ -162,6 +174,7 @@ final class Purchase implements BaseModel
      *
      * @param DisplayName|DisplayNameShape $displayName
      * @param Price|PriceShape $price
+     * @param PurchaseSource|value-of<PurchaseSource> $purchaseSource
      * @param PurchaseType|value-of<PurchaseType> $purchaseType
      * @param Status|value-of<Status> $status
      * @param Verification|VerificationShape|null $verification
@@ -174,6 +187,7 @@ final class Purchase implements BaseModel
         string $emoji,
         ?string $phoneNumber,
         Price|array $price,
+        PurchaseSource|string $purchaseSource,
         PurchaseType|string $purchaseType,
         Status|string $status,
         Verification|array|null $verification,
@@ -187,6 +201,7 @@ final class Purchase implements BaseModel
         $self['emoji'] = $emoji;
         $self['phoneNumber'] = $phoneNumber;
         $self['price'] = $price;
+        $self['purchaseSource'] = $purchaseSource;
         $self['purchaseType'] = $purchaseType;
         $self['status'] = $status;
         $self['verification'] = $verification;
@@ -275,6 +290,20 @@ final class Purchase implements BaseModel
     {
         $self = clone $this;
         $self['price'] = $price;
+
+        return $self;
+    }
+
+    /**
+     * Purchase channel: BOT (Telegram), WEB (site JWT), API (x-api-key).
+     *
+     * @param PurchaseSource|value-of<PurchaseSource> $purchaseSource
+     */
+    public function withPurchaseSource(
+        PurchaseSource|string $purchaseSource
+    ): self {
+        $self = clone $this;
+        $self['purchaseSource'] = $purchaseSource;
 
         return $self;
     }
