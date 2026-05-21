@@ -34,6 +34,7 @@ interface BulkRawContract
     /**
      * @api
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BulkGetResponse>
@@ -41,21 +42,22 @@ interface BulkRawContract
      * @throws APIException
      */
     public function retrieve(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 
     /**
      * @api
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<string>
+     * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function download(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse;
 }

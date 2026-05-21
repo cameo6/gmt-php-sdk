@@ -81,12 +81,13 @@ final class BulkService implements BulkContract
      *
      * Returns the status of a bulk purchase, including details and link to download archive.
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
     ): BulkGetResponse {
         // @phpstan-ignore-next-line argument.type
@@ -100,14 +101,15 @@ final class BulkService implements BulkContract
      *
      * Download the archive file containing multiple accounts from a successful bulk purchase
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function download(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
-    ): string {
+    ): mixed {
         // @phpstan-ignore-next-line argument.type
         $response = $this->raw->download($purchaseID, requestOptions: $requestOptions);
 

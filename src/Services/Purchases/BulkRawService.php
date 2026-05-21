@@ -74,6 +74,7 @@ final class BulkRawService implements BulkRawContract
      *
      * Returns the status of a bulk purchase, including details and link to download archive.
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
      * @return BaseResponse<BulkGetResponse>
@@ -81,7 +82,7 @@ final class BulkRawService implements BulkRawContract
      * @throws APIException
      */
     public function retrieve(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
@@ -98,23 +99,23 @@ final class BulkRawService implements BulkRawContract
      *
      * Download the archive file containing multiple accounts from a successful bulk purchase
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
-     * @return BaseResponse<string>
+     * @return BaseResponse<mixed>
      *
      * @throws APIException
      */
     public function download(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
     ): BaseResponse {
         // @phpstan-ignore-next-line return.type
         return $this->client->request(
             method: 'get',
             path: ['v1/purchases/bulk/%1$s/download', $purchaseID],
-            headers: ['Accept' => 'application/zip'],
             options: $requestOptions,
-            convert: 'string',
+            convert: null,
         );
     }
 }

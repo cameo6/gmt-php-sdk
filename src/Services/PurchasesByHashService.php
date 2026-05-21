@@ -13,7 +13,7 @@ use Gmt\RequestOptions;
 use Gmt\ServiceContracts\PurchasesByHashContract;
 
 /**
- * Purchase history and management.
+ * Endpoints for accessing purchase details and requesting verification codes using a unique hash identifier instead of purchase ID. This allows retrieval of purchase information without authentication, using the hash as a secure access token.
  *
  * @phpstan-import-type RequestOpts from \Gmt\RequestOptions
  */
@@ -39,6 +39,8 @@ final class PurchasesByHashService implements PurchasesByHashContract
      *
      * **No authentication required.** The hash code serves as the access token.
      *
+     * **Path parameter `hash`.** If it is missing or empty in the URL (e.g. `/v1/purchases-by-hash/` or `/v1/purchases-by-hash//`), the API returns **400** with `fieldViolations` on `hash`.
+     *
      * @param string $hash Unique hash code of the purchase
      * @param RequestOpts|null $requestOptions
      *
@@ -62,6 +64,8 @@ final class PurchasesByHashService implements PurchasesByHashContract
      * **No authentication required.** The hash code serves as the access token.
      *
      * **Idempotent Operation.** Safe to retry on network errors - will not generate duplicate codes.
+     *
+     * **Path parameter `hash`.** If it is missing or empty before `/request-code` (e.g. `/v1/purchases-by-hash/request-code`), the API returns **400** with `fieldViolations` on `hash`.
      *
      * @param string $hash Unique hash code of the purchase
      * @param string $callbackURL URL to receive webhook notification when code is received. POST request will be sent with either `WebhookSuccessPayload` or `WebhookFailedPayload`.

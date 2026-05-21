@@ -69,7 +69,7 @@ final class BulkTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->purchases->bulk->retrieve('purchase_id');
+        $result = $this->client->purchases->bulk->retrieve(12345);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
         $this->assertInstanceOf(BulkGetResponse::class, $result);
@@ -82,9 +82,9 @@ final class BulkTest extends TestCase
             $this->markTestSkipped('Mock server tests are disabled');
         }
 
-        $result = $this->client->purchases->bulk->download('purchase_id');
+        $result = $this->client->purchases->bulk->download(12345);
 
         // @phpstan-ignore-next-line method.alreadyNarrowedType
-        $this->assertIsString($result);
+        $this->assertNull($result);
     }
 }

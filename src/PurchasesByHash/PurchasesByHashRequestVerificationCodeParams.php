@@ -16,6 +16,8 @@ use Gmt\Core\Contracts\BaseModel;
  *
  * **Idempotent Operation.** Safe to retry on network errors - will not generate duplicate codes.
  *
+ * **Path parameter `hash`.** If it is missing or empty before `/request-code` (e.g. `/v1/purchases-by-hash/request-code`), the API returns **400** with `fieldViolations` on `hash`.
+ *
  * @see Gmt\Services\PurchasesByHashService::requestVerificationCode()
  *
  * @phpstan-type PurchasesByHashRequestVerificationCodeParamsShape = array{

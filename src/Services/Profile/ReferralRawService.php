@@ -52,7 +52,7 @@ final class ReferralRawService implements ReferralRawContract
     /**
      * @api
      *
-     * Change the current user password to a new one.
+     * Transfers a specified amount from the user's referral balance to their main balance. The amount must be between 1 and 100,000 USD.
      *
      * @param array{amount: float}|ReferralTransferBalanceParams $params
      * @param RequestOpts|null $requestOptions

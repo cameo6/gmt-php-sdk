@@ -36,24 +36,26 @@ interface BulkContract
     /**
      * @api
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function retrieve(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
     ): BulkGetResponse;
 
     /**
      * @api
      *
+     * @param int $purchaseID unique purchase identifier
      * @param RequestOpts|null $requestOptions
      *
      * @throws APIException
      */
     public function download(
-        string $purchaseID,
+        int $purchaseID,
         RequestOptions|array|null $requestOptions = null
-    ): string;
+    ): mixed;
 }
