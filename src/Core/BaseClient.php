@@ -12,6 +12,7 @@ use Gmt\Core\Conversion\Contracts\ConverterSource;
 use Gmt\Core\Exceptions\APIConnectionException;
 use Gmt\Core\Exceptions\APIStatusException;
 use Gmt\Core\Implementation\RawResponse;
+use Gmt\Core\Implementation\StreamingHttpClient;
 use Gmt\RequestOptions;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
@@ -249,7 +250,13 @@ abstract class BaseClient
         $err = null;
 
         try {
-            $rsp = $transporter->sendRequest($req);
+            if ($transporter instanceof StreamingHttpClient) {
+                $rsp = $transporter->sendRequest($req, timeout: $opts->timeout);
+            } elseif (is_a($transporter, '\GuzzleHttp\Client')) {
+                $rsp = $transporter->send($req, ['timeout' => $opts->timeout]);
+            } else {
+                $rsp = $transporter->sendRequest($req);
+            }
         } catch (ClientExceptionInterface $e) {
             $err = $e;
         }
